@@ -2,34 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Notifications\Notifiable;
 
-class User extends Authenticatable
+class Admin extends Model
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, HasRoles;
 
-    protected $table = 'users';
+    protected $table = 'tb_admin';
     protected $primaryKey = 'id';
-    protected $guard_name = 'web';
     protected $fillable = [
-        'nama',
-        'username',
-        'jenis_kelamin',
-        'tgl_lahir',
-        'alamat',
-        'email',
-        'password',
+        'nama', 
+        'username', 
+        'email', 
+        'password'
     ];
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
     protected $hidden = [
         'password',
         'remember_token',
@@ -37,11 +26,6 @@ class User extends Authenticatable
         'two_factor_secret',
     ];
 
-    /**
-     * The attributes that should be cast to native types.
-     *
-     * @var array
-     */
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
