@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUsersTable extends Migration
+class CreateTbDokterTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,15 +13,14 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
-            $table->bigIncrements('id', 20);
+        Schema::create('tb_dokter', function (Blueprint $table) {
+            $table->bigIncrements('id')->length(20)->unsigned();
+            $table->string('kd_dokter', 20)->unique();
             $table->string('nama', 255);
-            $table->string('username', 100);
-            $table->enum('jenis_kelamin', ['L','P']);
-            $table->date('tgl_lahir');
-            $table->text('alamat');
+            $table->integer('nip')->length(10)->unique();
+            $table->string('foto', 255);
             $table->string('email')->unique();
-            $table->timestamp('email_verified_at')->nullable();
+            $table->string('username', 100);
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
@@ -35,6 +34,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('users');
+        Schema::dropIfExists('tb_dokter');
     }
 }
