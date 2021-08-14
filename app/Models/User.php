@@ -12,15 +12,8 @@ class User extends Authenticatable
 {
     use HasFactory, Notifiable, HasRoles;
 
-    protected $table = 'users';
-    protected $primaryKey = 'id';
-    protected $guard_name = 'web';
     protected $fillable = [
         'nama',
-        'username',
-        'jenis_kelamin',
-        'tgl_lahir',
-        'alamat',
         'email',
         'password',
     ];

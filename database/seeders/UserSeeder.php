@@ -14,36 +14,29 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
+        $admin = User::create([
+            'nama' => 'Admin',
+            'email' => 'adminsispak@role.test',
+            'password' => bcrypt('admin123')
+        ]);
+
+        $admin->assignRole('admin');
+
+        $dokter = User::create([
+            'nama' => 'Dokter',
+            'email' => 'doktersispak@role.test',
+            'password' => bcrypt('dokter123')
+        ]);
+
+        $dokter->assignRole('dokter');
+
         $user = User::create([
-            'nama' => 'Irfan Wahyudi',
-            'username' => 'irfanw98',
-            'jenis_kelamin' => 'L',
-            'tgl_lahir' => '1998-11-04',
-            'alamat' => 'Jl.Bumi 1 D.19.No.5',
-            'email' => 'irfanwahyudi2016@gmail.com',
+            'nama' => 'User',
+            'email' => 'usersispak@role.test',
             'password' => bcrypt('user123')
         ]);
 
         $user->assignRole('user');
 
-        // $admin = Admin::create([
-        //     'nama' => 'Admin',
-        //     'username' => 'admin123', 
-        //     'email' => 'adminsispak@gmail.com', 
-        //     'password' => bcrypt('admin123')
-        // ]);
-
-        // $admin->assignRole('admin');
-
-        // $dokter = Dokter::create([
-        //     'kd_dokter' => 'KD123',
-        //     'nama' => 'Dr.Siska',
-        //     'nip' => 12345678,
-        //     'foto' => 'siska.jpg',
-        //     'email' => 'doktersiska@gmail.com',
-        //     'password' => bcrypt('dokter123')
-        // ]);
-
-        // $dokter->assignRole('dokter');
     }
 }
