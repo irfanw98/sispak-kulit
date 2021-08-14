@@ -43,15 +43,6 @@
               </li>
             </ul>
           </li>
-          <li class="nav-item">
-            <a href="../widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-                <span class="right badge badge-danger">New</span>
-              </p>
-            </a>
-          </li>
           @if(auth()->user()->hasRole('admin'))
            <li class="nav-item">
             <a href="{{ url('/admin') }}" class="nav-link">
@@ -59,7 +50,37 @@
               <p>Data Admin</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('/dokter') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Data Dokter</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/user') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Data User</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/laporan') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Laporan Konsultasi</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/pesan') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Pesan</p>
+            </a>
+          </li>
           @endif
+          <li class="nav-item">
+            <a href="{{ url('/logout') }}" class="nav-link">
+              <i class="nav-icon fas fa-th"></i>
+              <p>Keluar</p>
+            </a>
+          </li>
       </nav>
       <!-- /.sidebar-menu -->
     </div>
