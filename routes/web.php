@@ -9,11 +9,12 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
-
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard-admin', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('dashboard-admin');
-    Route::resource('/akun-admin', [App\Http\Controllers\Admin\AdminController::class]);
+    Route::resource('/admin', App\Http\Controllers\Admin\AdminController::class);
+    Route::resource('/dokter', App\Http\Controllers\Admin\DokterController::class);
+    Route::resource('/user', App\Http\Controllers\Admin\UserController::class)->only(['index', 'destroy']);
+    Route::resource('/laporan', App\Http\Controllers\Admin\LaporanController::class)->only(['index', 'destroy']);
 });
 Route::group(['middleware' => ['auth', 'role:dokter']], function() {
      Route::get('/dashboard-dokter', [App\Http\Controllers\Dokter\DashboardDokterController::class, 'index'])->name('dashboard-dokter');

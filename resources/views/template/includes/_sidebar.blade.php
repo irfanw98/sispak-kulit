@@ -52,12 +52,14 @@
               </p>
             </a>
           </li>
+          @if(auth()->user()->hasRole('admin'))
            <li class="nav-item">
-            <a href="{{ url('/akun-admin') }}" class="nav-link">
+            <a href="{{ url('/admin') }}" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>Data Admin</p>
             </a>
           </li>
+          @endif
       </nav>
       <!-- /.sidebar-menu -->
     </div>
