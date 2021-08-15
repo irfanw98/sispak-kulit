@@ -17,9 +17,9 @@ Route::get('/logout', ['App\Http\Controllers\LogoutController', 'logout'])->name
 //ADMIN ROUTE
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard-admin', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('dashboard-admin');
-    Route::resource('/admin', App\Http\Controllers\Admin\AdminController::class);
-    Route::resource('/dokter', App\Http\Controllers\Admin\DokterController::class);
-    Route::resource('/user', App\Http\Controllers\Admin\UserController::class)->only(['index', 'destroy']);
+    Route::resource('/akun-admin', App\Http\Controllers\Admin\AdminController::class);
+    Route::resource('/akun-dokter', App\Http\Controllers\Admin\DokterController::class);
+    Route::resource('/akun-user', App\Http\Controllers\Admin\UserController::class)->only(['index', 'destroy']);
     Route::resource('/laporan', App\Http\Controllers\Admin\LaporanController::class)->only(['index', 'destroy']);
 });
 

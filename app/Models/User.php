@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Notifications\Notifiable;
+use App\Admin;
 
 class User extends Authenticatable
 {
@@ -49,5 +50,10 @@ class User extends Authenticatable
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
+    }
+
+    //Relations
+    public function admin() {
+        return $this->hasOne(Admin::class);
     }
 }

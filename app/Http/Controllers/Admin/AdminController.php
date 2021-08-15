@@ -4,6 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Admin;
+use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -14,7 +17,8 @@ class AdminController extends Controller
      */
     public function index()
     {
-        //
+        $admins = DB::table('tb_admin')->get();
+        return view('admin.index', compact('admins'));
     }
 
     /**
