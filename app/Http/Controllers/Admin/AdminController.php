@@ -4,21 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use DataTables;
+use Illuminate\Support\Str;
 use App\Models\Admin;
 use App\Models\User;
-use Illuminate\Support\Facades\DB;
+use DataTables;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Request $request)
     {
-        $admins = DB::table('tb_admin')->get();
+        // $admins = DB::table('tb_admin')->get();
+        $admins = Admin::latest()->get();
 
         if ($request->ajax()) {
             return Datatables::of($admins)
@@ -33,7 +29,7 @@ class AdminController extends Controller
             ->removeColumn('id')
             ->make(true);
         }
-        return view('admin.index', compact('admins'));
+        return view('admin.index');
     }
 
     /**
@@ -54,7 +50,24 @@ class AdminController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //Insert table users
+        $user = new User;
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->password = bcrypt('admin123');
+        $user->remember_token = Str::random(60);
+        $user->assignRole('admin');
+        $user->save();
+
+        //Insert table Admin
+        $admin = new Admin;
+        $admin->user_id = $user->id;
+        $admin->nama = $request->nama;
+        $admin->username = $request->username;
+        $admin->email = $request->email;
+        $admin->save();
+
+        return redirect()->back();
     }
 
     /**
@@ -65,7 +78,7 @@ class AdminController extends Controller
      */
     public function show($id)
     {
-        //
+        
     }
 
     /**

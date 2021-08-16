@@ -12,8 +12,9 @@ class Admin extends Model
     use HasFactory, HasRoles;
 
     protected $table = 'tb_admin';
+    protected $guard = 'admin';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','nama','username','created_at','updated_at'];
+    protected $fillable = ['user_id','nama','username', 'email', 'created_at', 'updated_at'];
 
     public function getCreatedAtAttribute()
     {

@@ -37,11 +37,11 @@
                 <div class="grad">
                 </div>
                 <div class="card-body">
-                   <button name="adminAdd" class="btn btn-sm btn-primary mb-3 p-2 adminAdd"><i class="fa fa-plus-square"></i> TAMBAH</button>
+                   <button name="addAdmin" class="btn btn-sm btn-primary mb-3 p-2 addAdmin"><i class="fa fa-plus-square"></i> TAMBAH</button>
                     <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                         <thead>
                             <tr>
-                                <th style="text-align: center;" width="10%">No</th>
+                                <th width="10%">No</th>
                                 <th width="40%">Nama</th>
                                 <th width="30%">Username</th>
                                 <th style="text-align: center;" width="30%">Aksi</th>
@@ -64,6 +64,58 @@
     </div>
     </section>
 @endsection
+
+<!-- Modal Tambah data -->
+<div class="modal fade" id="addModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addModalLabel">Data Admin</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="#" method="POST" autocomplete="off" class="formInsert">
+                    @csrf
+                    <div class="row">
+                        <input type="hidden" name="id" id="id">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="nama">Nama :</label>
+                                <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
+
+                                <span class="text-danger" id="namaError"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="username">Username :</label>
+                                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}">
+
+                                <span class="text-danger" id="usernameError"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="email">Email :</label>
+                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+
+                                <span class="text-danger" id="emailError"></span>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary saveButton">SIMPAN</button>
+                <button type="button" class="btn btn-danger cancelButton"data-dismiss="modal">BATAL</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @section('footer')
 <script type="text/javascript">
@@ -96,5 +148,43 @@
             ]
         });
     });
+
+    //TAMBAH DATA WITH MODAL BOOTSTRAP
+    $('.addAdmin').on('click', function(e) {
+        e.preventDefault();
+        $('#addModal').modal('show');//Menampilkan modal 
+    })
+
+    $('.cancelButton').on('click', function(e) {
+        e.preventDefault();
+        $('.formInsert').trigger('reset'); //Ketika tombol batal di klick reset form input
+    })
+
+    $('.saveButton').on('click', function(e) {
+        e.preventDefault();
+        let form = $('.formInsert')[0]; //Get form input
+        const formData = new FormData(form);
+    
+        $.ajax({
+             headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('akun-admin') }}",
+            method: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: "JSON",
+            success: function(result) {
+                $('#formInsert').trigger('reset');//Reset inputan form
+                $('#addModal').modal('hide');//Tutup Modal
+                $("#datatable").DataTable().ajax.reload();//Reload Datatable
+            },
+            error: function(data) {
+                console.log(data);
+            }
+        })
+    })
 </script>
 @endsection
