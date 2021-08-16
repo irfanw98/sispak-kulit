@@ -38,7 +38,7 @@
                 </div>
                 <div class="card-body">
                    <button name="adminAdd" class="btn btn-sm btn-primary mb-3 p-2 adminAdd"><i class="fa fa-plus-square"></i> TAMBAH</button>
-                    <table id="example" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
+                    <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                         <thead>
                             <tr>
                                 <th style="text-align: center;" width="10%">No</th>
@@ -47,7 +47,7 @@
                                 <th style="text-align: center;" width="30%">Aksi</th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <!-- <tbody>
                             <tr>
                                 <td style="text-align: center;">1</td>
                                 <td>Admin</td>
@@ -56,7 +56,7 @@
                                     <a href="#" class="btn btn-info adminEdit" id="" role="button" edit-id=""><i class="fa fa-edit"></i> UBAH</a>
                                     <a href="#" class="btn btn-danger adminEdelete" role="button" delete-id="" sma=""><i class="fa fa-trash"></i> HAPUS</a>
                                 </td>
-                        </tbody>
+                        </tbody> -->
                     </table>   
                 </div>
             </div>
@@ -68,8 +68,32 @@
 @section('footer')
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#example').DataTable({
+        $('#datatable').DataTable({
             responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ url('/akun-admin') }}",
+                type: "GET",
+                dataType: "JSON"
+            },
+            columns: [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                },
+                {
+                    data: 'nama',
+                    name: 'nama'
+                },
+                {
+                    data: 'username',
+                    name: 'username'
+                },
+                {
+                    data: 'Aksi',
+                    name: 'Aksi'
+                }
+            ]
         });
     });
 </script>

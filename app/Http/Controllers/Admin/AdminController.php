@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use DataTables;
 use App\Models\Admin;
 use App\Models\User;
 use Illuminate\Support\Facades\DB;
@@ -15,9 +16,23 @@ class AdminController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $admins = DB::table('tb_admin')->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($admins)
+            -> addColumn('Aksi', function($data) {
+                return '
+                     <a href="" class="btn btn-info adminEdit" id="" role="button" edit-id="' . $data->id . '"><i class="fa fa-edit"></i> UBAH</a>
+                     <a href="" class="btn btn-danger adminEdelete" role="button" delete-id="' . $data->id . '"><i class="fa fa-trash"></i> HAPUS</a>
+                ';
+            })
+            ->rawColumns(['Aksi'])
+            ->addIndexColumn()
+            ->removeColumn('id')
+            ->make(true);
+        }
         return view('admin.index', compact('admins'));
     }
 
