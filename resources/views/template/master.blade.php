@@ -86,6 +86,7 @@
 <script src="{{ asset('admin/assets/dist/js/adminlte.min.js') }}"></script>
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/assets/dist/js/demo.js') }}"></script>
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 @yield('footer')
 </body>
 </html>

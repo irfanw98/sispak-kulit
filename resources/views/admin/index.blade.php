@@ -9,9 +9,11 @@
             height: 4px;
             border-radius: 20px;
         }
-        /* .adminAdd {
-            margin-left: 90%;
-        } */
+        .gradModal {
+            background-image: linear-gradient(to bottom, #4e54c8, #8f94fb);
+            height: 4px;
+            border-radius: 20px;
+        }
     </style>
 @endsection
 
@@ -69,6 +71,8 @@
 <div class="modal fade" id="addModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
+                 <div class="gradModal">
+                </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="addModalLabel">Data Admin</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -109,8 +113,8 @@
                     </div>
             </div>
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary saveButton">SIMPAN</button>
-                <button type="button" class="btn btn-danger cancelButton"data-dismiss="modal">BATAL</button>
+                <button type="submit" class="btn btn-outline-primary saveButton">SIMPAN</button>
+                <button type="button" class="btn btn-outline-danger cancelButton"data-dismiss="modal">BATAL</button>
                 </form>
             </div>
         </div>
@@ -180,6 +184,14 @@
                 $('#formInsert').trigger('reset');//Reset inputan form
                 $('#addModal').modal('hide');//Tutup Modal
                 $("#datatable").DataTable().ajax.reload();//Reload Datatable
+
+                swal({
+                  title: "Sukses!",
+                  text: "Admin berhasil ditambahkan!",
+                  icon: "success",
+                  timer: 2000,
+                  buttons: false,
+                })
             },
             error: function(data) {
                 console.log(data);
