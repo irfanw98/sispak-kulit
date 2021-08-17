@@ -5,16 +5,17 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User;
 
 class Admin extends Model
 {
-    use HasFactory, HasRoles;
+    use HasFactory, HasRoles, SoftDeletes;
 
     protected $table = 'tb_admin';
     protected $guard = 'admin';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','nama','username', 'email', 'created_at', 'updated_at'];
+    protected $fillable = ['user_id','nama','username', 'email'];
 
     public function getCreatedAtAttribute()
     {

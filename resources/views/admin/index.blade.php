@@ -153,7 +153,7 @@
         });
     });
 
-    //TAMBAH DATA WITH MODAL BOOTSTRAP
+    //TAMBAH DATA 
     $('.addAdmin').on('click', function(e) {
         e.preventDefault();
         $('#addModal').modal('show');//Menampilkan modal 
@@ -225,6 +225,49 @@
         $('#username').removeClass('is-invalid');
         $('#email').removeClass('is-invalid');
 
+    })
+
+    //HAPUS DATA
+    $(document).on('click', '.adminDelete', function(e) {
+        e.preventDefault();
+        const adminId = $(this).attr('delete-id');
+        const adminNama = $(this).attr('adminNama');
+        const url = `akun-admin/${adminId}`;
+        
+        swal({
+                title: "Yakin?",
+                text: `Data admin ${adminNama} akan dihapus?`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((result) => {
+                if (result) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url:url,
+                        type:"POST",
+                        data: {
+                            '_method': 'DELETE',
+                            'id': adminId,
+                        },
+                        success: function(response) {
+                             $('#datatable').DataTable().ajax.reload();
+
+                            swal({
+                                title: "Sukses!",
+                                text: `Data admin ${adminNama} berhasil dihapus!`,
+                                icon: "success",
+                                timer: 2000,
+                                buttons: false,
+                            })
+                        }
+                    })
+                }
+            }) 
+            .catch()
     })
     
 </script>

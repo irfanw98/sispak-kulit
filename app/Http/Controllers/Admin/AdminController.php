@@ -22,7 +22,7 @@ class AdminController extends Controller
             -> addColumn('Aksi', function($data) {
                 return '
                      <a href="" class="btn btn-info adminEdit" id="" role="button" edit-id="' . $data->id . '"><i class="fa fa-edit"></i> UBAH</a>
-                     <a href="" class="btn btn-danger adminEdelete" role="button" delete-id="' . $data->id . '"><i class="fa fa-trash"></i> HAPUS</a>
+                     <a href="" class="btn btn-danger adminDelete" role="button" delete-id="' . $data->id . '" adminNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
             ->rawColumns(['Aksi'])
@@ -113,6 +113,9 @@ class AdminController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $admin = Admin::findOrFail($id);
+        $admin->delete();
+
+        return redirect()->back();
     }
 }
