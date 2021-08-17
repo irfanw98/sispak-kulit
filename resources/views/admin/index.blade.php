@@ -159,15 +159,15 @@
         $('#addModal').modal('show');//Menampilkan modal 
     })
 
-    $('.cancelButton').on('click', function(e) {
-        e.preventDefault();
-        $('.formInsert').trigger('reset'); //Ketika tombol batal di klick reset form input
-    })
-
     $('.saveButton').on('click', function(e) {
         e.preventDefault();
         let form = $('.formInsert')[0]; //Get form input
         const formData = new FormData(form);
+
+        //Validasi form input
+        $('#namaError').addClass('d-none');
+        $('#usernameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
     
         $.ajax({
              headers: {
@@ -194,9 +194,38 @@
                 })
             },
             error: function(data) {
-                console.log(data);
+                // console.log(data); //response 422 messages error
+                let errors = data.responseJSON;
+                if ($.isEmptyObject(errors) == false) {
+                    $.each(errors.errors, function(key,value) {
+                        let errID = '#' + key + 'Error';
+                        $('#nama').removeClass('is-valid');
+                        $('#nama').addClass('is-invalid');
+                        $('#username').removeClass('is-valid');
+                        $('#username').addClass('is-invalid');
+                        $('#email').removeClass('is-valid');
+                        $('#email').addClass('is-invalid');
+                        $(errID).removeClass('d-none');
+                        $(errID).text(value);
+                    })
+                } 
             }
         })
     })
+
+    $('.cancelButton').on('click', function(e) {
+        e.preventDefault();
+        $('.formInsert').trigger('reset'); //reset form input
+
+        $('#namaError').addClass('d-none');//reset validasi form input
+        $('#usernameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
+
+        $('#nama').removeClass('is-invalid');
+        $('#username').removeClass('is-invalid');
+        $('#email').removeClass('is-invalid');
+
+    })
+    
 </script>
 @endsection

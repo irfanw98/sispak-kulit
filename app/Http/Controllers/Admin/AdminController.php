@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use DataTables;
 use App\Models\Admin;
 use App\Models\User;
-use DataTables;
+use App\Http\Requests\Admin\StoreAdminRequest;
 
 class AdminController extends Controller
 {
@@ -48,7 +49,7 @@ class AdminController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(StoreAdminRequest $request)
     {
         //Insert table users
         $user = new User;
