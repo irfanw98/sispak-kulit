@@ -39,14 +39,15 @@
                 <div class="grad">
                 </div>
                 <div class="card-body">
-                   <button name="addAdmin" class="btn btn-sm btn-primary mb-3 p-2 addAdmin"><i class="fa fa-plus-square"></i> TAMBAH</button>
+                   <a href="" name="addAdmin" class="btn btn-primary mb-3 p-2 addAdmin"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
+                   <a href="{{ route('sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                     <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                         <thead>
                             <tr>
                                 <th width="10%">No</th>
                                 <th width="40%">Nama</th>
                                 <th width="30%">Username</th>
-                                <th style="text-align: center;" width="30%">Aksi</th>
+                                <th style="text-align: center;" width="10%">Aksi</th>
                             </tr>
                         </thead>
                         <!-- <tbody>

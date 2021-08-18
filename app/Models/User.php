@@ -6,12 +6,13 @@ use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use App\Admin;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, HasRoles;
+    use HasFactory, Notifiable, HasRoles, SoftDeletes;
 
     protected $fillable = [
         'nama',
@@ -53,7 +54,8 @@ class User extends Authenticatable
     }
 
     //Relations
-    public function admin() {
-        return $this->hasOne(Admin::class);
+    public function admins() {
+        return $this->hasOne(Admin::class, 'user_id');
     }
+
 }

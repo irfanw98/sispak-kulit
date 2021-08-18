@@ -21,7 +21,6 @@ class AdminController extends Controller
             return Datatables::of($admins)
             -> addColumn('Aksi', function($data) {
                 return '
-                     <a href="" class="btn btn-info adminEdit" id="" role="button" edit-id="' . $data->id . '"><i class="fa fa-edit"></i> UBAH</a>
                      <a href="" class="btn btn-danger adminDelete" role="button" delete-id="' . $data->id . '" adminNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
@@ -33,22 +32,6 @@ class AdminController extends Controller
         return view('admin.index');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(StoreAdminRequest $request)
     {
         //Insert table users
@@ -68,53 +51,54 @@ class AdminController extends Controller
         $admin->email = $request->email;
         $admin->save();
 
-        return redirect()->back();
+        return redirect('akun-admin');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        $admin = Admin::findOrFail($id);
+        $admin = Admin::find($id);
+        $user = Admin::find($id)->user;
+        $user->delete();
         $admin->delete();
+
+        //  Admin::where('id', $id)->with('user')->delete();
+
+        return redirect('akun-admin');
+    }
+
+    public function sampah()
+    {
+        $admins = Admin::onlyTrashed()->get();
+        return view('admin.sampah', compact('admins'));
+    }
+
+    public function pulihkan($id = null) 
+    {
+        if ($id != null) {
+            Admin::onlyTrashed()
+                        ->where('id', $id)
+                        ->restore();
+        } else {
+            Admin::onlyTrashed()->restore();
+        }
+
+        return redirect('/akun-admin/sampah');
+    }
+
+    public function hapus($id = null)
+    {
+        if ($id != null) {
+
+            // $user = user::find($id);
+            // $user->admins()->whereId($id);
+            // dd($user);
+                    
+            // Admin::onlyTrashed()
+            //             ->where('id', $id)
+            //             ->forceDelete();
+        } else {
+            Admin::onlyTrashed()->forceDelete();
+        }
 
         return redirect()->back();
     }
