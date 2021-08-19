@@ -88,7 +88,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="nama">Nama :</label>
-                                <input type="text" class="form-control" id="nama" name="nama" value="{{ old('nama') }}">
+                                <input type="text" class="form-control" id="nama" name="nama">
 
                                 <span class="text-danger" id="namaError"></span>
                             </div>
@@ -96,7 +96,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label for="username">Username :</label>
-                                <input type="text" class="form-control" id="username" name="username" value="{{ old('username') }}">
+                                <input type="text" class="form-control" id="username" name="username">
 
                                 <span class="text-danger" id="usernameError"></span>
                             </div>
@@ -106,7 +106,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="email">Email :</label>
-                                <input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}">
+                                <input type="email" class="form-control" id="email" name="email">
 
                                 <span class="text-danger" id="emailError"></span>
                             </div>

@@ -14,7 +14,6 @@ class AdminController extends Controller
 {
     public function index(Request $request)
     {
-        // $admins = DB::table('tb_admin')->get();
         $admins = Admin::latest()->get();
 
         if ($request->ajax()) {
@@ -56,29 +55,33 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-        $admin = Admin::find($id);
         $user = Admin::find($id)->user;
         $user->delete();
+        $admin = Admin::findOrFail($id); 
         $admin->delete();
-
-        //  Admin::where('id', $id)->with('user')->delete();
 
         return redirect('akun-admin');
     }
 
     public function sampah()
     {
-        $admins = Admin::onlyTrashed()->get();
-        return view('admin.sampah', compact('admins'));
+        $users = User::onlyTrashed()->get();
+
+        return view('admin.sampah', compact('users'));
     }
 
     public function pulihkan($id = null) 
     {
         if ($id != null) {
-            Admin::onlyTrashed()
-                        ->where('id', $id)
+           User::where('id', $id)
+                    ->onlyTrashed()
+                    ->restore();
+
+            Admin::where('user_id', $id)
+                        ->onlyTrashed()
                         ->restore();
         } else {
+            User::onlyTrashed()->restore();
             Admin::onlyTrashed()->restore();
         }
 
@@ -88,18 +91,15 @@ class AdminController extends Controller
     public function hapus($id = null)
     {
         if ($id != null) {
-
-            // $user = user::find($id);
-            // $user->admins()->whereId($id);
-            // dd($user);
-                    
-            // Admin::onlyTrashed()
-            //             ->where('id', $id)
-            //             ->forceDelete();
+             $user = User::where('id', $id)
+                                ->onlyTrashed()->first();
+            $user->removeRole('admin');
+            $user->forceDelete();
         } else {
-            Admin::onlyTrashed()->forceDelete();
+            // $users = auth()->user()->onlyTrashed();
+            // $users->syncRoles([]);
+            // dd($users);
+            // $users->forceDelete(); 
         }
-
-        return redirect()->back();
     }
 }

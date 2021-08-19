@@ -52,15 +52,15 @@
                                 </tr>
                             </thead>
                             <tbody>
-                            @if ($admins->count() > 0)
-                                @foreach($admins as $admin)
+                            @if ($users->count() > 0)
+                                @foreach($users as $user)
                                 <tr>
                                     <td style="text-align: center;">{{ $loop->iteration }}</td>
-                                    <td>{{ $admin->nama }}</td>
-                                    <td>{{ $admin->username }}</td>
+                                    <td>{{ $user->nama }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{ url('/akun-admin/sampah/pulihkan/'.$admin->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
-                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $admin->id }}" deleteName ="{{ $admin->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
+                                        <a href="{{ url('/akun-admin/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
+                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
                                     </td>
                                     @endforeach
                             @else
@@ -149,6 +149,7 @@
                             timer: 2000,
                             buttons: false,
                         })
+                        window.location.reload();
                     }
                 })
             }

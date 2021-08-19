@@ -8,7 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use App\Admin;
+use App\Models\Admin;
 
 class User extends Authenticatable
 {
@@ -54,8 +54,9 @@ class User extends Authenticatable
     }
 
     //Relations
-    public function admins() {
-        return $this->hasOne(Admin::class, 'user_id');
+    public function admin() 
+    {
+        return $this->hasOne(Admin::class);
     }
 
 }

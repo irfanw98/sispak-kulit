@@ -15,7 +15,12 @@ class Admin extends Model
     protected $table = 'tb_admin';
     protected $guard = 'admin';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id','nama','username', 'email'];
+    protected $fillable = [
+        'user_id',
+        'nama',
+        'username',
+        'email
+    '];
 
     public function getCreatedAtAttribute()
     {
@@ -31,7 +36,7 @@ class Admin extends Model
 
     //Relations
     public function user() {
-        return $this->belongsTo(User::class, 'user_id');
+        return $this->belongsTo(User::class);
     }
 
  }
