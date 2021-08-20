@@ -5,16 +5,13 @@ use Illuminate\Support\Facades\Route;
 use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::view('/', 'welcome');
 
 Auth::routes();
 
 Route::resource('/pesan', App\Http\Controllers\Admin\PesanController::class);
 Route::get('/logout', ['App\Http\Controllers\LogoutController', 'logout'])->name('logout');
 
-//ADMIN ROUTE
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::get('/dashboard-admin', [App\Http\Controllers\Admin\DashboardAdminController::class, 'index'])->name('dashboard-admin');
     Route::get('/akun-admin/sampah',[App\Http\Controllers\Admin\AdminController::class, 'sampah'])->name('sampah');
