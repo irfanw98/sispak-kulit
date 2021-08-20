@@ -101,14 +101,14 @@
                     '_method': 'DELETE',
                 },
                 success: function(response) {
-                    swal({
-                        title: "Sukses!",
-                        text: `Data semua admin berhasil dihapus permanen!`,
-                        icon: "success",
-                        timer: 2000,
-                        buttons: false,
-                    })
-                    location.reload();
+                    // swal({
+                    //     title: "Sukses!",
+                    //     text: `Data semua admin berhasil dihapus permanen!`,
+                    //     icon: "success",
+                    //     timer: 2000,
+                    //     buttons: false,
+                    // })
+                    // location.reload();
                 }
             })
             }

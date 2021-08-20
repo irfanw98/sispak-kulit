@@ -91,15 +91,17 @@ class AdminController extends Controller
     public function hapus($id = null)
     {
         if ($id != null) {
-             $user = User::where('id', $id)
+            $user = User::where('id', $id)
                                 ->onlyTrashed()->first();
             $user->removeRole('admin');
             $user->forceDelete();
         } else {
-            // $users = auth()->user()->onlyTrashed();
-            // $users->syncRoles([]);
-            // dd($users);
-            // $users->forceDelete(); 
+            $users = User::onlyTrashed()->get();
+
+            foreach ($users as $key => $user) {
+                $user->removeRole('admin');
+                $user->forceDelete();
+            }
         }
     }
 }
