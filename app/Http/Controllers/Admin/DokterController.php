@@ -14,6 +14,21 @@ class DokterController extends Controller
 {
     public function index(Request $request)
     {
+        $dokters = Dokter::latest()->get();
+
+        if ($request->ajax()) {
+            return Datatables::of($dokters)
+            -> addColumn('Aksi', function($data) {
+                return '
+                    <a href="" class="btn btn-info dokterUbah" role="button" ubah-id="' . $data->id . '"><i class="fas fa-edit"></i> UBAH</a>
+                     <a href="" class="btn btn-danger dokterDelete" role="button" delete-id="' . $data->id . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                ';
+            })
+            ->rawColumns(['Aksi'])
+            ->addIndexColumn()
+            ->removeColumn('id')
+            ->make(true);
+        }
         return view('dokter.index');
     }
 
