@@ -5,21 +5,22 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
-use Illuminate\Database\Eloquent\SoftDeletes;
+// use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\User;
 
-class Admin extends Model
+class Dokter extends Model
 {
-    use HasFactory, HasRoles, SoftDeletes;
+    use HasFactory, HasRoles;
 
-    protected $table = 'tb_admin';
-    protected $guard = 'admin';
-    protected $primaryKey = 'id';
+    protected $table = 'tb_dokter';
+    protected $guard = 'dokter';
+    protected $primaryKey = 'kode_dokter';
     protected $fillable = [
         'user_id',
         'nama',
         'username',
-        'email'
+        'email',
+        'foto'
     ];
 
     public function getCreatedAtAttribute()
@@ -34,9 +35,11 @@ class Admin extends Model
         ->diffForHumans();
     }
 
-    //Relations
+     //Relations
     public function user() {
         return $this->belongsTo(User::class);
     }
 
- }
+
+
+}

@@ -9,6 +9,7 @@ use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
 use App\Models\Admin;
+use App\Models\Dokter;
 
 class User extends Authenticatable
 {
@@ -52,11 +53,15 @@ class User extends Authenticatable
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
     }
-
     //Relations
     public function admin() 
     {
         return $this->hasOne(Admin::class);
     }
+     public function dokter() 
+    {
+        return $this->hasOne(Dokter::class);
+    }
+
 
 }

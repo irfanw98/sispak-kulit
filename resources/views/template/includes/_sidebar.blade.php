@@ -17,7 +17,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/akun-dokter') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-user-md"></i>
               <p>Data Dokter</p>
             </a>
           </li>
