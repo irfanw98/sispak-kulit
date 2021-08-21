@@ -37,7 +37,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Dokter</span>
-                    <span class="info-box-number">410</span>
+                    <span class="info-box-number">{{ $dokter }}</span>
                 </div>
                 <!-- /.info-box-content -->
                 </div>
