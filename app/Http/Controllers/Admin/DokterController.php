@@ -20,8 +20,9 @@ class DokterController extends Controller
             return Datatables::of($dokters)
             -> addColumn('Aksi', function($data) {
                 return '
-                    <a href="" class="btn btn-info dokterUbah" role="button" ubah-id="' . $data->id . '"><i class="fas fa-edit"></i> UBAH</a>
-                     <a href="" class="btn btn-danger dokterDelete" role="button" delete-id="' . $data->id . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                    <a href="#" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
+                    <a href="" class="btn btn-info dokterUbah" role="button" ubah-kode="' . $data->kode_dokter . '"><i class="fas fa-edit"></i> UBAH</a>
+                     <a href="" class="btn btn-danger dokterDelete" role="button" delete-kode="' . $data->kode_dokter . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
             ->rawColumns(['Aksi'])
@@ -29,7 +30,7 @@ class DokterController extends Controller
             ->removeColumn('id')
             ->make(true);
         }
-        return view('dokter.index');
+        return view('dokter.index', compact('dokters'));
     }
 
     /**
@@ -61,7 +62,9 @@ class DokterController extends Controller
      */
     public function show($id)
     {
-        //
+        $dokter = Dokter::findOrFail($id);
+       
+        return view('dokter.detail', compact('dokter'));
     }
 
     /**

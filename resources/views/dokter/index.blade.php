@@ -58,6 +58,23 @@
 </section>
 @endsection
 
+<!-- Modal Detail  -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('footer')
 <script type="text/javascript">
         $(document).ready(function(){
@@ -87,6 +104,21 @@
                                 name: 'Aksi'
                         }]
                 })
+        })
+
+        //Detail Dokter
+        $(document).on('click', '.dokterDetail', function(e) {
+            e.preventDefault();
+            const kode_dokter = $(this).attr('detail-kode');
+            
+            $.ajax({
+                url:  `{{ url('/akun-dokter/${kode_dokter}') }}`,
+                method: 'GET',
+                success: function(result) {
+                    $('#detailModal').modal('show');
+                    $('#detailModal').find('.modal-body').html(result);
+                }
+            })
         })
 </script>
 @endsection
