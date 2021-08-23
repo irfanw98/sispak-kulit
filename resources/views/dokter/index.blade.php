@@ -75,6 +75,23 @@
     </div>
 </div>
 
+<!-- Modal Create  -->
+<div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="createModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('footer')
 <script type="text/javascript">
         $(document).ready(function(){
@@ -119,6 +136,47 @@
                     $('#detailModal').find('.modal-body').html(result);
                 }
             })
+        })
+
+        //Create Dokter
+        $(document).on('click', '.addDokter', function(e) {
+            e.preventDefault();
+            
+            $.ajax({
+                url: "{{ url('/akun-dokter/create') }}",
+                method: "GET",
+                success: function(result) {
+                    $('#createModal').modal('show');
+                    $('#createModal').find('.modal-body').html(result);
+                }
+            })
+
+        })
+
+        $(document).on('click', '.saveButton', function(e) {
+            e.preventDefault();
+            let form = $('.formInsert')[0]; //Get form input
+            const formData = new FormData(form);
+            
+            $.ajax({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: "{{ url('akun-dokter') }}",
+                method: "POST",
+                data: formData,
+                contentType: false,
+                processData: false,
+                cache: false,
+                dataType: "JSON",
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function(data) {
+                    console.log(data);
+                }
+            })
+
         })
 </script>
 @endsection

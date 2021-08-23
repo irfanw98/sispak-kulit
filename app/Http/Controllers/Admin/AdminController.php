@@ -33,7 +33,7 @@ class AdminController extends Controller
 
     public function store(StoreAdminRequest $request)
     {
-        //Insert table users
+        //Insert users
         $user = new User;
         $user->nama = $request->nama;
         $user->email = $request->email;
@@ -42,7 +42,7 @@ class AdminController extends Controller
         $user->assignRole('admin');
         $user->save();
 
-        //Insert table Admin
+        //Insert Admin
         $admin = new Admin;
         $admin->user_id = $user->id;
         $admin->nama = $request->nama;

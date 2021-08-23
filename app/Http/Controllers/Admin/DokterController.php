@@ -20,9 +20,9 @@ class DokterController extends Controller
             return Datatables::of($dokters)
             -> addColumn('Aksi', function($data) {
                 return '
-                    <a href="#" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
+                    <a href="" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
                     <a href="" class="btn btn-info dokterUbah" role="button" ubah-kode="' . $data->kode_dokter . '"><i class="fas fa-edit"></i> UBAH</a>
-                     <a href="" class="btn btn-danger dokterDelete" role="button" delete-kode="' . $data->kode_dokter . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                    <a href="" class="btn btn-danger dokterDelete" role="button" delete-kode="' . $data->kode_dokter . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
             ->rawColumns(['Aksi'])
@@ -33,33 +33,26 @@ class DokterController extends Controller
         return view('dokter.index', compact('dokters'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
-        //
+        return view('dokter.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
-    }
+        //Insert Users
+        // $user = new User;
+        // $user->nama = $request->nama;
+        // $user->email = $request->email;
+        // $user->password = bcrypt('dokter123');
+        // $user->remember_token = Str::random(60);
+        // $user->assignRole('dokter');
+        // $user->save();
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+        //Insert Dokter
+        
+    }
+    
     public function show($id)
     {
         $dokter = Dokter::findOrFail($id);
