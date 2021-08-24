@@ -123,7 +123,7 @@
                 })
         })
 
-        //Detail Dokter
+        //DETAIL
         $(document).on('click', '.dokterDetail', function(e) {
             e.preventDefault();
             const kode_dokter = $(this).attr('detail-kode');
@@ -138,7 +138,7 @@
             })
         })
 
-        //Create Dokter
+        //TAMBAH DATA
         $(document).on('click', '.addDokter', function(e) {
             e.preventDefault();
             
@@ -158,6 +158,12 @@
             let form = $('.formInsert')[0]; //Get form input
             const formData = new FormData(form);
             
+            //Validasi form input
+            $('#namaError').addClass('d-none');
+            $('#usernameError').addClass('d-none');
+            $('#emailError').addClass('d-none');
+            $('#fotoError').addClass('d-none');
+
             $.ajax({
                 headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
@@ -183,10 +189,40 @@
                     })
                 },
                 error: function(data) {
-                    console.log(data);
+                    let errors = data.responseJSON;
+                    if ($.isEmptyObject(errors) == false) {
+                        $.each(errors.errors, function(key,value) {
+                            let errID = '#' + key + 'Error';
+                            $('#nama').removeClass('is-valid');
+                            $('#nama').addClass('is-invalid');
+                            $('#username').removeClass('is-valid');
+                            $('#username').addClass('is-invalid');
+                            $('#email').removeClass('is-valid');
+                            $('#email').addClass('is-invalid');
+                            $('#foto').removeClass('is-valid');
+                            $('#foto').addClass('is-invalid');
+                            $(errID).removeClass('d-none');
+                            $(errID).text(value);
+                         })
+                    } 
                 }
             })
 
+        })
+
+        $(document).on('click', '.cancelButton', function(e) {
+            e.preventDefault();
+            $('.formInsert').trigger('reset'); //reset form input
+
+            $('#namaError').addClass('d-none');//reset validasi form input
+            $('#usernameError').addClass('d-none');
+            $('#emailError').addClass('d-none');
+            $('#fotoError').addClass('d-none');
+
+            $('#nama').removeClass('is-invalid');
+            $('#username').removeClass('is-invalid');
+            $('#email').removeClass('is-invalid');
+            $('#foto').removeClass('is-invalid');
         })
 </script>
 @endsection

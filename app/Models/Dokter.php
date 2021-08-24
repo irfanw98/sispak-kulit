@@ -16,7 +16,6 @@ class Dokter extends Model
     protected $table = 'tb_dokter';
     protected $guard = 'dokter';
     protected $primaryKey = 'kode_dokter';
-    // public $incrementing = false;
     protected $keyType = 'string';
     protected $fillable = [
         'kode_dokter',

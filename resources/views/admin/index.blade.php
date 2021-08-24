@@ -195,7 +195,6 @@
                 })
             },
             error: function(data) {
-                // console.log(data); //response 422 messages error
                 let errors = data.responseJSON;
                 if ($.isEmptyObject(errors) == false) {
                     $.each(errors.errors, function(key,value) {

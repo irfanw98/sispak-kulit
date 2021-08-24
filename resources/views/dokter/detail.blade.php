@@ -2,7 +2,7 @@
     <div class="row">
         <div class="col-md-12">
             <center class="mt-3">
-                <img src="{{ asset('storage/dokter') }}/{{  $dokter->foto }}" width="100px" class="img-thumbnail rounded-circle">
+                <img src="{{ asset('storage/dokter') }}/{{  $dokter->foto }}" width="200px" class="img-thumbnail">
             </center>
         </div>
     </div>

@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use DataTables;
 use App\Models\User;
 use App\Models\Dokter;
+use App\Http\Requests\Admin\StoreDokterRequest;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -30,16 +31,18 @@ class DokterController extends Controller
             ->removeColumn('id')
             ->make(true);
         }
+
         return view('dokter.index', compact('dokters'));
     }
 
     public function create()
     {
         $kode = Dokter::kode();
+
         return view('dokter.create', compact('kode'));
     }
 
-    public function store(Request $request)
+    public function store(StoreDokterRequest $request)
     {
         //Insert Users
         $user = new User;
