@@ -2,7 +2,10 @@
     @csrf
     <div class="row">
         <div class="col-md-12">
-            <input type="hidden" name="kode_dokter">
+            <div class="form-group">
+                <label for="kode">Kode Dokter</label>
+                <input type="text" class="form-control" name="kode" id="kode" value="{{ $kode }}" readonly="readonly" required>
+            </div>
 
             <div class="form-group">
                 <label for="nama">Nama :</label>
@@ -12,8 +15,6 @@
     </div>
     <div class="row">
         <div class="col-md-12">
-            <input type="hidden" name="kode_dokter" id="kode_dokter">
-
             <div class="form-group">
                 <label for="username">Username :</label>
                 <input type="text" class="form-control" id="username" name="username">

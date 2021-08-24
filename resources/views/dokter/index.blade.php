@@ -127,7 +127,7 @@
         $(document).on('click', '.dokterDetail', function(e) {
             e.preventDefault();
             const kode_dokter = $(this).attr('detail-kode');
-            
+
             $.ajax({
                 url:  `{{ url('/akun-dokter/${kode_dokter}') }}`,
                 method: 'GET',
@@ -170,7 +170,17 @@
                 cache: false,
                 dataType: "JSON",
                 success: function(result) {
-                    console.log(result);
+                     $('.formInsert').trigger('reset');//Reset inputan form
+                     $('#createModal').modal('hide');//Tutup Modal
+                     $("#datatable").DataTable().ajax.reload();//Reload Datatable
+
+                    swal({
+                    title: "Sukses!",
+                    text: "Dokter berhasil ditambahkan!",
+                    icon: "success",
+                    timer: 2000,
+                    buttons: false,
+                    })
                 },
                 error: function(data) {
                     console.log(data);

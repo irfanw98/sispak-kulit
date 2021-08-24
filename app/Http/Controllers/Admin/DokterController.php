@@ -35,22 +35,38 @@ class DokterController extends Controller
 
     public function create()
     {
-        return view('dokter.create');
+        $kode = Dokter::kode();
+        return view('dokter.create', compact('kode'));
     }
 
     public function store(Request $request)
     {
         //Insert Users
-        // $user = new User;
-        // $user->nama = $request->nama;
-        // $user->email = $request->email;
-        // $user->password = bcrypt('dokter123');
-        // $user->remember_token = Str::random(60);
-        // $user->assignRole('dokter');
-        // $user->save();
+        $user = new User;
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->password = bcrypt('dokter123');
+        $user->remember_token = Str::random(60);
+        $user->assignRole('dokter');
+        $user->save();
 
         //Insert Dokter
-        
+        $file = $request->file('foto');
+        $extension = $file->getClientOriginalExtension();
+        $filename = base64_encode(time()) . '.' . $extension;
+        $file->move('storage/dokter', $filename);
+        $file->foto = $filename;
+
+        $dokter = new Dokter;
+        $dokter->kode_dokter = $request->kode;
+        $dokter->user_id = $user->id;
+        $dokter->nama = $request->nama;
+        $dokter->username = $request->username;
+        $dokter->email = $request->email;
+        $dokter->foto = $filename;
+        $dokter->save();
+
+       return redirect('akun-dokter');
     }
     
     public function show($id)
