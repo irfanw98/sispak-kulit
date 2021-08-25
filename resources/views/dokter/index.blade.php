@@ -262,6 +262,11 @@
             const form_id = $('input[id=kode]').val();
             let form = $('.formEdit')[0];
             const formData = new FormData(form);
+
+            $('#namaError').addClass('d-none');
+            $('#usernameError').addClass('d-none');
+            $('#emailError').addClass('d-none');
+            $('#fotoError').addClass('d-none');
             
             $.ajax({
                 headers: {
@@ -287,6 +292,24 @@
                         timer: 2000,
                         buttons: false,
                     })
+                },
+                error: function(data) {
+                    let errors = data.responseJSON;
+                    if ($.isEmptyObject(errors) == false) {
+                        $.each(errors.errors, function(key,value) {
+                            let errID = '#' + key + 'Error';
+                            $('#nama').removeClass('is-valid');
+                            $('#nama').addClass('is-invalid');
+                            $('#username').removeClass('is-valid');
+                            $('#username').addClass('is-invalid');
+                            $('#email').removeClass('is-valid');
+                            $('#email').addClass('is-invalid');
+                            $('#foto').removeClass('is-valid');
+                            $('#foto').addClass('is-invalid');
+                            $(errID).removeClass('d-none');
+                            $(errID).text(value);
+                         })
+                    } 
                 }
             })
         })

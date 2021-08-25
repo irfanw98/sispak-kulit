@@ -46,6 +46,7 @@
         <div class="col-md-6">
                 <label for="foto">Upload foto baru :</label>
                 <input type="file" id="foto" name="foto">
+                
                 <span class="text-danger" id="fotoError"></span>
         </div>
     </div>

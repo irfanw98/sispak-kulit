@@ -9,6 +9,7 @@ use DataTables;
 use App\Models\User;
 use App\Models\Dokter;
 use App\Http\Requests\Admin\StoreDokterRequest;
+use App\Http\Requests\Admin\UpdateDokterRequest;
 use Illuminate\Http\Request;
 
 class DokterController extends Controller
@@ -44,7 +45,6 @@ class DokterController extends Controller
 
     public function store(StoreDokterRequest $request)
     {
-        //Insert Users
         $user = new User;
         $user->nama = $request->nama;
         $user->email = $request->email;
@@ -53,7 +53,6 @@ class DokterController extends Controller
         $user->assignRole('dokter');
         $user->save();
 
-        //Insert Dokter
         $file = $request->file('foto');
         $extension = $file->getClientOriginalExtension();
         $filename = base64_encode(time()) . '.' . $extension;
@@ -86,7 +85,7 @@ class DokterController extends Controller
         return view('dokter.edit', compact('dokter'));
     }
 
-    public function update(Request $request, $id)
+    public function update(UpdateDokterRequest $request, $id)
     {
         $dokter = Dokter::findOrFail($id);
 
