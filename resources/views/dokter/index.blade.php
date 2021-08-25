@@ -224,5 +224,46 @@
             $('#email').removeClass('is-invalid');
             $('#foto').removeClass('is-invalid');
         })
+
+        //HAPUS DATA
+        $(document).on('click', '.dokterDelete', function(e) {
+            e.preventDefault();
+            const kodeDokter = $(this).attr('delete-kode');
+            const namaDokter = $(this).attr('dokterNama');
+           
+            swal({
+                title: "Yakin?",
+                text: `Data dokter ${namaDokter} akan dihapus?`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((result) => {
+                if (result) {
+                    $.ajax({
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: `{{ url('/akun-dokter/${kodeDokter}') }}`,
+                        type:"POST",
+                        data: {
+                            '_method': 'DELETE',
+                            'id': kodeDokter,
+                        },
+                        success: function(response) {
+                            $('#datatable').DataTable().ajax.reload();
+
+                            swal({
+                                title: "Sukses!",
+                                text: `Data admin ${namaDokter} berhasil dihapus!`,
+                                icon: "success",
+                                timer: 2000,
+                                buttons: false,
+                            })
+                        }
+                    })
+                }
+            })
+        })
 </script>
 @endsection

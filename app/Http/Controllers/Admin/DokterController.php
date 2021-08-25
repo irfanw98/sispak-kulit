@@ -102,14 +102,13 @@ class DokterController extends Controller
         //
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $user = Dokter::findOrFail($id)->user;
+        $user->delete();
+        $dokter = Dokter::findOrFail($id);
+        $dokter->delete();
+        
+        return redirect('akun-dokter');
     }
 }
