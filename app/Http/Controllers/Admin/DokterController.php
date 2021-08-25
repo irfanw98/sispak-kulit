@@ -79,27 +79,41 @@ class DokterController extends Controller
         return view('dokter.detail', compact('dokter'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $dokter = Dokter::findOrFail($id);
+
+        return view('dokter.edit', compact('dokter'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $dokter = Dokter::findOrFail($id);
+
+        if ($request->hasFile('foto')) {
+            $file = $request->file('foto');
+            $extension = $file->getClientOriginalExtension();
+            $filename = base64_encode(time()) . '.' . $extension;
+            $file->move('storage/dokter', $filename);
+            $oldFilename = $dokter->foto;
+            $dokter->foto = $filename;
+            Storage::disk('public')->delete("dokter/" . $oldFilename);
+        } else {
+            $filename = $dokter->foto;
+        }
+
+        $user = User::findOrFail($dokter->user_id);
+        $user->nama = $request->nama;
+        $user->email = $request->email;
+        $user->save();
+
+        $dokter->nama = $request->nama;
+        $dokter->username = $request->username;
+        $dokter->email = $request->email;
+        $dokter->foto = $filename;
+        $dokter->save();
+
+        return redirect('akun-dokter');
     }
 
     public function destroy($id)

@@ -92,6 +92,23 @@
     </div>
 </div>
 
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('footer')
 <script type="text/javascript">
         $(document).ready(function(){
@@ -223,6 +240,55 @@
             $('#username').removeClass('is-invalid');
             $('#email').removeClass('is-invalid');
             $('#foto').removeClass('is-invalid');
+        })
+
+        //UBAH DATA
+        $(document).on('click', '.dokterUbah', function(e) {
+            e.preventDefault();
+            const dokterId = $(this).attr('ubah-kode');
+            
+            $.ajax({
+                url: `{{ url('/akun-dokter/${dokterId}/edit') }}`,
+                method: "GET",
+                success: function(result) {
+                    $('#editModal').modal('show');
+                    $('#editModal').find('.modal-body').html(result);
+                }
+            })
+        })
+
+        $(document).on('click', '.editButton', function(e) {
+            e.preventDefault();
+            const form_id = $('input[id=kode]').val();
+            let form = $('.formEdit')[0];
+            const formData = new FormData(form);
+            
+            $.ajax({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `{{ url('/akun-dokter/${form_id}') }}`,
+                method: 'POST',
+                enctype: 'multipart/form-data',
+                processData: false, // Important!
+                contentType: false,
+                cache: false,
+                data: formData,
+                dataType: 'JSON',
+                success: function(response) {
+                    $('.formEdit').trigger('reset');//Reset inputan form
+                    $('#editModal').modal('hide');//Tutup Modal
+                    $("#datatable").DataTable().ajax.reload();//Reload Datatable
+
+                    swal({
+                        title: "Sukses!",
+                        text: "Dokter berhasil diubah!",
+                        icon: "success",
+                        timer: 2000,
+                        buttons: false,
+                    })
+                }
+            })
         })
 
         //HAPUS DATA
