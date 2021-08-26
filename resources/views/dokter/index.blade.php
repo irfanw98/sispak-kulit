@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addDokter" class="btn btn-primary mb-3 p-2 addDokter"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
-                    <a href="#" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                    <a href="{{ url('/akun-dokter/sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -344,7 +344,7 @@
 
                             swal({
                                 title: "Sukses!",
-                                text: `Data admin ${namaDokter} berhasil dihapus!`,
+                                text: `Data dokter ${namaDokter} berhasil dihapus!`,
                                 icon: "success",
                                 timer: 2000,
                                 buttons: false,

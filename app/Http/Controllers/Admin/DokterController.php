@@ -124,4 +124,34 @@ class DokterController extends Controller
         
         return redirect('akun-dokter');
     }
+
+    public function sampah ()
+    {
+        $users = User::whereHas("roles", function($q){
+            $q->where("name", "dokter"); 
+        })->onlyTrashed()->get();
+
+         return view('dokter.sampah', compact('users'));
+    }
+
+    public function pulihkan($id = null) 
+    {
+        if ($id != null) {
+            User::where('id', $id)
+                    ->onlyTrashed()
+                    ->restore();
+
+            Dokter::where('user_id', $id)
+                        ->onlyTrashed()
+                        ->restore();
+        } else {
+            User::whereHas("roles", function($q){
+                $q->where("name", "dokter"); 
+            })->onlyTrashed()->restore();
+
+            Dokter::onlyTrashed()->restore();
+        }
+
+        return redirect('/akun-dokter/sampah');
+    }
 }

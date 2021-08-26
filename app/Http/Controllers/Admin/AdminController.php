@@ -65,7 +65,9 @@ class AdminController extends Controller
 
     public function sampah()
     {
-        $users = User::onlyTrashed()->get();
+        $users = User::whereHas("roles", function($q){
+            $q->where("name", "admin"); 
+        })->onlyTrashed()->get();
 
         return view('admin.sampah', compact('users'));
     }
