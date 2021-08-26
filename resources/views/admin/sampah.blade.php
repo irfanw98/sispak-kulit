@@ -149,7 +149,7 @@
                             timer: 2000,
                             buttons: false,
                         })
-                        window.location.reload();
+                        location.reload();
                     }
                 })
             }

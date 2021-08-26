@@ -27,7 +27,7 @@ class StoreDokterRequest extends FormRequest
             'nama' => 'required|min:3',
             'username' => 'required|min:6|unique:tb_dokter',
             'email' => 'required|email|unique:tb_dokter',
-            'foto' => 'nullable|mimes:jpeg,png,jpg|max:2048',
+            'foto' => 'image|nullable|mimes:jpeg,png,jpg|max:2048',
         ];
     }
 

@@ -60,7 +60,7 @@
                                     <td>{{ $user->email }}</td>
                                     <td style="text-align: center;">
                                         <a href="{{ url('/akun-dokter/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
-                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "#" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
+                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
                                     </td>
                                     @endforeach
                             @else
@@ -79,5 +79,80 @@
 
 @section('footer')
 <script type="text/javascript">
+    //DELETE ALL
+    $(document).on('click', '.hapus', function(e) {
+        e.preventDefault();
+        swal({
+            title: "Yakin?",
+            text: `Data semua dokter dihapus permanen?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ url('/akun-dokter/sampah/hapus') }}",
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Sukses!",
+                            text: `Data semua dokter berhasil dihapus permanen!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        location.reload();
+                    }
+                })
+            }
+        })
+    })
+
+    //DELETE BY ID
+    $(document).on('click', '.deleteSampah', function(e) {
+        e.preventDefault();
+        const hapusId = $(this).attr('deleteId');
+        const hapusNama = $(this).attr('deleteName');
+        
+        swal({
+            title: "Yakin?",
+            text: `Data dokter ${hapusNama} akan dihapus permanen?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/akun-dokter/sampah/hapus/${hapusId}') }}`,
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                        'id': hapusId,
+                    },
+                    success: function(response) {
+                         swal({
+                            title: "Sukses!",
+                            text: `Data dokter ${hapusNama} berhasil dihapus permanen!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        location.reload();
+                    }
+                })
+            }
+        })
+    })
 </script>
 @endsection

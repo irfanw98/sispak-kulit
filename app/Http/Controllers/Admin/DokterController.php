@@ -44,7 +44,7 @@ class DokterController extends Controller
     }
 
     public function store(StoreDokterRequest $request)
-    {
+    {        
         $user = new User;
         $user->nama = $request->nama;
         $user->email = $request->email;
@@ -53,11 +53,15 @@ class DokterController extends Controller
         $user->assignRole('dokter');
         $user->save();
 
-        $file = $request->file('foto');
-        $extension = $file->getClientOriginalExtension();
-        $filename = base64_encode(time()) . '.' . $extension;
-        $file->move('storage/dokter', $filename);
-        $file->foto = $filename;
+        if ($request->hasFile('foto')) {
+                $file = $request->file('foto');
+                $extension = $file->getClientOriginalExtension();
+                $filename = base64_encode(time()) . '.' . $extension;
+                $file->move('storage/dokter', $filename);
+                $file->foto = $filename;
+        } else {
+            $filename = '';
+        }
 
         $dokter = new Dokter;
         $dokter->kode_dokter = $request->kode;
@@ -153,5 +157,26 @@ class DokterController extends Controller
         }
 
         return redirect('/akun-dokter/sampah');
+    }
+
+    public function hapus($id = null)
+    {
+        if($id != null) {
+            $users = User::where('id', $id)
+                                ->onlyTrashed()->first();
+            $users->removeRole('dokter');
+            $users->forceDelete();
+        } else {
+            $users =  User::whereHas("roles", function($q){
+                                $q->where("name", "dokter"); 
+                            })
+                            ->onlyTrashed()
+                            ->get();
+                
+                foreach ($users as $key => $user) {
+                    $user->removeRole("dokter");
+                    $user->forceDelete();
+                }
+        }
     }
 }

@@ -20,6 +20,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::resource('/akun-admin', App\Http\Controllers\Admin\AdminController::class)->only(['index','store','destroy']);
     Route::get('/akun-dokter/sampah', [App\Http\Controllers\Admin\DokterController::class, 'sampah']);
     Route::get('/akun-dokter/sampah/pulihkan/{id?}', [App\Http\Controllers\Admin\DokterController::class, 'pulihkan']);
+    Route::delete('/akun-dokter/sampah/hapus/{id?}', [App\Http\Controllers\Admin\DokterController::class, 'hapus']);
     Route::resource('/akun-dokter', App\Http\Controllers\Admin\DokterController::class);
     Route::resource('/akun-user', App\Http\Controllers\Admin\UserController::class)->only(['index', 'destroy']);
     Route::resource('/laporan', App\Http\Controllers\Admin\LaporanController::class)->only(['index', 'destroy']);
