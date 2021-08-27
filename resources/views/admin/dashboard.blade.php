@@ -16,7 +16,7 @@
     </section>
     <section class="content">
         <div class="row">
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
                 <span class="info-box-icon bg-primary">
                     <i class="nav-icon fas fa-user-shield"></i>
@@ -31,7 +31,7 @@
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
                 <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
 
@@ -44,7 +44,7 @@
                 <!-- /.info-box -->
             </div>
             <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
+            <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="far fa-copy"></i></span>
 
@@ -56,20 +56,6 @@
                 </div>
                 <!-- /.info-box -->
             </div>
-            <!-- /.col -->
-            <div class="col-md-3 col-sm-6 col-12">
-                <div class="info-box">
-                <span class="info-box-icon bg-danger"><i class="far fa-star"></i></span>
-
-                <div class="info-box-content">
-                    <span class="info-box-text">Pesan</span>
-                    <span class="info-box-number">93,139</span>
-                </div>
-                <!-- /.info-box-content -->
-                </div>
-                <!-- /.info-box -->
-            </div>
-             <!-- /.col -->
         </div>
     </section>
 @endsection

@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addAdmin" class="btn btn-primary mb-3 p-2 addAdmin"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
-                    <a href="{{ route('sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                    <a href="{{ url('/akun-admin/sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>

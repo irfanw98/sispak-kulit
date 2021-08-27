@@ -8,6 +8,10 @@
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
+  <!-- Font Roboto -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@200&family=Roboto:wght@300&display=swap" rel="stylesheet">
   <!-- DataTables -->
   <link rel="stylesheet" href="https://cdn.datatables.net/1.10.23/css/dataTables.bootstrap5.min.css">
   <!-- DataTables Responsive -->
@@ -30,11 +34,11 @@
 <!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
-    @include('template.includes._navbar');
+    @include('template.includes._navbar')
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-dark-primary elevation-4" id="sidebar">
+  <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #2a3f54;font-family: 'Roboto', sans-serif;">
     <!-- Brand Logo -->
     <a href="{{ route('dashboard-admin') }}" class="brand-link">
       <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
@@ -87,6 +91,12 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/assets/dist/js/demo.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script type="text/javascript">
+  // $(".nav .nav-link").on("click", function(){
+  //   $(".nav").find(".active").removeClass("active");
+  //   $(this).addClass("active");
+  // });
+</script>
 @yield('footer')
 </body>
 </html>

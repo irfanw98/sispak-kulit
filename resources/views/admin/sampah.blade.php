@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-body">
                         <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="{{ route('pulihkan') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
+                        <a href="{{ url('/akun-admin/sampah/pulihkan') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -95,7 +95,7 @@
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 },
-                url:"{{ route('hapus') }}",
+                url:"{{ url('/akun-admin/sampah/hapus') }}",
                 type:"POST",
                 data: {
                     '_method': 'DELETE',
@@ -120,7 +120,6 @@
         e.preventDefault();
         const hapusId = $(this).attr('deleteId');
         const hapusNama = $(this).attr('deleteName');
-        const url = `sampah/hapus/${hapusId}`;
         
         swal({
             title: "Yakin?",
@@ -135,7 +134,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url:url,
+                    url:`{{ url('/akun-admin/sampah/hapus/${hapusId}') }}`,
                     type:"POST",
                     data: {
                         '_method': 'DELETE',
