@@ -133,7 +133,9 @@ class DokterController extends Controller
     {
         $users = User::whereHas("roles", function($q){
             $q->where("name", "dokter"); 
-        })->onlyTrashed()->get();
+        })
+        ->onlyTrashed()
+        ->get();
 
          return view('dokter.sampah', compact('users'));
     }
@@ -151,7 +153,9 @@ class DokterController extends Controller
         } else {
             User::whereHas("roles", function($q){
                 $q->where("name", "dokter"); 
-            })->onlyTrashed()->restore();
+            })
+            ->onlyTrashed()
+            ->restore();
 
             Dokter::onlyTrashed()->restore();
         }
@@ -173,10 +177,10 @@ class DokterController extends Controller
                             ->onlyTrashed()
                             ->get();
                 
-                foreach ($users as $key => $user) {
-                    $user->removeRole("dokter");
-                    $user->forceDelete();
-                }
+            foreach ($users as $key => $user) {
+                $user->removeRole("dokter");
+                $user->forceDelete();
+            }
         }
     }
 }

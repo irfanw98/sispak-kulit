@@ -55,7 +55,7 @@ class AdminController extends Controller
 
     public function destroy($id)
     {
-        $user = Admin::find($id)->user;
+        $user = Admin::findOrFail($id)->user;
         $user->delete();
         $admin = Admin::findOrFail($id); 
         $admin->delete();
@@ -67,7 +67,9 @@ class AdminController extends Controller
     {
         $users = User::whereHas("roles", function($q){
             $q->where("name", "admin"); 
-        })->onlyTrashed()->get();
+        })
+        ->onlyTrashed()
+        ->get();
 
         return view('admin.sampah', compact('users'));
     }
@@ -83,7 +85,12 @@ class AdminController extends Controller
                         ->onlyTrashed()
                         ->restore();
         } else {
-            User::onlyTrashed()->restore();
+            User::whereHas("roles", function($q){
+                $q->where("name", "admin"); 
+            })
+            ->onlyTrashed()
+            ->restore();
+
             Admin::onlyTrashed()->restore();
         }
 
@@ -94,11 +101,16 @@ class AdminController extends Controller
     {
         if ($id != null) {
             $user = User::where('id', $id)
-                                ->onlyTrashed()->first();
+                                ->onlyTrashed()
+                                ->first();
             $user->removeRole('admin');
             $user->forceDelete();
         } else {
-            $users = User::onlyTrashed()->get();
+            $users =  User::whereHas("roles", function($q){
+                                $q->where("name", "admin"); 
+                            })
+                            ->onlyTrashed()
+                            ->get();
 
             foreach ($users as $key => $user) {
                 $user->removeRole('admin');

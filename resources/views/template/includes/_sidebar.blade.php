@@ -23,7 +23,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/akun-user') }}" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-users"></i>
               <p>Data User</p>
             </a>
           </li>

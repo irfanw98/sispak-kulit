@@ -57,7 +57,7 @@
                                 <tr>
                                     <td style="text-align: center;">{{ $loop->iteration }}</td>
                                     <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
+                                    <td>{{ $user->username }}</td>
                                     <td style="text-align: center;">
                                         <a href="{{ url('/akun-dokter/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
                                         <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
