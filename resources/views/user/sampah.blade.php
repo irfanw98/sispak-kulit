@@ -27,7 +27,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('dashboard-dokter') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active">Akun-Dokter</li>
+              <li class="breadcrumb-item active">Akun-User</li>
             </ol>
           </div>
         </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-body">
                         <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="#" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
+                        <a href="{{ url('/akun-user/sampah/pulihkan') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -59,13 +59,13 @@
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td style="text-align: center;">
-                                        <a href="#" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
+                                        <a href="{{ url('/akun-user/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
                                         <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
                                     </td>
                                     @endforeach
                             @else
                                     <tr>
-                                        <td colspan="4" class="text-center">Data Kosong</td>
+                                        <td colspan="4" class="text-center">Tidak Ada Data</td>
                                     </tr>
                             @endif
                             </tbody>
@@ -80,5 +80,80 @@
 @section('footer')
 <script type="text/javascript">
 
+    //DELETE ALL
+    $(document).on('click', '.hapus', function(e) {
+        e.preventDefault();
+        swal({
+            title: "Yakin?",
+            text: `Data semua user dihapus permanen?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: "{{ url('/akun-user/sampah/hapus') }}",
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Sukses!",
+                            text: `Data semua user berhasil dihapus permanen!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        location.reload();
+                    }
+                })
+            }
+        })
+    })
+
+     //DELETE BY ID
+    $(document).on('click', '.deleteSampah', function(e) {
+        e.preventDefault();
+        const hapusId = $(this).attr('deleteId');
+        const hapusNama = $(this).attr('deleteName');
+        
+        swal({
+            title: "Yakin?",
+            text: `Data user ${hapusNama} akan dihapus permanen?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/akun-user/sampah/hapus/${hapusId}') }}`,
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                        'id': hapusId,
+                    },
+                    success: function(response) {
+                         swal({
+                            title: "Sukses!",
+                            text: `Data user ${hapusNama} berhasil dihapus permanen!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        location.reload();
+                    }
+                })
+            }
+        })
+    })
 </script>
 @endsection

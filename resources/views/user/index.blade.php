@@ -26,7 +26,7 @@
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="{{ route('dashboard-admin') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active">Akun-Dokter</li>
+              <li class="breadcrumb-item active">Akun-User</li>
             </ol>
           </div>
         </div>

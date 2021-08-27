@@ -47,7 +47,7 @@
                                 <tr>
                                     <th width="10%">No</th>
                                     <th width="20%">Nama</th>
-                                    <th width="30%">Username</th>
+                                    <th width="30%">Email</th>
                                     <th style="text-align: center;" width="40%">Aksi</th>
                                 </tr>
                             </thead>
@@ -57,7 +57,7 @@
                                 <tr>
                                     <td style="text-align: center;">{{ $loop->iteration }}</td>
                                     <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->username }}</td>
+                                    <td>{{ $user->email }}</td>
                                     <td style="text-align: center;">
                                         <a href="{{ url('/akun-dokter/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
                                         <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
@@ -65,7 +65,7 @@
                                     @endforeach
                             @else
                                     <tr>
-                                        <td colspan="4" class="text-center">Data Kosong</td>
+                                        <td colspan="4" class="text-center">Tidak Ada Data</td>
                                     </tr>
                             @endif
                             </tbody>

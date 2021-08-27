@@ -49,4 +49,43 @@ class UserController extends Controller
 
         return view('user.sampah', compact('users'));
     }
+
+    public function pulihkan($id = null)
+    {
+        if ($id != null) {
+            User::where('id', $id)
+                    ->onlyTrashed()
+                    ->restore();
+        } else {
+            User::whereHas("roles", function($q){
+                $q->where("name", "user"); 
+            })
+            ->onlyTrashed()
+            ->restore();
+        }
+
+        return redirect('/akun-user/sampah');
+    }
+
+    public function hapus($id = null) 
+    {
+        if ($id != null) {
+            $users = User::where('id', $id)
+                                    ->onlyTrashed()
+                                    ->first();
+            $users->removeRole('user');
+            $users->forceDelete();
+        } else {
+            $users =  User::whereHas("roles", function($q){
+                                $q->where("name", "user"); 
+                            })
+                            ->onlyTrashed()
+                            ->get();
+                
+            foreach ($users as $key => $user) {
+                $user->removeRole("user");
+                $user->forceDelete();
+            }
+        }
+    }
 }

@@ -48,9 +48,9 @@
                 <div class="info-box">
                 <span class="info-box-icon bg-info"><i class="far fa-copy"></i></span>
 
-                <div class="info-box-content">
+                 <div class="info-box-content">
                     <span class="info-box-text">User</span>
-                    <span class="info-box-number">13,648</span>
+                    <span class="info-box-number">{{ $user }}</span>
                 </div>
                 <!-- /.info-box-content -->
                 </div>

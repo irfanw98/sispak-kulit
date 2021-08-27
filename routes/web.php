@@ -9,7 +9,6 @@ Route::view('/', 'welcome');
 
 Auth::routes();
 
-Route::resource('/pesan', App\Http\Controllers\Admin\PesanController::class);
 Route::get('/logout', ['App\Http\Controllers\LogoutController', 'logout'])->name('logout');
 
 Route::group(['middleware' => ['auth', 'role:admin']], function () {
@@ -23,6 +22,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
     Route::delete('/akun-dokter/sampah/hapus/{id?}', [App\Http\Controllers\Admin\DokterController::class, 'hapus']);
     Route::resource('/akun-dokter', App\Http\Controllers\Admin\DokterController::class);
     Route::get('/akun-user/sampah', [App\Http\Controllers\Admin\UserController::class, 'sampah']);
+    Route::get('/akun-user/sampah/pulihkan/{id?}', [App\Http\Controllers\Admin\UserController::class, 'pulihkan']);
+    Route::delete('/akun-user/sampah/hapus/{id?}', [App\Http\Controllers\Admin\UserController::class, 'hapus']);
     Route::resource('/akun-user', App\Http\Controllers\Admin\UserController::class)->only(['index', 'destroy']);
     Route::resource('/laporan', App\Http\Controllers\Admin\LaporanController::class)->only(['index', 'destroy']);
 });
