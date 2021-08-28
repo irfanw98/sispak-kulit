@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Gejala;
 use DataTables;
 use App\Http\Requests\Dokter\Gejala\StoreRequest;
+use App\Http\Requests\Dokter\Gejala\UpdateRequest;
 use Illuminate\Http\Request;
 
 class GejalaController extends Controller
@@ -39,46 +40,27 @@ class GejalaController extends Controller
 
     public function store(StoreRequest $request)
     {
-        Gejala::create([
-            'kode_gejala' => $request->kode,
-            'nama' => $request->nama
-        ]);
+        $gejala = new Gejala;
+        $gejala->kode_gejala = $request->kode;
+        $gejala->nama = $request->nama;
+        $gejala->save();
 
         return redirect('gejala');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $gejala = Gejala::findOrFail($id);
+        
+        return view('dokter.gejala.edit', compact('gejala'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $gejala = Gejala::findOrFail($id);
+        $gejala->nama = $request->nama;
+        $gejala->save();
+        
+        return redirect('gejala');
     }
 
     /**

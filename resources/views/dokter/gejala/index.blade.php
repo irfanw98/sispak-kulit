@@ -74,6 +74,22 @@
     </div>
 </div>
 
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
 @section('footer')
 <script type="text/javascript">
     $(document).ready(function(){   
@@ -172,5 +188,68 @@
         $('#namaError').addClass('d-none');//reset validasi form input
         $('#nama').removeClass('is-invalid');
     })
+
+    //UBAH GEJALA
+    $(document).on('click', '.ubahGejala', function(e) {
+        e.preventDefault();
+        const kodeGejala = $(this).attr('ubah-kode');
+        
+        $.ajax({
+            url: `{{ url('/gejala/${kodeGejala}/edit') }}`,
+            method: "GET",
+            success: function(result) {
+                $('#editModal').modal('show');
+                $('#editModal').find('.modal-body').html(result);
+            }
+        })
+    })
+
+     $(document).on('click', '.editButton', function(e) {
+            e.preventDefault();
+            const form_id = $('input[id=kode]').val();
+            let form = $('.formEdit')[0];
+            const formData = new FormData(form);
+
+            $('#namaError').addClass('d-none');
+            
+            $.ajax({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `{{ url('/gejala/${form_id}') }}`,
+                method: 'POST',
+                processData: false, // Important!
+                contentType: false,
+                cache: false,
+                data: formData,
+                dataType: 'JSON',
+                success: function(response) {
+                    $('.formEdit').trigger('reset');//Reset inputan form
+                    $('#editModal').modal('hide');//Tutup Modal
+                    $("#datatable").DataTable().ajax.reload();//Reload Datatable
+
+                    swal({
+                        title: "Sukses!",
+                        text: "Gejala berhasil diubah!",
+                        icon: "success",
+                        timer: 2000,
+                        buttons: false,
+                    })
+                },
+                error: function(data) {
+                    let errors = data.responseJSON;
+                    if ($.isEmptyObject(errors) == false) {
+                        $.each(errors.errors, function(key,value) {
+                            let errID = '#' + key + 'Error';
+                            $('#nama').removeClass('is-valid');
+                            $('#nama').addClass('is-invalid');
+                            $(errID).removeClass('d-none');
+                            $(errID).text(value);
+                         })
+                    } 
+                }
+            })
+        })
+
 </script>
 @endsection
