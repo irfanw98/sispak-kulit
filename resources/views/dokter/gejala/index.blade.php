@@ -94,30 +94,30 @@
 <script type="text/javascript">
     $(document).ready(function(){   
             $('#datatable').DataTable({
-                        responsive: true,
-                        processing: true,
-                        serverSide: true,
-                        ajax: {
-                        url: "{{ url('/gejala') }}",
-                        method: "GET",
-                        dataType: "JSON"
-                        },
-                        columns : [{
-                            data: 'DT_RowIndex',
-                            name: 'DT_RowIndex'
-                            },
-                            {
-                            data: 'kode_gejala',
-                            name: 'kode_gejala'
-                            },
-                            {
-                            data: 'nama',
-                            name: 'nama'
-                            },
-                            {
-                            data: 'Aksi',
-                            name: 'Aksi'
-                        }]
+                responsive: true,
+                processing: true,
+                serverSide: true,
+                ajax: {
+                url: "{{ url('/gejala') }}",
+                method: "GET",
+                dataType: "JSON"
+                },
+                columns : [{
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
+                    },
+                    {
+                    data: 'kode_gejala',
+                    name: 'kode_gejala'
+                    },
+                    {
+                    data: 'nama',
+                    name: 'nama'
+                    },
+                    {
+                    data: 'Aksi',
+                    name: 'Aksi'
+                }]
             })
     })
 
@@ -176,7 +176,7 @@
                         $('#nama').addClass('is-invalid');
                         $(errID).removeClass('d-none');
                         $(errID).text(value);
-                        })
+                    })
                 } 
             }
         })

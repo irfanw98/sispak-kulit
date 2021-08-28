@@ -47,6 +47,12 @@
                 <p>Gejala</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url('/penyakit') }}" class="nav-link {{ Request::url() == url('/penyakit') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-disease"></i>
+                <p>Penyakit</p>
+              </a>
+            </li>
           @endif
           <li class="nav-item">
             <a href="{{ url('/logout') }}" class="nav-link">
