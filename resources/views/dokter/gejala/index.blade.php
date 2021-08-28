@@ -249,7 +249,47 @@
                     } 
                 }
             })
-        })
+    })
 
+    //DELETE GEJALA
+    $(document).on('click', '.hapusGejala', function(e) {
+        e.preventDefault();
+        const kodeGejala = $(this).attr('delete-kode');
+        const namaGejala = $(this).attr('namaGejala');
+        
+        swal({
+            title: "Yakin?",
+            text: `Data gejala ${namaGejala} akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/gejala/${kodeGejala}') }}`,
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                        'id': kodeGejala,
+                    },
+                    success: function(response) {
+                         $('#datatable').DataTable().ajax.reload();
+
+                        swal({
+                            title: "Sukses!",
+                            text: `Data gejala ${namaGejala} berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    }
+                })
+            }
+        })
+    })
 </script>
 @endsection
