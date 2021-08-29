@@ -72,7 +72,7 @@
 <div class="modal fade" id="addModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-                 <div class="gradModal">
+                <div class="gradModal">
                 </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="addModalLabel">Data Admin</h5>

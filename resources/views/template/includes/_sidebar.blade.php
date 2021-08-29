@@ -44,13 +44,13 @@
             <li class="nav-item">
               <a href="{{ url('/gejala') }}" class="nav-link {{ Request::url() == url('/gejala') ? 'active' : ' ' }}">
                 <i class="nav-icon fas fa-heartbeat"></i>
-                <p>Gejala</p>
+                <p>Daftar Gejala</p>
               </a>
             </li>
             <li class="nav-item">
               <a href="{{ url('/penyakit') }}" class="nav-link {{ Request::url() == url('/penyakit') ? 'active' : ' ' }}">
                 <i class="nav-icon fas fa-disease"></i>
-                <p>Penyakit</p>
+                <p>Daftar Penyakit</p>
               </a>
             </li>
           @endif

@@ -30,6 +30,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function () {
 
 Route::group(['middleware' => ['auth', 'role:dokter']], function() {
      Route::get('/dashboard-dokter', [App\Http\Controllers\Dokter\DashboardDokterController::class, 'index'])->name('dashboard-dokter');
+     Route::delete('/gejala/hapus',  [App\Http\Controllers\Dokter\GejalaController::class, 'hapus']);
      Route::resource('/gejala', App\Http\Controllers\Dokter\GejalaController::class);
      Route::resource('/penyakit', App\Http\Controllers\Dokter\PenyakitController::class);
 });

@@ -18,6 +18,7 @@ class PenyakitController extends Controller
             return DataTables::of($penyakits) 
                 -> addColumn('Aksi', function($data) {
                     return '
+                        <a href="" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
                         <a href="" class="btn btn-info ubahGejala" role="button" ubah-kode="' . $data->kode_gejala . '"><i class="fas fa-edit"></i> UBAH</a>
                         <a href="" class="btn btn-danger hapusGejala" role="button" delete-kode="' . $data->kode_gejala . '" namaGejala="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                     ';

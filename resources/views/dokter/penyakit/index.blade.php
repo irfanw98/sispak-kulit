@@ -44,8 +44,8 @@
                             <thead>
                                 <tr>
                                     <th width="10%">No</th>
-                                    <th width="40%">Kode Penyakit</th>
-                                    <th width="30%">Nama Penyakit</th>
+                                    <th width="20%">Kode Penyakit</th>
+                                    <th width="50%">Nama Penyakit</th>
                                     <th style="text-align: center;" width="10%">Aksi</th>
                                 </tr>
                             </thead>
@@ -61,6 +61,8 @@
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">

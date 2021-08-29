@@ -17,13 +17,17 @@ class GejalaController extends Controller
 
         if($request->ajax()) {
             return Datatables::of($gejalas) 
+            ->addColumn('Cek', function($data) {
+                $cek = '<input type="checkbox"  class="ceks"  kode-gejala="' . $data->kode_gejala . '">';
+                return $cek;
+            })
             -> addColumn('Aksi', function($data) {
                 return '
                     <a href="" class="btn btn-info ubahGejala" role="button" ubah-kode="' . $data->kode_gejala . '"><i class="fas fa-edit"></i> UBAH</a>
                     <a href="" class="btn btn-danger hapusGejala" role="button" delete-kode="' . $data->kode_gejala . '" namaGejala="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
-            ->rawColumns(['Aksi'])
+            ->rawColumns(['Aksi', 'Cek'])
             ->addIndexColumn()
             ->removeColumn('id')
             ->make(true);
@@ -69,5 +73,18 @@ class GejalaController extends Controller
         $gejala->delete();
 
         return redirect('gejala');
+    }
+
+    public function hapus(Request $request)
+    {
+        if ($request->multi != null) {
+            $datas = $request->data;
+            foreach ($datas as $key) {
+                $data = Gejala::findOrFail($key);
+                $data->delete();
+            }
+
+            return redirect('gejala');
+        }
     }
 }

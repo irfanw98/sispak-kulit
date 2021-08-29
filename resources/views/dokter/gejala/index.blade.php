@@ -40,9 +40,11 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addGejala" class="btn btn-primary mb-3 p-2 addGejala"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
+                    <a href="" class="btn btn-outline-danger mb-3 p-2 deleteSelect" role="button">Hapus Gejala</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
+                                    <th  style="text-align: center;" width="5%"></th>
                                     <th width="10%">No</th>
                                     <th width="40%">Kode Gejala</th>
                                     <th width="30%">Nama Gejala</th>
@@ -61,6 +63,8 @@
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -78,6 +82,8 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -102,7 +108,12 @@
                 method: "GET",
                 dataType: "JSON"
                 },
-                columns : [{
+                columns : [
+                    {
+                    data: 'Cek',
+                    name: 'Cek'
+                    },
+                    {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                     },
@@ -273,6 +284,7 @@
                     url: `{{ url('/gejala/${kodeGejala}') }}`,
                     type:"POST",
                     data: {
+                        multi: null,
                         '_method': 'DELETE',
                         'id': kodeGejala,
                     },
@@ -291,5 +303,72 @@
             }
         })
     })
+
+    //MULTIPEL DELETE
+    let dataCek = []
+    $(document).on('change', '.ceks', function() {
+        let kodeGejala = $(this).attr('kode-gejala')
+        
+        if ($(this).is(':checked')) {
+            dataCek.push(kodeGejala)
+        } else {
+            let index = dataCek.indexOf(kodeGejala)
+            if (index > -1) {
+                dataCek.splice(index, 1)
+            }
+        }
+    })
+
+    $(document).on('click', '.deleteSelect', function(e) {
+        e.preventDefault();
+         swal({
+            title: "Yakin?",
+            text: `Data gejala yang dipilih akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result){
+                $.ajax({
+                    headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/gejala/hapus') }}`,
+                    type:"POST",
+                    data: {
+                        data: dataCek,
+                        multi: 1,
+                        '_method': 'DELETE',
+                    },
+                    success: function(response) {
+                        $('#datatable').DataTable().ajax.reload();
+
+                        swal({
+                            title: "Sukses!",
+                            text: `Data gejala berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    },
+                    error: function(response) {
+                        $('#datatable').DataTable().ajax.reload();
+
+                        swal({
+                            title: "Error!",
+                            text: `Tidak ada gejala yang di select!`,
+                            icon: "error",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    }
+                })
+            }
+        })
+        
+        
+    })
+
 </script>
 @endsection
