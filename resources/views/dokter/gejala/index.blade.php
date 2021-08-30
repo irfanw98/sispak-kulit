@@ -25,7 +25,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard-admin') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard-dokter') }}">Dashboard</a></li>
               <li class="breadcrumb-item active">Gejala</li>
             </ol>
           </div>
@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addGejala" class="btn btn-primary mb-3 p-2 addGejala"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
-                    <a href="" class="btn btn-outline-danger mb-3 p-2 deleteSelect" role="button">Hapus Gejala</a>
+                    <a href="" class="btn btn-outline-danger mb-3 p-2 deleteSelect" role="button"><i class="fas fa-exclamation-circle"></i> DELETE SELECTED</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -357,7 +357,7 @@
 
                         swal({
                             title: "Error!",
-                            text: `Tidak ada gejala yang di select!`,
+                            text: `Tidak ada gejala yang dipilih!`,
                             icon: "error",
                             timer: 2000,
                             buttons: false,

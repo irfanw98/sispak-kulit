@@ -25,7 +25,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard-admin') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard-dokter') }}">Dashboard</a></li>
               <li class="breadcrumb-item active">Penyakit</li>
             </ol>
           </div>
@@ -56,6 +56,23 @@
         </div>
 </section>
 @endsection
+
+<!-- Modal Detail  -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
 
 <!-- Modal Create  -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
@@ -106,6 +123,21 @@
             })
     })
 
+    //DETAIL
+    $(document).on('click', '.penyakitDetail', function(e) {
+        e.preventDefault();
+        const kodePenyakit = $(this).attr('detail-kode');
+        
+        $.ajax({
+            url: `{{ url('/penyakit/${kodePenyakit}') }}`,
+            method: "GET",
+            success: function(result) {
+                $('#detailModal').modal('show');
+                $('#detailModal').find('.modal-body').html(result);
+            }
+        })
+    })
+    
     //TAMBAH DATA
     $(document).on('click', '.addPenyakit', function(e) {
         e.preventDefault();

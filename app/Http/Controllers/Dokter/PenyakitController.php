@@ -12,13 +12,13 @@ class PenyakitController extends Controller
 {
     public function index(Request $request)
     {
-        $penyakits = Penyakit::orderBy('nama', 'asc')->get();
+        $penyakits = Penyakit::orderBy('kode_penyakit', 'asc')->get();
 
         if($request->ajax()) {
             return DataTables::of($penyakits) 
                 -> addColumn('Aksi', function($data) {
                     return '
-                        <a href="" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
+                        <a href="" class="btn btn-success penyakitDetail" role="button" detail-kode="' . $data->kode_penyakit . '"><i class="fas fa-eye"></i> DETAIL</a>
                         <a href="" class="btn btn-info ubahGejala" role="button" ubah-kode="' . $data->kode_gejala . '"><i class="fas fa-edit"></i> UBAH</a>
                         <a href="" class="btn btn-danger hapusGejala" role="button" delete-kode="' . $data->kode_gejala . '" namaGejala="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                     ';
@@ -51,15 +51,11 @@ class PenyakitController extends Controller
         return redirect('penyakit');
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        
+        return view('dokter.penyakit.detail', compact('penyakit'));
     }
 
     /**
