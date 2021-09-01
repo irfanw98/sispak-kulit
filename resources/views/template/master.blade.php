@@ -20,6 +20,8 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.bootstrap.min.css">
   <!-- Css -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <!-- Css Select -->
+  <link rel="stylesheet" href="{{ asset('select/css/bootstrap-select.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('admin/assets/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -40,6 +42,7 @@
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color: #2a3f54;font-family: 'Roboto', sans-serif;">
     <!-- Brand Logo -->
+    @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('dashboard-admin') }}" class="brand-link">
       <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
            alt="AdminLTE Logo"
@@ -47,7 +50,25 @@
            style="opacity: .8">
       <span class="brand-text font-weight-light">SISTEM PAKAR</span>
     </a>
-
+    @endif
+    @if(auth()->user()->hasRole('dokter'))
+    <a href="{{ route('dashboard-dokter') }}" class="brand-link">
+      <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">SISTEM PAKAR</span>
+    </a>
+    @endif
+    @if(auth()->user()->hasRole('user'))
+    <a href="{{ route('dashboard-user') }}" class="brand-link">
+      <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
+           alt="AdminLTE Logo"
+           class="brand-image img-circle elevation-3"
+           style="opacity: .8">
+      <span class="brand-text font-weight-light">SISTEM PAKAR</span>
+    </a>
+    @endif
     <!-- Sidebar -->
     @include('template.includes._sidebar')
     <!-- /.sidebar -->
@@ -91,12 +112,8 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/assets/dist/js/demo.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<script type="text/javascript">
-  // $(".nav .nav-link").on("click", function(){
-  //   $(".nav").find(".active").removeClass("active");
-  //   $(this).addClass("active");
-  // });
-</script>
+<!-- Select -->
+<script src="{{ asset('select/js/bootstrap-select.min.js') }}"></script>
 @yield('footer')
 </body>
 </html>

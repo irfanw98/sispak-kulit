@@ -33,6 +33,7 @@ Route::group(['middleware' => ['auth', 'role:dokter']], function() {
      Route::delete('/gejala/hapus',  [App\Http\Controllers\Dokter\GejalaController::class, 'hapus']);
      Route::resource('/gejala', App\Http\Controllers\Dokter\GejalaController::class);
      Route::resource('/penyakit', App\Http\Controllers\Dokter\PenyakitController::class);
+     Route::resource('/aturan',  App\Http\Controllers\Dokter\AturanController::class);
 });
 Route::group(['middleware' => ['auth', 'role:user']], function() {
      Route::get('/dashboard-user', [App\Http\Controllers\User\DashboardUserController::class, 'index'])->name('dashboard-user');

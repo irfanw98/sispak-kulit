@@ -53,6 +53,12 @@
                 <p>Daftar Penyakit</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url('/aturan') }}" class="nav-link {{ Request::url() == url('/aturan') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-clipboard"></i>
+                <p>Aturan</p>
+              </a>
+            </li>
           @endif
           <li class="nav-item">
             <a href="{{ url('/logout') }}" class="nav-link">
