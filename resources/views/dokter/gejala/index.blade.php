@@ -215,7 +215,7 @@
         })
     })
 
-     $(document).on('click', '.editButton', function(e) {
+    $(document).on('click', '.editButton', function(e) {
             e.preventDefault();
             const form_id = $('input[id=kode]').val();
             let form = $('.formEdit')[0];

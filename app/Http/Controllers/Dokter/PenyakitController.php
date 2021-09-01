@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Dokter;
 use App\Http\Controllers\Controller;
 use App\Models\Penyakit;
 use App\Http\Requests\Dokter\Penyakit\StoreRequest;
+use App\Http\Requests\Dokter\Penyakit\UpdateRequest;
 use DataTables;
 use Illuminate\Http\Request;
 
@@ -19,8 +20,8 @@ class PenyakitController extends Controller
                 -> addColumn('Aksi', function($data) {
                     return '
                         <a href="" class="btn btn-success penyakitDetail" role="button" detail-kode="' . $data->kode_penyakit . '"><i class="fas fa-eye"></i> DETAIL</a>
-                        <a href="" class="btn btn-info ubahGejala" role="button" ubah-kode="' . $data->kode_gejala . '"><i class="fas fa-edit"></i> UBAH</a>
-                        <a href="" class="btn btn-danger hapusGejala" role="button" delete-kode="' . $data->kode_gejala . '" namaGejala="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                        <a href="" class="btn btn-info ubahPenyakit" role="button" ubah-kode="' . $data->kode_penyakit . '"><i class="fas fa-edit"></i> UBAH</a>
+                        <a href="" class="btn btn-danger hapusPenyakit" role="button" delete-kode="' . $data->kode_penyakit . '" namaPenyakit="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                     ';
                 })
                 ->rawColumns(['Aksi'])
@@ -58,37 +59,29 @@ class PenyakitController extends Controller
         return view('dokter.penyakit.detail', compact('penyakit'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+        $penyakit = Penyakit::FindOrFail($id);
+        
+        return view('dokter.penyakit.edit', compact('penyakit'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
+    public function update(UpdateRequest $request, $id)
     {
-        //
+        $penyakit = Penyakit::FindOrFail($id);
+        $penyakit->nama = $request->nama;
+        $penyakit->deskripsi = $request->deskripsi;
+        $penyakit->solusi = $request->solusi;
+        $penyakit->save();
+
+        return redirect('penyakit');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function destroy($id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        $penyakit->delete();
+
+        return redirect('penyakit');
     }
 }
