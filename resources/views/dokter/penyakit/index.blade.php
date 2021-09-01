@@ -40,9 +40,11 @@
                     </div>
                     <div class="card-body">
                         <a href="" name="addPenyakit" class="btn btn-primary mb-3 p-2 addPenyakit"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
+                        <a href="" class="btn btn-outline-danger mb-3 p-2 deleteSelect" role="button"><i class="fas fa-exclamation-circle"></i> DELETE SELECTED</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
+                                    <th style="text-align: center;" width="5%"></th>
                                     <th width="10%">No</th>
                                     <th width="20%">Kode Penyakit</th>
                                     <th width="50%">Nama Penyakit</th>
@@ -123,7 +125,12 @@
                 method: "GET",
                 dataType: "JSON"
                 },
-                columns : [{
+                columns : [
+                    {
+                    data: 'Cek',
+                    name: 'Cek'
+                    },
+                    {
                     data: 'DT_RowIndex',
                     name: 'DT_RowIndex'
                     },
@@ -333,6 +340,70 @@
             }
         })
 
+    })
+
+    //MULTIPEL DELETE
+    let dataCek = []
+    $(document).on('change', '.ceks', function() {
+        let kodePenyakit = $(this).attr('kode-penyakit')
+        
+        if ($(this).is(':checked')) {
+            dataCek.push(kodePenyakit)
+        } else {
+            let index = dataCek.indexOf(kodePenyakit)
+            if (index > -1) {
+                dataCek.splice(index, 1)
+            }
+        }
+    })
+
+    $(document).on('click', '.deleteSelect', function(e) {
+        e.preventDefault();
+        swal({
+            title: "Yakin?",
+            text: `Data penyakit yang dipilih akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/penyakit/hapus') }}`,
+                    type:"POST",
+                    data: {
+                        data: dataCek,
+                        multi: 1,
+                        '_method': 'DELETE',
+                    },
+                    success: function(response) {
+                        $('#datatable').DataTable().ajax.reload();
+
+                        swal({
+                            title: "Sukses!",
+                            text: `Data penyakit berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    },
+                    error: function(response) {
+                        $('#datatable').DataTable().ajax.reload();
+
+                        swal({
+                            title: "Error!",
+                            text: `Tidak ada penyakit yang dipilih!`,
+                            icon: "error",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    }
+                })
+            }
+        })
     })
 </script>
 @endsection

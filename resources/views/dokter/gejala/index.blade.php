@@ -321,7 +321,7 @@
 
     $(document).on('click', '.deleteSelect', function(e) {
         e.preventDefault();
-         swal({
+        swal({
             title: "Yakin?",
             text: `Data gejala yang dipilih akan dihapus?`,
             icon: "warning",

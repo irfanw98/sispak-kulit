@@ -16,7 +16,11 @@ class PenyakitController extends Controller
         $penyakits = Penyakit::orderBy('kode_penyakit', 'asc')->get();
 
         if($request->ajax()) {
-            return DataTables::of($penyakits) 
+            return DataTables::of($penyakits)
+                 ->addColumn('Cek', function($data) {
+                    $cek = '<input type="checkbox"  class="ceks"  kode-penyakit="' . $data->kode_penyakit . '">';
+                    return $cek;
+                }) 
                 -> addColumn('Aksi', function($data) {
                     return '
                         <a href="" class="btn btn-success penyakitDetail" role="button" detail-kode="' . $data->kode_penyakit . '"><i class="fas fa-eye"></i> DETAIL</a>
@@ -24,7 +28,7 @@ class PenyakitController extends Controller
                         <a href="" class="btn btn-danger hapusPenyakit" role="button" delete-kode="' . $data->kode_penyakit . '" namaPenyakit="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                     ';
                 })
-                ->rawColumns(['Aksi'])
+                ->rawColumns(['Aksi', 'Cek'])
                 ->addIndexColumn()
                 ->removeColumn('id')
                 ->make(true);
@@ -83,5 +87,18 @@ class PenyakitController extends Controller
         $penyakit->delete();
 
         return redirect('penyakit');
+    }
+
+    public function hapus(Request $request)
+    {
+        if ($request->multi != null) {
+            $datas = $request->data;
+            foreach ($datas as $key) {
+                $data = Penyakit::findOrFail($key);
+                $data->delete();
+            }
+
+            return redirect('penyakit');
+        }
     }
 }
