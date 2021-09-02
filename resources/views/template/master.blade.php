@@ -20,8 +20,6 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.bootstrap.min.css">
   <!-- Css -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-  <!-- Css Select -->
-  <link rel="stylesheet" href="{{ asset('select/css/bootstrap-select.min.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('admin/assets/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -30,6 +28,7 @@
   <link rel="stylesheet" href="{{ asset('admin/assets/dist/css/adminlte.min.css') }}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
   @yield('header')
 </head>
 <body class="hold-transition sidebar-mini">
@@ -112,8 +111,7 @@
 <!-- AdminLTE for demo purposes -->
 <script src="{{ asset('admin/assets/dist/js/demo.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-<!-- Select -->
-<script src="{{ asset('select/js/bootstrap-select.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 @yield('footer')
 </body>
 </html>

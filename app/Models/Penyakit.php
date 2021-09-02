@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\DB;
+use App\Models\Gejala;
+use App\Models\Aturan;
 
 class Penyakit extends Model
 {
@@ -50,5 +52,10 @@ class Penyakit extends Model
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
+    }
+
+     public function gejala()
+    {
+        return $this->belongsToMany(Gejala::class, 'tb_aturan', 'penyakit_kode','gejala_kode');
     }
 }
