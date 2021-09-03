@@ -13,7 +13,8 @@ class AturanController extends Controller
 {
     public function index(Request $request) 
     {
-        $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'ASC')->get();
+        $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
+        // $aturans = Aturan::with(['penyakit', 'gejala'])->orderBy('penyakit_kode', 'asc')->get();
 
         if($request->ajax()) {
             return DataTables::of($penyakits)
@@ -33,39 +34,17 @@ class AturanController extends Controller
         return view('dokter.aturan.index');
     }
 
-    public function create()
-    {
-        $penyakits = Penyakit::orderBy('kode_penyakit', 'asc')->get();
-        $gejalas   = Gejala::orderBy('kode_gejala', 'asc')->get();
-        
-        return view('dokter.aturan.create', compact('penyakits', 'gejalas'));
-    }
-
-    public function store(Request $request)
-    {
-        dd($request);
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function show($id)
     {
         //
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function edit($id)
     {
-        //
+       $penyakits = Penyakit::orderBy('kode_penyakit', 'asc')->get();
+       $gejalas   = Gejala::orderBy('kode_gejala', 'asc')->get();
+
+        return view('dokter.aturan.edit', compact('penyakits', 'gejalas'));
     }
 
     /**

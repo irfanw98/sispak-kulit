@@ -40,7 +40,6 @@
                     </div>
                     <div class="card-body">
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
-                            <a href="" name="addAturan" class="btn btn-primary mb-3 p-2 addAturan"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
                             <thead>
                                 <tr>
                                     <th width="5%">No</th>
@@ -77,6 +76,25 @@
     </div>
 </div>
 
+<!-- Modal Edit -->
+<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="gradModal">
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="editModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('footer')
 <script type="text/javascript">
     $(document).ready(function(){   
@@ -95,7 +113,7 @@
                     name: 'DT_RowIndex'
                     },
                     {
-                    data: 'kode_penyakit',
+                    data : 'kode_penyakit',
                     name: 'kode_penyakit'
                     },
                     {
@@ -113,38 +131,15 @@
             })
     })
 
-    //TAMBAH DATA
-    $(document).on('click', '.addAturan', function(e) {
+    $(document).on('click', '.ubahAturan', function(e) {
         e.preventDefault();
-        
+       const kodeAturan = $(this).attr('ubah-kode');
+       
         $.ajax({
-            url: "{{ route('aturan.create') }}",
+            url: `{{ url('/aturan/${kodeAturan}/edit') }}`,
             method: "GET",
             success: function(result) {
-                $('#createModal').modal('show');
-                $('#createModal').find('.modal-body').html(result);
-            }
-        })
-    })
-
-    $(document).on('click', '.saveButton', function(e) {
-        e.preventDefault();
-        let form = $('.formInsert')[0];
-        const formData = new FormData(form);
-
-        $.ajax({
-            headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-            },
-            url: "{{ route('aturan.store') }}",
-            method: "POST",
-            data: formData,
-            contentType: false,
-            processData: false,
-            cache: false,
-            dataType: "JSON",
-            success: function(response) {
-                console.log(response);
+               
             }
         })
     })

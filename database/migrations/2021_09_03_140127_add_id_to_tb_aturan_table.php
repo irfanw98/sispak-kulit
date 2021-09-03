@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddDaftarGejalaToTbAturanTable extends Migration
+class AddIdToTbAturanTable extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class AddDaftarGejalaToTbAturanTable extends Migration
     public function up()
     {
         Schema::table('tb_aturan', function (Blueprint $table) {
-            $table->string('daftar_gejala', 255);
+            $table->id();
         });
     }
 
