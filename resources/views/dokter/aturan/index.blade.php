@@ -139,7 +139,8 @@
             url: `{{ url('/aturan/${kodeAturan}/edit') }}`,
             method: "GET",
             success: function(result) {
-               
+                $('#editModal').modal('show');
+                $('#editModal').find('.modal-body').html(result);
             }
         })
     })

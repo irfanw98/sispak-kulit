@@ -41,10 +41,10 @@ class AturanController extends Controller
 
     public function edit($id)
     {
-       $penyakits = Penyakit::orderBy('kode_penyakit', 'asc')->get();
-       $gejalas   = Gejala::orderBy('kode_gejala', 'asc')->get();
+        $penyakit = Penyakit::findOrFail($id);
+        $gejalas = Gejala::orderBy('kode_gejala', 'asc')->get();
 
-        return view('dokter.aturan.edit', compact('penyakits', 'gejalas'));
+        return view('dokter.aturan.edit', compact('penyakit','gejalas'));
     }
 
     /**

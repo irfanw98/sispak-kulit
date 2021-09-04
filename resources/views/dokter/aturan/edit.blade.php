@@ -2,24 +2,25 @@
     @csrf
     <div class="row">
         <div class="col-md-12">
+            <input type="hidden" name="id" id="id_data" value="{{ $penyakit->kode_penyakit }}">
+
             <div class="form-group">
-                <select name="penyakit" class="form-control">
-                    <option selected="" disabled="">-- PILIH PENYAKIT --</option>
-                    @foreach($data as $penyakit)
-                        <option value="{{ $penyakit->kode_penyakit }}" @if ($penyakit->kode_penyakit == $penyakit->gejala->penyakit_kode) SELECTED @endif>{{ $penyakit->kode_penyakit }} - {{ $penyakit->nama }}</option>
-                    @endforeach
-                </select>
+                <label for="nama">Penyakit :</label>
+                <input type="text" class="form-control " name="nama" id="nama" value="{{ $penyakit->kode_penyakit }} - {{ $penyakit->nama }}" readonly>
             </div>
         </div>
     </div>
     <div class="row">
         <div class="col-md-12">
             <div class="form-group">
-                <label for="daftar_gejala">Daftar Gejala</label>
-                <select name="daftar_gejala[]" class="select2multiple form-control" id="daftar_gejala" multiple>
-                    <!-- <option selected="" disabled="">-- PILIH GEJALA --</option> -->
+                <label for="gejala">Pilih Gejala</label>
+                <select name="gejala[]" class="gejala multiple form-control" multiple="multiple">
                     @foreach($gejalas as $gejala)
-                        <option value="{{ $gejala->kode_gejala }}" @if ($gejala->kode_gejala == $data->kode_gejala) SELECTED @endif>{{ $gejala->kode_gejala }} - {{ $gejala->nama }}</option>
+                        <option value="{{ $gejala->kode_gejala }}"
+                            @foreach($penyakit->gejala as $aturan)
+                                @if($aturan->kode_gejala  == $gejala->kode_gejala) selected @endif
+                            @endforeach
+                        >{{ $gejala->kode_gejala}} - {{ $gejala->nama }}</option>
                     @endforeach
                 </select>
             </div>
@@ -31,8 +32,29 @@
     </div>
 </form>
 
+<style>
+    .select2-container--default .select2-selection--multiple 
+    .select2-selection__rendered 
+    .select2-selection__choice {
+    background-color: #4e54c8;
+    border-color: #4e54c8;
+    color: #fff;
+    padding: 7px;
+    padding-left: 40px;
+    }
+     .select2-container--default .select2-selection--multiple 
+    .select2-selection__rendered 
+    .select2-selection__choice
+    .select2-selection__choice__remove{
+    border-right: 1px solid #aaa;
+    height: 40px;
+    padding: 7px;
+    color: #aaa;
+    }
+</style>
+
 <script type="text/javascript">
     $(document).ready(function() {
-        $('.select2multiple').select2();
+        $('.gejala').select2();
     })
 </script>
