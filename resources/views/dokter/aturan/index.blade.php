@@ -113,16 +113,16 @@
                     name: 'DT_RowIndex'
                     },
                     {
-                    data : 'kode_penyakit',
-                    name: 'kode_penyakit'
+                    data : 'penyakit_kode',
+                    name: 'penyakit_kode'
                     },
                     {
-                    data: 'nama',
-                    name: 'nama'
+                    data: 'penyakit',
+                    name: 'penyakit.nama'
                     },
                     {
-                    data: 'gejala[- ].kode_gejala',
-                    name: 'gejala[- ].kode_gejala',
+                    data: 'gejala_kode',
+                    name: 'gejala_kode',
                     },
                     {
                     data: 'Aksi',
@@ -142,6 +142,32 @@
                 $('#editModal').modal('show');
                 $('#editModal').find('.modal-body').html(result);
             }
+        })
+    })
+
+    $(document).on('click', '.editButton', function(e) {
+        e.preventDefault();
+        const form_id = $('input[id=kode]').val();
+        let form = $('.formEdit')[0];
+        const formData = new FormData(form);
+
+        $.ajax({
+                headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                url: `{{ url('/aturan/${form_id}') }}`,
+                method: 'POST',
+                processData: false, // Important!
+                contentType: false,
+                cache: false,
+                data: formData,
+                success: function (response) {
+                    console.log(response);
+                },
+                error: function (data) {
+                    console.log(data);
+                }
+
         })
     })
 </script>

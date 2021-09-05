@@ -13,16 +13,21 @@ class AturanController extends Controller
 {
     public function index(Request $request) 
     {
-        $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
-        // $aturans = Aturan::with(['penyakit', 'gejala'])->orderBy('penyakit_kode', 'asc')->get();
+        // $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
+        // $aturans = Aturan::with(['penyakit', 'gejala'])->groupBy('penyakit_kode')->get();
+        $aturans = Aturan::with(['penyakit', 'gejala'])
+                                        ->get()
+                                        ->groupBy('penyakit_kode');
+        
+        // dd($aturans);
 
         if($request->ajax()) {
-            return DataTables::of($penyakits)
+            return DataTables::of($aturans)
             -> addColumn('Aksi', function($data) {
                     return '
-                        <a href="" class="btn btn-success aturanDetail" role="button" detail-kode="' . $data->kode_penyakit . '"><i class="fas fa-eye"></i> DETAIL</a>
-                        <a href="" class="btn btn-info ubahAturan" role="button" ubah-kode="' . $data->kode_penyakit . '"><i class="fas fa-edit"></i> UBAH</a>
-                        <a href="" class="btn btn-danger hapusAturan" role="button" delete-kode="' . $data->kode_penyakit . '" namaPenyakit="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                        <a href="" class="btn btn-success aturanDetail" role="button" ><i class="fas fa-eye"></i> DETAIL</a>
+                        <a href="" class="btn btn-info ubahAturan" role="button" ><i class="fas fa-edit"></i> UBAH</a>
+                        <a href="" class="btn btn-danger hapusAturan" role="button" ><i class="fa fa-trash"></i> HAPUS</a>
                     ';
                 })
                 ->rawColumns(['Aksi'])
@@ -46,17 +51,13 @@ class AturanController extends Controller
 
         return view('dokter.aturan.edit', compact('penyakit','gejalas'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
     public function update(Request $request, $id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        dd($penyakit->gejala->gajala_kode);
+
+
+        return redirect('aturan');
     }
 
     /**

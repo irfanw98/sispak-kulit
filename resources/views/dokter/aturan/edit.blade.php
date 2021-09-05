@@ -1,8 +1,9 @@
 <form action="" method="post" autocomplete="off" class="formEdit">
+    @method('put')
     @csrf
     <div class="row">
         <div class="col-md-12">
-            <input type="hidden" name="id" id="id_data" value="{{ $penyakit->kode_penyakit }}">
+            <input type="hidden" name="kode" id="kode" value="{{ $penyakit->kode_penyakit }}">
 
             <div class="form-group">
                 <label for="nama">Penyakit :</label>
@@ -27,7 +28,7 @@
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" class="btn btn-outline-primary saveButton">SIMPAN</button>
+        <button type="submit" class="btn btn-outline-primary editButton">SIMPAN</button>
         <button type="button" class="btn btn-outline-danger cancelButton"data-dismiss="modal">BATAL</button>
     </div>
 </form>

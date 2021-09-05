@@ -48,4 +48,9 @@ class Gejala extends Model
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
     }
+
+    public function penyakit()
+    {
+        return $this->belongsToMany(Penyakit::class);
+    }
 }

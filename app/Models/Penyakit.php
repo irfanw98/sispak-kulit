@@ -54,8 +54,14 @@ class Penyakit extends Model
         ->diffForHumans();
     }
 
-     public function gejala()
+    //  public function gejala()
+    // {
+    //     return $this->belongsToMany(Gejala::class, 'tb_aturan', 'penyakit_kode','gejala_kode');
+    // }
+
+     public function aturan()
     {
-        return $this->belongsToMany(Gejala::class, 'tb_aturan', 'penyakit_kode','gejala_kode');
+        return $this->hasMany(Aturan::class, 'penyakit_kode', 'kode_penyakit');
     }
+
 }
