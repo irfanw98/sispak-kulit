@@ -113,16 +113,16 @@
                     name: 'DT_RowIndex'
                     },
                     {
-                    data : 'penyakit_kode',
-                    name: 'penyakit_kode'
+                    data : 'kode_penyakit',
+                    name: 'kode_penyakit',
                     },
                     {
-                    data: 'penyakit',
-                    name: 'penyakit.nama'
+                    data: 'nama',
+                    name: 'nama'
                     },
                     {
-                    data: 'gejala_kode',
-                    name: 'gejala_kode',
+                    data: 'gejala[ - ].kode_gejala',
+                    name: 'gejala[ - ].kode_gejala',
                     },
                     {
                     data: 'Aksi',
@@ -162,7 +162,17 @@
                 cache: false,
                 data: formData,
                 success: function (response) {
-                    console.log(response);
+                    $('.formEdit').trigger('reset');//Reset inputan form
+                    $('#editModal').modal('hide');//Tutup Modal
+                    $("#datatable").DataTable().ajax.reload();//Reload Datatable
+
+                    swal({
+                        title: "Sukses!",
+                        text: "Aturan berhasil diubah!",
+                        icon: "success",
+                        timer: 2000,
+                        buttons: false,
+                    })
                 },
                 error: function (data) {
                     console.log(data);

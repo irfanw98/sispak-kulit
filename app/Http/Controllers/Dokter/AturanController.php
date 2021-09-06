@@ -13,20 +13,19 @@ class AturanController extends Controller
 {
     public function index(Request $request) 
     {
-        // $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
+        $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
         // $aturans = Aturan::with(['penyakit', 'gejala'])->groupBy('penyakit_kode')->get();
-        $aturans = Aturan::with(['penyakit', 'gejala'])
-                                        ->get()
-                                        ->groupBy('penyakit_kode');
-        
-        // dd($aturans);
+        // $aturans = Aturan::with(['penyakit', 'gejala'])->orderBy('penyakit_kode')->get()->groupBy('penyakit_kode');
 
         if($request->ajax()) {
-            return DataTables::of($aturans)
+            return DataTables::of($penyakits)
+            -> addColumn('penyakit', function($row) {
+                return $row->gejala;
+            })
             -> addColumn('Aksi', function($data) {
                     return '
                         <a href="" class="btn btn-success aturanDetail" role="button" ><i class="fas fa-eye"></i> DETAIL</a>
-                        <a href="" class="btn btn-info ubahAturan" role="button" ><i class="fas fa-edit"></i> UBAH</a>
+                        <a href="" class="btn btn-info ubahAturan" role="button" ubah-kode="' . $data->kode_penyakit  . '"><i class="fas fa-edit"></i> UBAH</a>
                         <a href="" class="btn btn-danger hapusAturan" role="button" ><i class="fa fa-trash"></i> HAPUS</a>
                     ';
                 })
@@ -54,8 +53,7 @@ class AturanController extends Controller
     public function update(Request $request, $id)
     {
         $penyakit = Penyakit::findOrFail($id);
-        dd($penyakit->gejala->gajala_kode);
-
+        $penyakit->gejala()->sync($request->gejala);
 
         return redirect('aturan');
     }
