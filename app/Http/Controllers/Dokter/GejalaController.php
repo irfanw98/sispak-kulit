@@ -3,11 +3,14 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use App\Models\Gejala;
 use DataTables;
-use App\Http\Requests\Dokter\Gejala\StoreRequest;
-use App\Http\Requests\Dokter\Gejala\UpdateRequest;
-use Illuminate\Http\Request;
+use App\Http\Requests\Dokter\Gejala\{
+    StoreRequest,
+    UpdateRequest,
+};
+
 
 class GejalaController extends Controller
 {

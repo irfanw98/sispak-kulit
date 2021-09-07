@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
-use App\Models\Penyakit;
-use App\Http\Requests\Dokter\Penyakit\StoreRequest;
-use App\Http\Requests\Dokter\Penyakit\UpdateRequest;
-use DataTables;
 use Illuminate\Http\Request;
+use App\Models\Penyakit;
+use DataTables;
+use App\Http\Requests\Dokter\Penyakit\{
+    StoreRequest,
+    UpdateRequest,
+};
 
 class PenyakitController extends Controller
 {

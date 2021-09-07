@@ -6,8 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use DataTables;
-use App\Models\Admin;
-use App\Models\User;
+use App\Models\{
+    Admin,
+    User
+};
 use App\Http\Requests\Admin\StoreAdminRequest;
 
 class AdminController extends Controller
@@ -20,7 +22,7 @@ class AdminController extends Controller
             return Datatables::of($admins)
             -> addColumn('Aksi', function($data) {
                 return '
-                     <a href="" class="btn btn-danger adminDelete" role="button" delete-id="' . $data->id . '" adminNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
+                    <a href="" class="btn btn-danger adminDelete" role="button" delete-id="' . $data->id . '" adminNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
             ->rawColumns(['Aksi'])
@@ -33,7 +35,6 @@ class AdminController extends Controller
 
     public function store(StoreAdminRequest $request)
     {
-        //Insert users
         $user = new User;
         $user->nama = $request->nama;
         $user->email = $request->email;
@@ -42,7 +43,6 @@ class AdminController extends Controller
         $user->assignRole('admin');
         $user->save();
 
-        //Insert Admin
         $admin = new Admin;
         $admin->user_id = $user->id;
         $admin->nama = $request->nama;

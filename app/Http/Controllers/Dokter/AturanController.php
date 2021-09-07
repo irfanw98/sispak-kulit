@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
-use App\Models\Aturan;
-use App\Models\Penyakit;
-use App\Models\Gejala;
-use DataTables;
 use Illuminate\Http\Request;
+use DataTables;
+use App\Models\{
+    Penyakit,
+    Gejala
+};
 
 class AturanController extends Controller
 {

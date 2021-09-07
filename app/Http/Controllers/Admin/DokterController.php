@@ -4,13 +4,17 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use DataTables;
-use App\Models\User;
-use App\Models\Dokter;
-use App\Http\Requests\Admin\StoreDokterRequest;
-use App\Http\Requests\Admin\UpdateDokterRequest;
-use Illuminate\Http\Request;
+use App\Models\{
+    Dokter,
+    User
+};
+use App\Http\Requests\Admin\{
+    StoreDokterRequest,
+    UpdateDokterRequest
+};
 
 class DokterController extends Controller
 {
