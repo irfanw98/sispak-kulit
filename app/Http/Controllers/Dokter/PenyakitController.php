@@ -84,6 +84,7 @@ class PenyakitController extends Controller
     public function destroy($id)
     {
         $penyakit = Penyakit::findOrFail($id);
+        $penyakit->gejala()->detach();
         $penyakit->delete();
 
         return redirect('penyakit');

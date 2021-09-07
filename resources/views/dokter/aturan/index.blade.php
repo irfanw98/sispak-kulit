@@ -57,6 +57,23 @@
 </section>
 @endsection
 
+<!-- Modal Detail  -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Modal Create  -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
@@ -98,42 +115,57 @@
 @section('footer')
 <script type="text/javascript">
     $(document).ready(function(){   
-            $('#datatable').DataTable({
-                responsive: true,
-                processing: true,
-                serverSide: true,
-                ajax: {
-                url: "{{ url('aturan') }}",
-                method: "GET",
-                dataType: "JSON"
+        $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+            url: "{{ url('aturan') }}",
+            method: "GET",
+            dataType: "JSON"
+            },
+            columns : [
+                {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
                 },
-                columns : [
-                    {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                    },
-                    {
-                    data : 'kode_penyakit',
-                    name: 'kode_penyakit',
-                    },
-                    {
-                    data: 'nama',
-                    name: 'nama'
-                    },
-                    {
-                    data: 'gejala[ - ].kode_gejala',
-                    name: 'gejala[ - ].kode_gejala',
-                    },
-                    {
-                    data: 'Aksi',
-                    name: 'Aksi'
-                }]
-            })
+                {
+                data: 'kode_penyakit',
+                name: 'kode_penyakit',
+                },
+                {
+                data: 'nama',
+                name: 'nama'
+                },
+                {
+                data: 'gejala[ - ].kode_gejala',
+                name: 'gejala[ - ].kode_gejala',
+                },
+                {
+                data: 'Aksi',
+                name: 'Aksi'
+                }
+            ]
+        })
+    })
+
+    $(document).on('click', '.detailAturan', function(e) {
+        e.preventDefault();
+        const kodeAturan = $(this).attr('detail-kode');
+        
+        $.ajax({
+            url: `{{ url('/aturan/${kodeAturan}') }}`,
+            method: "GET",
+            success: function(result) {
+                $('#detailModal').modal('show');
+                $('#detailModal').find('.modal-body').html(result);
+            }
+        })
     })
 
     $(document).on('click', '.ubahAturan', function(e) {
         e.preventDefault();
-       const kodeAturan = $(this).attr('ubah-kode');
+        const kodeAturan = $(this).attr('ubah-kode');
        
         $.ajax({
             url: `{{ url('/aturan/${kodeAturan}/edit') }}`,
@@ -152,32 +184,31 @@
         const formData = new FormData(form);
 
         $.ajax({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: `{{ url('/aturan/${form_id}') }}`,
-                method: 'POST',
-                processData: false, // Important!
-                contentType: false,
-                cache: false,
-                data: formData,
-                success: function (response) {
-                    $('.formEdit').trigger('reset');//Reset inputan form
-                    $('#editModal').modal('hide');//Tutup Modal
-                    $("#datatable").DataTable().ajax.reload();//Reload Datatable
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: `{{ url('/aturan/${form_id}') }}`,
+            method: 'POST',
+            processData: false, // Important!
+            contentType: false,
+            cache: false,
+            data: formData,
+            success: function (response) {
+                $('.formEdit').trigger('reset');//Reset inputan form
+                $('#editModal').modal('hide');//Tutup Modal
+                $("#datatable").DataTable().ajax.reload();//Reload Datatable
 
-                    swal({
-                        title: "Sukses!",
-                        text: "Aturan berhasil diubah!",
-                        icon: "success",
-                        timer: 2000,
-                        buttons: false,
-                    })
-                },
-                error: function (data) {
-                    console.log(data);
-                }
-
+                swal({
+                    title: "Sukses!",
+                    text: "Aturan berhasil diubah!",
+                    icon: "success",
+                    timer: 2000,
+                    buttons: false,
+                })
+            },
+            error: function (data) {
+                console.log(data);
+            }
         })
     })
 </script>

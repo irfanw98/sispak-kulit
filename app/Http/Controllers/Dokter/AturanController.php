@@ -14,8 +14,6 @@ class AturanController extends Controller
     public function index(Request $request) 
     {
         $penyakits = Penyakit::with(['gejala'])->orderBy('kode_penyakit', 'asc')->get();
-        // $aturans = Aturan::with(['penyakit', 'gejala'])->groupBy('penyakit_kode')->get();
-        // $aturans = Aturan::with(['penyakit', 'gejala'])->orderBy('penyakit_kode')->get()->groupBy('penyakit_kode');
 
         if($request->ajax()) {
             return DataTables::of($penyakits)
@@ -23,24 +21,25 @@ class AturanController extends Controller
                 return $row->gejala;
             })
             -> addColumn('Aksi', function($data) {
-                    return '
-                        <a href="" class="btn btn-success aturanDetail" role="button" ><i class="fas fa-eye"></i> DETAIL</a>
-                        <a href="" class="btn btn-info ubahAturan" role="button" ubah-kode="' . $data->kode_penyakit  . '"><i class="fas fa-edit"></i> UBAH</a>
-                        <a href="" class="btn btn-danger hapusAturan" role="button" ><i class="fa fa-trash"></i> HAPUS</a>
-                    ';
-                })
-                ->rawColumns(['Aksi'])
-                ->addIndexColumn()
-                ->removeColumn('id')
-                ->make(true);
-            }
+                return '
+                    <a href="" class="btn btn-success detailAturan" role="button" detail-kode="' . $data->kode_penyakit  . '"><i class="fas fa-eye"></i> DETAIL</a>
+                    <a href="" class="btn btn-info ubahAturan" role="button" ubah-kode="' . $data->kode_penyakit  . '"><i class="fas fa-edit"></i> UBAH</a>
+                ';
+            })
+            ->rawColumns(['Aksi'])
+            ->addIndexColumn()
+            ->removeColumn('id')
+            ->make(true);
+        }
       
         return view('dokter.aturan.index');
     }
 
     public function show($id)
     {
-        //
+        $penyakit = Penyakit::findOrFail($id);
+        
+        return view('dokter.aturan.detail', compact('penyakit'));
     }
 
     public function edit($id)
@@ -56,16 +55,5 @@ class AturanController extends Controller
         $penyakit->gejala()->sync($request->gejala);
 
         return redirect('aturan');
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
     }
 }
