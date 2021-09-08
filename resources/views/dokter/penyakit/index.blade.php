@@ -216,6 +216,7 @@
                 let errors = data.responseJSON;
                 if ($.isEmptyObject(errors) == false) {
                     $.each(errors.errors, function(key,value) {
+                        console.log(key);
                         let errID = '#' + key + 'Error';
                         $('#nama').removeClass('is-valid');
                         $('#nama').addClass('is-invalid');

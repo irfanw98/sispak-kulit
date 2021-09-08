@@ -1,8 +1,11 @@
 <?php
 
-use GuzzleHttp\Middleware;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
+use App\Http\Controllers\{
+     LogoutController,
+     PasswordController
+};
 use App\Http\Controllers\Admin\{
      DashboardAdminController,
      AdminController,
@@ -18,27 +21,30 @@ use App\Http\Controllers\Dokter\{
 };
 
 
+Auth::routes();
 Route::view('/', 'welcome');
 
-Auth::routes();
+Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {
+     Route::resource('/ubah-password', PasswordController::class)->only(['index','store']);
+     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+});
 
-Route::get('/logout', ['App\Http\Controllers\LogoutController', 'logout'])->name('logout');
 
-Route::group(['middleware' => ['auth', 'role:admin']], function () {
-    Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard-admin');
-    Route::get('/akun-admin/sampah', [AdminController::class, 'sampah']);
-    Route::get('/akun-admin/sampah/pulihkan/{id?}', [AdminController::class, 'pulihkan']);
-    Route::delete('/akun-admin/sampah/hapus/{id?}', [AdminController::class, 'hapus'])->name('hapus');
-    Route::resource('/akun-admin', AdminController::class)->only(['index','store','destroy']);
-    Route::get('/akun-dokter/sampah', [DokterController::class, 'sampah']);
-    Route::get('/akun-dokter/sampah/pulihkan/{id?}', [DokterController::class, 'pulihkan']);
-    Route::delete('/akun-dokter/sampah/hapus/{id?}', [DokterController::class, 'hapus']);
-    Route::resource('/akun-dokter', DokterController::class);
-    Route::get('/akun-user/sampah', [UserController::class, 'sampah']);
-    Route::get('/akun-user/sampah/pulihkan/{id?}', [UserController::class, 'pulihkan']);
-    Route::delete('/akun-user/sampah/hapus/{id?}', [UserController::class, 'hapus']);
-    Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
-    Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
+Route::group(['middleware' => ['auth', 'role:admin']], function() {
+     Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard-admin');
+     Route::get('/akun-admin/sampah', [AdminController::class, 'sampah']);
+     Route::get('/akun-admin/sampah/pulihkan/{id?}', [AdminController::class, 'pulihkan']);
+     Route::delete('/akun-admin/sampah/hapus/{id?}', [AdminController::class, 'hapus'])->name('hapus');
+     Route::resource('/akun-admin', AdminController::class)->only(['index','store','destroy']);
+     Route::get('/akun-dokter/sampah', [DokterController::class, 'sampah']);
+     Route::get('/akun-dokter/sampah/pulihkan/{id?}', [DokterController::class, 'pulihkan']);
+     Route::delete('/akun-dokter/sampah/hapus/{id?}', [DokterController::class, 'hapus']);
+     Route::resource('/akun-dokter', DokterController::class);
+     Route::get('/akun-user/sampah', [UserController::class, 'sampah']);
+     Route::get('/akun-user/sampah/pulihkan/{id?}', [UserController::class, 'pulihkan']);
+     Route::delete('/akun-user/sampah/hapus/{id?}', [UserController::class, 'hapus']);
+     Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
+     Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });
 
 Route::group(['middleware' => ['auth', 'role:dokter']], function() {

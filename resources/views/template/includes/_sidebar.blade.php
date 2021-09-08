@@ -33,6 +33,18 @@
               <p>Laporan Konsultasi</p>
             </a>
           </li>
+          <li class="nav-item">
+            <a href="{{ url('/ubah-password') }}" class="nav-link">
+              <i class="nav-icon fas fa-unlock-alt"></i>
+              <p>Ubah Password</p>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a href="{{ url('/logout') }}" class="nav-link">
+              <i class="nav-icon fas fa-sign-out-alt"></i>
+              <p> Keluar</p>
+            </a>
+          </li>
           @endif
           @if(auth()->user()->hasRole('dokter'))
             <li class="nav-item">
@@ -59,13 +71,27 @@
                 <p>Aturan</p>
               </a>
             </li>
+            <li class="nav-item">
+              <a href="{{ url('/ubah-password') }}" class="nav-link">
+                <i class="nav-icon fas fa-unlock-alt"></i>
+                <p>Ubah Password</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/logout') }}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p> Keluar</p>
+              </a>
+            </li>
           @endif
-          <li class="nav-item">
-            <a href="{{ url('/logout') }}" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-               <p> Keluar</p>
-            </a>
-          </li>
+          @if(auth()->user()->hasRole('user'))
+            <li class="nav-item">
+              <a href="{{ url('/logout') }}" class="nav-link">
+                <i class="nav-icon fas fa-sign-out-alt"></i>
+                <p> Keluar</p>
+              </a>
+            </li>
+          @endif
       </nav>
       <!-- /.sidebar-menu -->
     </div>
