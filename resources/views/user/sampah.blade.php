@@ -26,7 +26,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard-dokter') }}">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard-admin') }}">Dashboard</a></li>
               <li class="breadcrumb-item active">Akun-User</li>
             </ol>
           </div>
@@ -41,7 +41,7 @@
                     </div>
                     <div class="card-body">
                         <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="{{ url('/akun-user/sampah/pulihkan') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
+                        <a href="{{ route('pulihkan-user') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -59,7 +59,7 @@
                                     <td>{{ $user->nama }}</td>
                                     <td>{{ $user->email }}</td>
                                     <td style="text-align: center;">
-                                        <a href="{{ url('/akun-user/sampah/pulihkan/'.$user->id) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
+                                        <a href="{{ route('pulihkan-user', [$user->id]) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
                                         <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
                                     </td>
                                     @endforeach
@@ -96,7 +96,7 @@
                     headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: "{{ url('/akun-user/sampah/hapus') }}",
+                    url: "{{ route('hapus-user') }}",
                     type:"POST",
                     data: {
                         '_method': 'DELETE',
@@ -135,7 +135,7 @@
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: `{{ url('/akun-user/sampah/hapus/${hapusId}') }}`,
+                    url: '{{ route("hapus-user") }}/'+hapusId,
                     type:"POST",
                     data: {
                         '_method': 'DELETE',

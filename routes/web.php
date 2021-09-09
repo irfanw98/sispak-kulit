@@ -26,23 +26,28 @@ Route::view('/', 'welcome');
 
 Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {
      Route::resource('/ubah-password', PasswordController::class)->only(['index','store']);
-     Route::get('/logout', [LogoutController::class, 'logout'])->name('logout');
+     Route::get('/logout', [LogoutController::class,'logout'])->name('logout');
 });
 
-
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
-     Route::get('/dashboard-admin', [DashboardAdminController::class, 'index'])->name('dashboard-admin');
-     Route::get('/akun-admin/sampah', [AdminController::class, 'sampah']);
-     Route::get('/akun-admin/sampah/pulihkan/{id?}', [AdminController::class, 'pulihkan']);
-     Route::delete('/akun-admin/sampah/hapus/{id?}', [AdminController::class, 'hapus'])->name('hapus');
+     Route::get('/dashboard-admin', [DashboardAdminController::class,'index'])->name('dashboard-admin');
+     Route::group(['prefix' => '/akun-admin/sampah'], function() {
+          Route::get('/', [AdminController::class,'sampah'])->name('sampah-admin');
+          Route::get('/pulihkan/{id?}', [AdminController::class,'pulihkan'])->name('pulihkan-admin');
+          Route::delete('/hapus/{id?}', [AdminController::class,'hapus'])->name('hapus-admin');
+     });
      Route::resource('/akun-admin', AdminController::class)->only(['index','store','destroy']);
-     Route::get('/akun-dokter/sampah', [DokterController::class, 'sampah']);
-     Route::get('/akun-dokter/sampah/pulihkan/{id?}', [DokterController::class, 'pulihkan']);
-     Route::delete('/akun-dokter/sampah/hapus/{id?}', [DokterController::class, 'hapus']);
+     Route::group(['prefix' => '/akun-dokter/sampah'], function() {
+          Route::get('/', [DokterController::class,'sampah']);
+          Route::get('/pulihkan/{id?}', [DokterController::class,'pulihkan'])->name('pulihkan-dokter');
+          Route::delete('/hapus/{id?}', [DokterController::class,'hapus'])->name('hapus-dokter');
+     });
      Route::resource('/akun-dokter', DokterController::class);
-     Route::get('/akun-user/sampah', [UserController::class, 'sampah']);
-     Route::get('/akun-user/sampah/pulihkan/{id?}', [UserController::class, 'pulihkan']);
-     Route::delete('/akun-user/sampah/hapus/{id?}', [UserController::class, 'hapus']);
+     Route::group(['prefix' => '/akun-user/sampah'], function() {
+          Route::get('/', [UserController::class,'sampah']);
+          Route::get('/pulihkan/{id?}', [UserController::class,'pulihkan'])->name('pulihkan-user');
+          Route::delete('/hapus/{id?}', [UserController::class,'hapus'])->name('hapus-user');
+     });
      Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });

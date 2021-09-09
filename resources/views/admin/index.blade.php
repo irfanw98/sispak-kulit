@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addAdmin" class="btn btn-primary mb-3 p-2 addAdmin"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
-                    <a href="{{ url('/akun-admin/sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                    <a href="{{ route('sampah-admin') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -50,16 +50,6 @@
                                     <th style="text-align: center;" width="10%">Aksi</th>
                                 </tr>
                             </thead>
-                            <!-- <tbody>
-                                <tr>
-                                    <td style="text-align: center;">1</td>
-                                    <td>Admin</td>
-                                    <td>adminsispak98</td>
-                                    <td style="text-align: center;">
-                                        <a href="#" class="btn btn-info adminEdit" id="" role="button" edit-id=""><i class="fa fa-edit"></i> UBAH</a>
-                                        <a href="#" class="btn btn-danger adminEdelete" role="button" delete-id="" sma=""><i class="fa fa-trash"></i> HAPUS</a>
-                                    </td>
-                            </tbody> -->
                         </table>   
                     </div>
                 </div>
@@ -82,36 +72,36 @@
             </div>
             <div class="modal-body">
                 <form action="#" method="POST" autocomplete="off" class="formInsert">
-                    @csrf
-                    <div class="row">
-                        <input type="hidden" name="id" id="id">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="nama">Nama :</label>
-                                <input type="text" class="form-control" id="nama" name="nama">
+                @csrf
+                <div class="row">
+                    <input type="hidden" name="id" id="id">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="nama">Nama :</label>
+                            <input type="text" class="form-control" id="nama" name="nama">
 
-                                <span class="text-danger" id="namaError"></span>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="username">Username :</label>
-                                <input type="text" class="form-control" id="username" name="username">
-
-                                <span class="text-danger" id="usernameError"></span>
-                            </div>
+                            <span class="text-danger" id="namaError"></span>
                         </div>
                     </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <div class="form-group">
-                                <label for="email">Email :</label>
-                                <input type="email" class="form-control" id="email" name="email">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label for="username">Username :</label>
+                            <input type="text" class="form-control" id="username" name="username">
 
-                                <span class="text-danger" id="emailError"></span>
-                            </div>
+                            <span class="text-danger" id="usernameError"></span>
                         </div>
                     </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email">Email :</label>
+                            <input type="email" class="form-control" id="email" name="email">
+
+                            <span class="text-danger" id="emailError"></span>
+                        </div>
+                    </div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-outline-primary saveButton">SIMPAN</button>
@@ -174,7 +164,7 @@
              headers: {
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             },
-            url: "{{ url('akun-admin') }}",
+            url: "{{ route('akun-admin.store') }}",
             method: "POST",
             data: formData,
             contentType: false,
@@ -227,47 +217,44 @@
 
     })
 
-    //HAPUS DATA
     $(document).on('click', '.adminDelete', function(e) {
         e.preventDefault();
         const adminId = $(this).attr('delete-id');
         const adminNama = $(this).attr('adminNama');
-        const url = `akun-admin/${adminId}`;
         
         swal({
-                title: "Yakin?",
-                text: `Data admin ${adminNama} akan dihapus?`,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((result) => {
-                if (result) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url:url,
-                        type:"POST",
-                        data: {
-                            '_method': 'DELETE',
-                            'id': adminId,
-                        },
-                        success: function(response) {
-                             $('#datatable').DataTable().ajax.reload();
+            title: "Yakin?",
+            text: `Data admin ${adminNama} akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if (result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url:`{{ url('akun-admin/${adminId}') }}`,
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                        'id': adminId,
+                    },
+                    success: function(response) {
+                            $('#datatable').DataTable().ajax.reload();
 
-                            swal({
-                                title: "Sukses!",
-                                text: `Data admin ${adminNama} berhasil dihapus!`,
-                                icon: "success",
-                                timer: 2000,
-                                buttons: false,
-                            })
-                        }
-                    })
-                }
-            }) 
-            .catch()
+                        swal({
+                            title: "Sukses!",
+                            text: `Data admin ${adminNama} berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    }
+                })
+            }
+        }) 
     })
     
 </script>
