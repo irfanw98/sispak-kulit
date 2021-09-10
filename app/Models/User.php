@@ -8,8 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Notifications\Notifiable;
-use App\Models\Admin;
-use App\Models\Dokter;
+use App\Models\{
+    Admin,
+    Dokter,
+    Konsultasi
+};
 
 class User extends Authenticatable
 {
@@ -42,6 +45,19 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function admin() 
+    {
+        return $this->hasOne(Admin::class);
+    }
+    public function dokter() 
+    {
+        return $this->hasOne(Dokter::class);
+    }
+    public function konsultasi()
+    {
+        return $this->hasMany(Konsultasi::class);
+    }
+
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
@@ -53,15 +69,4 @@ class User extends Authenticatable
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
     }
-    //Relations
-    public function admin() 
-    {
-        return $this->hasOne(Admin::class);
-    }
-     public function dokter() 
-    {
-        return $this->hasOne(Dokter::class);
-    }
-
-
 }

@@ -86,6 +86,18 @@
           @endif
           @if(auth()->user()->hasRole('user'))
             <li class="nav-item">
+              <a href="{{ route('dashboard-user') }}" class="nav-link {{ Request::url() == url('/dashboard-user') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>Dashboard</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="{{ url('/konsultasi') }}" class="nav-link {{ Request::url() == url('/konsultasi') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-check-circle"></i>
+                <p>Konsultasi</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('/logout') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>

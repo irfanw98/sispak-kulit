@@ -19,7 +19,10 @@ use App\Http\Controllers\Dokter\{
      PenyakitController,
      AturanController
 };
-
+use App\Http\Controllers\User\{
+     DashboardUserController,
+     KonsultasiController
+};
 
 Auth::routes();
 Route::view('/', 'welcome');
@@ -60,7 +63,9 @@ Route::group(['middleware' => ['auth', 'role:dokter']], function() {
      Route::resource('/penyakit', PenyakitController::class);
      Route::resource('/aturan',  AturanController::class);
 });
+
 Route::group(['middleware' => ['auth', 'role:user']], function() {
-     Route::get('/dashboard-user', [App\Http\Controllers\User\DashboardUserController::class, 'index'])->name('dashboard-user');
+     Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard-user');
+     Route::resource('/konsultasi', KonsultasiController::class);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
