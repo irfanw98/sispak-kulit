@@ -40,7 +40,7 @@
                     </div>
                     <div class="card-body">
                     <a href="" name="addDokter" class="btn btn-primary mb-3 p-2 addDokter"  role="button" style="color: white;"><i class="fa fa-plus-square"></i> TAMBAH</a>
-                    <a href="{{ url('/akun-dokter/sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                    <a href="{{ route('sampah-dokter') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -111,248 +111,245 @@
 
 @section('footer')
 <script type="text/javascript">
-        $(document).ready(function(){
-                $('#datatable').DataTable({
-                         responsive: true,
-                         processing: true,
-                         serverSide: true,
-                         ajax: {
-                                 url: "{{ url('/akun-dokter') }}",
-                                 type: "GET",
-                                 dataType: "JSON"
-                         },
-                         columns: [{
-                                 data: 'DT_RowIndex',
-                                 name: 'DT_RowIndex'
-                                },
-                                {
-                                data: 'nama',
-                                name: 'nama'
-                                },
-                                {
-                                data: 'username',
-                                name: 'username'
-                                },
-                                {
-                                data: 'Aksi',
-                                name: 'Aksi'
-                        }]
-                })
-        })
-
-        //DETAIL
-        $(document).on('click', '.dokterDetail', function(e) {
-            e.preventDefault();
-            const kode_dokter = $(this).attr('detail-kode');
-
-            $.ajax({
-                url:  `{{ url('/akun-dokter/${kode_dokter}') }}`,
-                method: 'GET',
-                success: function(result) {
-                    $('#detailModal').modal('show');
-                    $('#detailModal').find('.modal-body').html(result);
-                }
-            })
-        })
-
-        //TAMBAH DATA
-        $(document).on('click', '.addDokter', function(e) {
-            e.preventDefault();
-            
-            $.ajax({
-                url: "{{ url('/akun-dokter/create') }}",
-                method: "GET",
-                success: function(result) {
-                    $('#createModal').modal('show');
-                    $('#createModal').find('.modal-body').html(result);
-                }
-            })
-
-        })
-
-        $(document).on('click', '.saveButton', function(e) {
-            e.preventDefault();
-            let form = $('.formInsert')[0]; //Get form input
-            const formData = new FormData(form);
-            
-            //Validasi form input
-            $('#namaError').addClass('d-none');
-            $('#usernameError').addClass('d-none');
-            $('#emailError').addClass('d-none');
-            $('#fotoError').addClass('d-none');
-
-            $.ajax({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    $(document).ready(function(){
+        $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                    url: "{{ url('/akun-dokter') }}",
+                    type: "GET",
+                    dataType: "JSON"
+            },
+            columns: [
+                {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
                 },
-                url: "{{ url('akun-dokter') }}",
-                method: "POST",
-                data: formData,
-                contentType: false,
-                processData: false,
-                cache: false,
-                dataType: "JSON",
-                success: function(result) {
-                     $('.formInsert').trigger('reset');//Reset inputan form
-                     $('#createModal').modal('hide');//Tutup Modal
-                     $("#datatable").DataTable().ajax.reload();//Reload Datatable
+                {
+                data: 'nama',
+                name: 'nama'
+                },
+                {
+                data: 'username',
+                name: 'username'
+                },
+                {
+                data: 'Aksi',
+                name: 'Aksi'
+                }
+            ]
+        })
+    })
 
-                    swal({
+    $(document).on('click', '.dokterDetail', function(e) {
+        e.preventDefault();
+        const kode_dokter = $(this).attr('detail-kode');
+
+        $.ajax({
+            url:  `{{ url('/akun-dokter/${kode_dokter}') }}`,
+            method: 'GET',
+            success: function(result) {
+                $('#detailModal').modal('show');
+                $('#detailModal').find('.modal-body').html(result);
+            }
+        })
+    })
+
+    $(document).on('click', '.addDokter', function(e) {
+        e.preventDefault();
+        
+        $.ajax({
+            url: "{{ url('/akun-dokter/create') }}",
+            method: "GET",
+            success: function(result) {
+                $('#createModal').modal('show');
+                $('#createModal').find('.modal-body').html(result);
+            }
+        })
+
+    })
+
+    $(document).on('click', '.saveButton', function(e) {
+        e.preventDefault();
+        let form = $('.formInsert')[0];
+        const formData = new FormData(form);
+        
+        $('#namaError').addClass('d-none');
+        $('#usernameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
+        $('#fotoError').addClass('d-none');
+
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: "{{ url('akun-dokter') }}",
+            method: "POST",
+            data: formData,
+            contentType: false,
+            processData: false,
+            cache: false,
+            dataType: "JSON",
+            success: function(result) {
+                    $('.formInsert').trigger('reset');
+                    $('#createModal').modal('hide');
+                    $("#datatable").DataTable().ajax.reload();
+
+                swal({
+                title: "Sukses!",
+                text: "Dokter berhasil ditambahkan!",
+                icon: "success",
+                timer: 2000,
+                buttons: false,
+                })
+            },
+            error: function(data) {
+                let errors = data.responseJSON;
+                if ($.isEmptyObject(errors) == false) {
+                    $.each(errors.errors, function(key,value) {
+                        let errID = '#' + key + 'Error';
+                        $('#nama').removeClass('is-valid');
+                        $('#nama').addClass('is-invalid');
+                        $('#username').removeClass('is-valid');
+                        $('#username').addClass('is-invalid');
+                        $('#email').removeClass('is-valid');
+                        $('#email').addClass('is-invalid');
+                        $('#foto').removeClass('is-valid');
+                        $('#foto').addClass('is-invalid');
+                        $(errID).removeClass('d-none');
+                        $(errID).text(value);
+                    })
+                } 
+            }
+        })
+
+    })
+
+    $(document).on('click', '.cancelButton', function(e) {
+        e.preventDefault();
+        $('.formInsert').trigger('reset'); 
+
+        $('#namaError').addClass('d-none');
+        $('#usernameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
+        $('#fotoError').addClass('d-none');
+
+        $('#nama').removeClass('is-invalid');
+        $('#username').removeClass('is-invalid');
+        $('#email').removeClass('is-invalid');
+        $('#foto').removeClass('is-invalid');
+    })
+
+    $(document).on('click', '.dokterUbah', function(e) {
+        e.preventDefault();
+        const dokterId = $(this).attr('ubah-kode');
+        
+        $.ajax({
+            url: `{{ url('/akun-dokter/${dokterId}/edit') }}`,
+            method: "GET",
+            success: function(result) {
+                $('#editModal').modal('show');
+                $('#editModal').find('.modal-body').html(result);
+            }
+        })
+    })
+
+    $(document).on('click', '.editButton', function(e) {
+        e.preventDefault();
+        const form_id = $('input[id=kode]').val();
+        let form = $('.formEdit')[0];
+        const formData = new FormData(form);
+
+        $('#namaError').addClass('d-none');
+        $('#usernameError').addClass('d-none');
+        $('#emailError').addClass('d-none');
+        $('#fotoError').addClass('d-none');
+        
+        $.ajax({
+            headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: `{{ url('/akun-dokter/${form_id}') }}`,
+            method: 'POST',
+            enctype: 'multipart/form-data',
+            processData: false,
+            contentType: false,
+            cache: false,
+            data: formData,
+            dataType: 'JSON',
+            success: function(response) {
+                $('.formEdit').trigger('reset');
+                $('#editModal').modal('hide');
+                $("#datatable").DataTable().ajax.reload();
+
+                swal({
                     title: "Sukses!",
-                    text: "Dokter berhasil ditambahkan!",
+                    text: "Dokter berhasil diubah!",
                     icon: "success",
                     timer: 2000,
                     buttons: false,
+                })
+            },
+            error: function(data) {
+                let errors = data.responseJSON;
+                if ($.isEmptyObject(errors) == false) {
+                    $.each(errors.errors, function(key,value) {
+                        let errID = '#' + key + 'Error';
+                        $('#nama').removeClass('is-valid');
+                        $('#nama').addClass('is-invalid');
+                        $('#username').removeClass('is-valid');
+                        $('#username').addClass('is-invalid');
+                        $('#email').removeClass('is-valid');
+                        $('#email').addClass('is-invalid');
+                        $('#foto').removeClass('is-valid');
+                        $('#foto').addClass('is-invalid');
+                        $(errID).removeClass('d-none');
+                        $(errID).text(value);
                     })
-                },
-                error: function(data) {
-                    let errors = data.responseJSON;
-                    if ($.isEmptyObject(errors) == false) {
-                        $.each(errors.errors, function(key,value) {
-                            let errID = '#' + key + 'Error';
-                            $('#nama').removeClass('is-valid');
-                            $('#nama').addClass('is-invalid');
-                            $('#username').removeClass('is-valid');
-                            $('#username').addClass('is-invalid');
-                            $('#email').removeClass('is-valid');
-                            $('#email').addClass('is-invalid');
-                            $('#foto').removeClass('is-valid');
-                            $('#foto').addClass('is-invalid');
-                            $(errID).removeClass('d-none');
-                            $(errID).text(value);
-                         })
-                    } 
-                }
-            })
-
+                } 
+            }
         })
+    })
 
-        $(document).on('click', '.cancelButton', function(e) {
-            e.preventDefault();
-            $('.formInsert').trigger('reset'); //reset form input
-
-            $('#namaError').addClass('d-none');//reset validasi form input
-            $('#usernameError').addClass('d-none');
-            $('#emailError').addClass('d-none');
-            $('#fotoError').addClass('d-none');
-
-            $('#nama').removeClass('is-invalid');
-            $('#username').removeClass('is-invalid');
-            $('#email').removeClass('is-invalid');
-            $('#foto').removeClass('is-invalid');
+    $(document).on('click', '.dokterDelete', function(e) {
+        e.preventDefault();
+        const kodeDokter = $(this).attr('delete-kode');
+        const namaDokter = $(this).attr('dokterNama');
+        
+        swal({
+            title: "Yakin?",
+            text: `Data dokter ${namaDokter} akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
+        .then((result) => {
+            if (result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/akun-dokter/${kodeDokter}') }}`,
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                        'id': kodeDokter,
+                    },
+                    success: function(response) {
+                        $('#datatable').DataTable().ajax.reload();
 
-        //UBAH DATA
-        $(document).on('click', '.dokterUbah', function(e) {
-            e.preventDefault();
-            const dokterId = $(this).attr('ubah-kode');
-            
-            $.ajax({
-                url: `{{ url('/akun-dokter/${dokterId}/edit') }}`,
-                method: "GET",
-                success: function(result) {
-                    $('#editModal').modal('show');
-                    $('#editModal').find('.modal-body').html(result);
-                }
-            })
+                        swal({
+                            title: "Sukses!",
+                            text: `Data dokter ${namaDokter} berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                    }
+                })
+            }
         })
-
-        $(document).on('click', '.editButton', function(e) {
-            e.preventDefault();
-            const form_id = $('input[id=kode]').val();
-            let form = $('.formEdit')[0];
-            const formData = new FormData(form);
-
-            $('#namaError').addClass('d-none');
-            $('#usernameError').addClass('d-none');
-            $('#emailError').addClass('d-none');
-            $('#fotoError').addClass('d-none');
-            
-            $.ajax({
-                headers: {
-                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url: `{{ url('/akun-dokter/${form_id}') }}`,
-                method: 'POST',
-                enctype: 'multipart/form-data',
-                processData: false, // Important!
-                contentType: false,
-                cache: false,
-                data: formData,
-                dataType: 'JSON',
-                success: function(response) {
-                    $('.formEdit').trigger('reset');//Reset inputan form
-                    $('#editModal').modal('hide');//Tutup Modal
-                    $("#datatable").DataTable().ajax.reload();//Reload Datatable
-
-                    swal({
-                        title: "Sukses!",
-                        text: "Dokter berhasil diubah!",
-                        icon: "success",
-                        timer: 2000,
-                        buttons: false,
-                    })
-                },
-                error: function(data) {
-                    let errors = data.responseJSON;
-                    if ($.isEmptyObject(errors) == false) {
-                        $.each(errors.errors, function(key,value) {
-                            let errID = '#' + key + 'Error';
-                            $('#nama').removeClass('is-valid');
-                            $('#nama').addClass('is-invalid');
-                            $('#username').removeClass('is-valid');
-                            $('#username').addClass('is-invalid');
-                            $('#email').removeClass('is-valid');
-                            $('#email').addClass('is-invalid');
-                            $('#foto').removeClass('is-valid');
-                            $('#foto').addClass('is-invalid');
-                            $(errID).removeClass('d-none');
-                            $(errID).text(value);
-                         })
-                    } 
-                }
-            })
-        })
-
-        //HAPUS DATA
-        $(document).on('click', '.dokterDelete', function(e) {
-            e.preventDefault();
-            const kodeDokter = $(this).attr('delete-kode');
-            const namaDokter = $(this).attr('dokterNama');
-           
-            swal({
-                title: "Yakin?",
-                text: `Data dokter ${namaDokter} akan dihapus?`,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((result) => {
-                if (result) {
-                    $.ajax({
-                        headers: {
-                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: `{{ url('/akun-dokter/${kodeDokter}') }}`,
-                        type:"POST",
-                        data: {
-                            '_method': 'DELETE',
-                            'id': kodeDokter,
-                        },
-                        success: function(response) {
-                            $('#datatable').DataTable().ajax.reload();
-
-                            swal({
-                                title: "Sukses!",
-                                text: `Data dokter ${namaDokter} berhasil dihapus!`,
-                                icon: "success",
-                                timer: 2000,
-                                buttons: false,
-                            })
-                        }
-                    })
-                }
-            })
-        })
+    })
 </script>
 @endsection

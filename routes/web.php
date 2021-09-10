@@ -38,13 +38,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
      });
      Route::resource('/akun-admin', AdminController::class)->only(['index','store','destroy']);
      Route::group(['prefix' => '/akun-dokter/sampah'], function() {
-          Route::get('/', [DokterController::class,'sampah']);
+          Route::get('/', [DokterController::class,'sampah'])->name('sampah-dokter');
           Route::get('/pulihkan/{id?}', [DokterController::class,'pulihkan'])->name('pulihkan-dokter');
           Route::delete('/hapus/{id?}', [DokterController::class,'hapus'])->name('hapus-dokter');
      });
      Route::resource('/akun-dokter', DokterController::class);
      Route::group(['prefix' => '/akun-user/sampah'], function() {
-          Route::get('/', [UserController::class,'sampah']);
+          Route::get('/', [UserController::class,'sampah'])->name('sampah-user');
           Route::get('/pulihkan/{id?}', [UserController::class,'pulihkan'])->name('pulihkan-user');
           Route::delete('/hapus/{id?}', [UserController::class,'hapus'])->name('hapus-user');
      });

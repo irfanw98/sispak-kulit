@@ -39,7 +39,7 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
-                     <a href="{{ url('/akun-user/sampah') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                     <a href="{{ route('sampah-user') }}" class="btn btn-warning mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -69,7 +69,8 @@
                 type: "GET",
                 dataType: "JSON"
             },
-            columns: [{
+            columns: [
+                {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex'
                 },
@@ -84,11 +85,11 @@
                 {
                 data: 'Aksi',
                 name: 'Aksi'
-            }]
+                }
+            ]
         })
     })
 
-    //HAPUS DATA
     $(document).on('click', '.userDelete',  function(e){
         e.preventDefault();
         const idUser = $(this).attr('delete-id');
