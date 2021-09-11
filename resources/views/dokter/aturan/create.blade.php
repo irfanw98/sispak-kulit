@@ -17,7 +17,6 @@
             <div class="form-group">
                 <label for="daftar_gejala">Daftar Gejala</label>
                 <select name="daftar_gejala[]" class="select2multiple form-control" id="daftar_gejala" multiple>
-                    <!-- <option selected="" disabled="">-- PILIH GEJALA --</option> -->
                     @foreach($gejalas as $gejala)
                         <option value="{{ $gejala->kode_gejala }}">{{ $gejala->kode_gejala }} - {{ $gejala->nama }}</option>
                     @endforeach

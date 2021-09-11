@@ -15,7 +15,7 @@ class Aturan extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['penyakit_kode', 'gejala_kode'];
 
-     public function gejala()
+    public function gejala()
     {
         return $this->belongsTo(Gejala::class, 'gejala_kode', 'kode_gejala');
     }
@@ -25,7 +25,7 @@ class Aturan extends Model
         return $this->belongsTo(Penyakit::class, 'penyakit_kode', 'kode_penyakit');
     }
 
-     public function getCreatedAtAttribute()
+    public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
         ->format('d, M Y H:i');

@@ -5,82 +5,73 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\{
+    Konsultasi,
     User,
     Aturan,
     Gejala,
     Penyakit
 };
+use Auth;
 
 class KonsultasiController extends Controller
 {
     public function index()
     {
-        return view('user.konsultasi.index');
+        $gejalas = Gejala::orderBy('nama', 'asc')->get();
+
+        return view('user.konsultasi.index', compact('gejalas'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function store(Request $request)
     {
-        //
+        if($request->gejala == null) {
+            return redirect('konsultasi');
+        } else {
+
+            $gejala = $this->basispengetahuan($request->gejala);
+
+            $konsultasi = new Konsultasi;
+            $konsultasi->user_id = Auth::user()->id;
+            // dd($konsultasi);
+        }  
+
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
+    private function basispengetahuan($gejala)
     {
-        //
-    }
+        dd($gejala);
+        // $aturans = Aturan::groupBy('gejala_kode')->get();
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
+        // $gejala_kode = [];
+        
+        // foreach ($aturans as $aturan) {
+        //     $kode = $aturan->gejala_kode;
+        //     array_push($gejala_kode, $kode);
+        // }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
+        
+        // dd($gejala_kode);
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        // if($gejala == "G001") {
+        //     dd('OKE');
+        // } else {
+        //     dd('Fail');
+        // }
+
+        // $role['P001'] = 0;
+        // $role['P002'] = 0;
+    
+        // for ($i=0; $i < count($gejala); $i++) {
+        //     dd($gejala[$i]); 
+        //    if(
+        //         $gejala[$i] == "G001" && $gejala[$i] == "G003"
+        //         && $gejala[$i] == "G005"
+        //    ) {
+        //        $role['P001'] = $role['P001'] + 1 ;
+        //        dd($role['P001']);
+        //    }
+        // }
+
+        
     }
 }

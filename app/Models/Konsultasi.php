@@ -9,7 +9,7 @@ use App\Models\{
     Aturan
 };
 
-class Kosultasi extends Model
+class Konsultasi extends Model
 {
     use HasFactory;
 
