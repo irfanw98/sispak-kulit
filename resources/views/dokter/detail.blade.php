@@ -7,7 +7,7 @@
         </div>
     </div>
     <div class="row">
-     <table class="table table-bordered table-striped  nowrap" cellspacing="0" style="width: 100%">
+        <table class="table table-bordered table-striped  nowrap" cellspacing="0" style="width: 100%">
             <div class="col-md-12 mt-3">
                 <tbody>
                     <tr>
@@ -28,7 +28,7 @@
                     </tr>
                 </tbody>
             </div>
-     </table>    
+        </table>    
     </div>
      <div class="row">
         <div class="col-lg-12 ">
