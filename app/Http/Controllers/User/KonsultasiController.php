@@ -28,17 +28,17 @@ class KonsultasiController extends Controller
 
             $diagnosa = $this->basispengetahuan($request->input('gejala'));
             $penyakit = Penyakit::where('kode_penyakit', $diagnosa)->first();
-            $gejala   = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
-            $users = Auth::user()->id;
+            $gejalas = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
+            $user = User::where('id', Auth::user()->id)->first();
 
             $konsultasi = new Konsultasi;
-            $konsultasi->user_id = $users;
+            $konsultasi->user_id = $user->id;
             $konsultasi->kode_penyakit = $penyakit->kode_penyakit;
             $konsultasi->save();
 
-            // return view('user.konsultasi.hasil', compact('gejala', 'penyakit', 'users'));
+            return view('user.diagnosa.hasil', compact('penyakit', 'gejalas', 'user'));
         } else {
-
+            return redirect('konsultasi');
         }  
 
     }

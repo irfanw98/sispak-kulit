@@ -21,7 +21,7 @@ use App\Http\Controllers\Dokter\{
 };
 use App\Http\Controllers\User\{
      DashboardUserController,
-     KonsultasiController
+     KonsultasiController,
 };
 
 Auth::routes();

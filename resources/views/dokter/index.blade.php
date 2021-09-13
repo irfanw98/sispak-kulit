@@ -192,16 +192,16 @@
             cache: false,
             dataType: "JSON",
             success: function(result) {
-                    $('.formInsert').trigger('reset');
-                    $('#createModal').modal('hide');
-                    $("#datatable").DataTable().ajax.reload();
+                $('.formInsert').trigger('reset');
+                $('#createModal').modal('hide');
+                $("#datatable").DataTable().ajax.reload();
 
                 swal({
-                title: "Sukses!",
-                text: "Dokter berhasil ditambahkan!",
-                icon: "success",
-                timer: 2000,
-                buttons: false,
+                    title: "Sukses!",
+                    text: "Dokter berhasil ditambahkan!",
+                    icon: "success",
+                    timer: 2000,
+                    buttons: false,
                 })
             },
             error: function(data) {

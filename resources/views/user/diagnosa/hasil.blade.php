@@ -1,6 +1,6 @@
 @extends('template.master')
 
-@section('tittle', 'konsultasi')
+@section('tittle', 'hasil')
 
 @section('header')
     <style>
@@ -53,23 +53,27 @@
                                 <div class="col-md-12 mt-3">
                                     <tbody>
                                         <tr>
+                                            <td>Nama</td>
+                                            <td>{{ $user->nama }}</td>
+                                        </tr>
+                                        <tr>
                                             <td>Nama Penyakit</td>
                                             <td>{{ $penyakit->nama }}</td>
                                         </tr>
                                         <tr>
                                             <td>Deskripsi</td>
-                                            <td>{{ $penyakit->Deskripsi }}</td>
+                                            <td>{{ $penyakit->deskripsi }}</td>
                                         </tr>
                                         <tr>
-                                            <td>Email</td>
-                                            <td>{{ $penyakit->Solusi }}</td>
+                                            <td>Solusi</td>
+                                            <td>{{ $penyakit->solusi }}</td>
                                         </tr>
                                     </tbody>
                                 </div>
                             </table> 
                         </div>
                       </div>
-                      <a href="" type="button" class="btn btn-outline-success"><i class="fas fa-angle-double-right"></i>Konsultasi</a>
+                      <a href="{{ route('konsultasi.index') }}" type="button" class="btn btn-outline-success"><i class="fas fa-angle-double-left"></i> Konsultasi Lagi</a>
                     </div>
                 </div>
             </div>

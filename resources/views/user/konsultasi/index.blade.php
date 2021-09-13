@@ -47,16 +47,16 @@
                     </div>
                     <div class="card-body">
                       <h4 class="title-konsultasi">Pilih Gejala Penyakit Yang Anda Rasakan</h4>
-                      <form action="" method="post" class="konsultasi">
-                      @csrf
-                      @foreach($gejalas as $gejala)
-                      <div class="row">
-                        <div class="col-md-12">
-                          <input type="checkbox" name="gejala[]" class="checks" value="{{ $gejala->kode_gejala }}">{{ $gejala->nama }}
+                      <form action="{{ route('konsultasi.store') }}" method="post" class="konsultasi">
+                        @csrf
+                        @foreach($gejalas as $gejala)
+                        <div class="row">
+                          <div class="col-md-12">
+                            <input type="checkbox" name="gejala[]" class="checks" value="{{ $gejala->kode_gejala }}">{{ $gejala->nama }}
+                          </div>
                         </div>
-                      </div>
-                      @endforeach
-                      <button type="submit" class="btn btn-outline-primary proses"><i class="fas fa-angle-double-right"></i> Proses</button>
+                        @endforeach
+                        <button type="submit" class="btn btn-outline-primary proses"><i class="fas fa-angle-double-right"></i> Proses</button>
                       </form>
                     </div>
                 </div>
@@ -67,37 +67,38 @@
 
 @section('footer')
 <script type="text/javascript">
-  $(document).on('click', '.proses', function(e) {
-    e.preventDefault();
-    let form = $('.konsultasi')[0];
-    const formData = new FormData(form);
-    const namaGejala = $(this).attr('nama-gejala');
+  // $(document).on('click', '.proses', function(e) {
+  //   e.preventDefault();
+  //   let form = $('.konsultasi')[0];
+  //   const formData = new FormData(form);
+  //   const namaGejala = $(this).attr('nama-gejala');
 
-    swal({
-      title: "Yakin?",
-      text: `Gejala Yang Anda Rasakan Itu Benar?`,
-      icon: "warning",
-      buttons: true,
-      dangerMode: true,
-    })
-
-    $.ajax({
-      headers: {
-        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-      },
-      url:'{{ route("konsultasi.store") }}',
-      method: 'POST',
-      data: formData,
-      contentType: false,
-      processData: false,
-      cache: false,
-      success: function(response) {
-        // $('.konsultasi').trigger('reset')
-      },
-      error: function(response) {
-        console.log(response);
-      }
-    })
-  })
+  //   swal({
+  //     title: "Yakin?",
+  //     text: `Gejala Yang Anda Rasakan Itu Benar?`,
+  //     icon: "warning",
+  //     buttons: true,
+  //     dangerMode: true,
+  //   })
+  //   .then((result) => {
+      // console.log(result);
+      // if(result) {
+      //   $.ajax({
+      //     headers: {
+      //       'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+      //     },
+      //     url:'{{ route("konsultasi.store") }}',
+      //     method: 'POST',
+      //     data: formData,
+      //     processData: false, // Important!
+      //     contentType: false,
+      //     cache: false,
+      //     success: function(response) {
+      //       window.location.href = "diagnosa";
+      //     }
+      //   })
+      // }
+  //   })
+  // })
 </script>
 @endsection

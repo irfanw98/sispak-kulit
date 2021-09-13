@@ -20,8 +20,8 @@ class Konsultasi extends Model
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function aturan() {
-        return $this->belongsTo(Aturan::class, 'aturan_id', 'id');
+    public function penyakit() {
+        return $this->belongsTo(Penyakit::class, 'kode_penyakit', 'kode_penyakit');
     }
 
     public function getCreatedAtAttribute()
