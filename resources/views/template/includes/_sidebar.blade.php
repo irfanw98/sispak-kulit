@@ -98,6 +98,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ url('/riwayat-diagnosa') }}" class="nav-link {{ Request::url() == url('/riwayat-diagnosa') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-book-medical"></i>
+                <p>Riwayat Diagnosa</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('/logout') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>
