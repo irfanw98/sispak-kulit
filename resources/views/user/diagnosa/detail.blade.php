@@ -4,6 +4,10 @@
             <div class="col-md-12 mt-2">
                 <tbody>
                     <tr>
+                        <td>Tanggal Konsultasi</td>
+                        <td>{{ $diagnosa->created_at }}</td>
+                    </tr>
+                    <tr>
                         <td>Nama Lengkap</td>
                         <td>{{ $diagnosa->user->nama }}</td>
                     </tr>
