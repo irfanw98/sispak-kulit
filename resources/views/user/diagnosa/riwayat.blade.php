@@ -39,6 +39,11 @@
                   <div class="grad">
                   </div>
                   <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <a href="{{ route('export-pdf')}}" class="btn btn-danger mb-3 p-2"><i class="fas fa-file-pdf"></i> export PDF</a>
+                      </div>
+                    </div>
                     <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
                       <thead>
                         <tr>

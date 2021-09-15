@@ -27,7 +27,7 @@ class Konsultasi extends Model
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
-        ->format('jS F Y h:i:s A');
+        ->format('d-m-Y');
     }
 
     public function getUpdatedAtAttribute()

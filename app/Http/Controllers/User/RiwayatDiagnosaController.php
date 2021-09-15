@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
 use DataTables;
+use PDF;
 
 class RiwayatDiagnosaController extends Controller
 {
@@ -40,6 +41,13 @@ class RiwayatDiagnosaController extends Controller
         $diagnosa = Konsultasi::findOrFail($id);
         
         return view('user.diagnosa.detail', compact('diagnosa'));
+    }
+
+    public function exportPdf()
+    {
+        $diagnosas = Konsultasi::with(['user','penyakit'])->get();
+        $pdf = PDF::loadView('user.diagnosa.riwayatpdf', compact('diagnosas'));
+        return $pdf->download('riwayat.pdf');
     }
 
 }

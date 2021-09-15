@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/logout') }}" class="nav-link">
+            <a href="{{ url('/keluar') }}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p> Keluar</p>
             </a>
@@ -78,7 +78,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/logout') }}" class="nav-link">
+              <a href="{{ url('/keluar') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>
               </a>
@@ -110,7 +110,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/logout') }}" class="nav-link">
+              <a href="{{ url('/keluar') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>
               </a>

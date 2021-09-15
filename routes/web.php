@@ -30,7 +30,7 @@ Route::view('/', 'welcome');
 
 Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {
      Route::resource('/ubah-password', PasswordController::class)->only(['index','store']);
-     Route::get('/logout', [LogoutController::class,'logout'])->name('logout');
+     Route::get('/logout', [LogoutController::class,'logout'])->name('keluar');
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -68,6 +68,7 @@ Route::group(['middleware' => ['auth', 'role:dokter']], function() {
 Route::group(['middleware' => ['auth', 'role:user']], function() {
      Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard-user');
      Route::resource('/konsultasi', KonsultasiController::class);
+     Route::get('/riwayat-diagnosa/pdf', [RiwayatDiagnosaController::class,'exportPdf'])->name('export-pdf');
      Route::resource('/riwayat-diagnosa', RiwayatDiagnosaController::class)->only(['index', 'show']);
 });
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
