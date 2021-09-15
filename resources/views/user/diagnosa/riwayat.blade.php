@@ -36,11 +36,20 @@
         <div class="row">
             <div class="col-md-12 table-responsive">
                 <div class="card">
-                    <div class="grad">
-                    </div>
-                    <div class="card-body">
-                    
-                    </div>
+                  <div class="grad">
+                  </div>
+                  <div class="card-body">
+                    <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
+                      <thead>
+                        <tr>
+                          <th style="text-align: center;" width="10%">No</th>
+                          <th width="40%">Nama Lengkap</th>
+                          <th width="30%">Diagnosa Penyakit</th>
+                          <th style="text-align: center;" width="10%">Aksi</th>
+                        </tr>
+                      </thead>
+                    </table>   
+                  </div>
                 </div>
             </div>
         </div>
@@ -49,6 +58,40 @@
 
 @section('footer')
 <script type="text/javascript">
-
+  $(document).ready(function(){
+    $('#datatable').DataTable({
+      responsive: true,
+      processing: true,
+      serverSide: true,
+      ajax: {
+      url: "{{ route('riwayat-diagnosa.index') }}",
+      method: "GET",
+      dataType: "JSON"
+      },
+      'columnDefs': [{
+        "targets": 0, // your case first column
+        "className": "text-center",
+        "width": "4%"
+      }],
+      columns : [
+        {
+        data: 'DT_RowIndex',
+        name: 'DT_RowIndex'
+        },
+        {
+        data: 'user',
+        name: 'user.nama'
+        },
+        {
+        data: 'penyakit',
+        name: 'penyakit.nama'
+        },
+        {
+        data: 'Aksi',
+        name: 'Aksi'
+        }
+      ]
+    })
+  })
 </script>
 @endsection

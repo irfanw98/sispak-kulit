@@ -116,37 +116,37 @@
 @section('footer')
 <script type="text/javascript">
     $(document).ready(function(){   
-            $('#datatable').DataTable({
-                responsive: true,
-                processing: true,
-                serverSide: true,
-                ajax: {
-                url: "{{ url('penyakit') }}",
-                method: "GET",
-                dataType: "JSON"
+        $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+            url: "{{ url('penyakit') }}",
+            method: "GET",
+            dataType: "JSON"
+            },
+            columns : [
+                {
+                data: 'Cek',
+                name: 'Cek'
                 },
-                columns : [
-                    {
-                    data: 'Cek',
-                    name: 'Cek'
-                    },
-                    {
-                    data: 'DT_RowIndex',
-                    name: 'DT_RowIndex'
-                    },
-                    {
-                    data: 'kode_penyakit',
-                    name: 'kode_penyakit'
-                    },
-                    {
-                    data: 'nama',
-                    name: 'nama'
-                    },
-                    {
-                    data: 'Aksi',
-                    name: 'Aksi'
-                }]
-            })
+                {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+                },
+                {
+                data: 'kode_penyakit',
+                name: 'kode_penyakit'
+                },
+                {
+                data: 'nama',
+                name: 'nama'
+                },
+                {
+                data: 'Aksi',
+                name: 'Aksi'
+            }]
+        })
     })
 
     //DETAIL
