@@ -56,6 +56,25 @@
 </section>
 @endsection
 
+<!-- Modal Detail  -->
+<div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="gradModal">
+            </div>
+            <div class="modal-header">
+                <h5 class="modal-title" id="detailModalLabel"></h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+
+            </div>
+        </div>
+    </div>
+</div>
+
 @section('footer')
 <script type="text/javascript">
   $(document).ready(function(){
@@ -91,6 +110,20 @@
         name: 'Aksi'
         }
       ]
+    })
+  })
+
+  $(document).on('click', '.diagnosaDetail', function(e) {
+    e.preventDefault();
+    const idDiagnosa = $(this).attr('detail-diagnosa');
+    
+    $.ajax({
+      url: `{{ url('/riwayat-diagnosa/${idDiagnosa}') }}`,
+      method: 'GET',
+      success: function(result) {
+        $('#detailModal').modal('show');
+        $('#detailModal').find('.modal-body').html(result);
+      }
     })
   })
 </script>

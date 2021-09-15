@@ -11,10 +11,10 @@ class RiwayatDiagnosaController extends Controller
 {
     public function index(Request $request)
     {
-        $konsultasis = Konsultasi::with(['user', 'penyakit'])->latest()->get();
+        $diagnosa = Konsultasi::with(['user', 'penyakit'])->latest()->get();
 
         if($request->ajax()){
-            return DataTables::of($konsultasis)
+            return DataTables::of($diagnosa)
                 ->addColumn('user', function($data){
                     return $data->user->nama;
                 }) 
@@ -23,7 +23,7 @@ class RiwayatDiagnosaController extends Controller
                 })
                 -> addColumn('Aksi', function($data) {
                     return '
-                        <a href="" class="btn btn-success diagnosaDetail" role="button" detail-kode="' . $data->id . '"><i class="fas fa-eye"></i> DETAIL</a>
+                        <a href="" class="btn btn-success diagnosaDetail" role="button" detail-diagnosa="' . $data->id . '"><i class="fas fa-eye"></i> DETAIL</a>
                     ';
                 })
                 ->rawColumns(['Aksi', 'user', 'penyakit'])
@@ -32,12 +32,14 @@ class RiwayatDiagnosaController extends Controller
                 ->make(true);
         }
 
-        return view('user.diagnosa.riwayat', compact('konsultasis'));
+        return view('user.diagnosa.riwayat', compact('diagnosa'));
     }
 
     public function show($id)
     {
-        //
+        $diagnosa = Konsultasi::findOrFail($id);
+        
+        return view('user.diagnosa.detail', compact('diagnosa'));
     }
 
 }
