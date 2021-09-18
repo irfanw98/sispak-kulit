@@ -39,17 +39,15 @@
                   <div class="grad">
                   </div>
                   <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-12">
+
                         <a href="{{ route('export-pdf')}}" class="btn btn-danger mb-3 p-2"><i class="fas fa-file-pdf"></i> export PDF</a>
-                      </div>
-                    </div>
+                      
                     <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
                       <thead>
                         <tr>
                           <th style="text-align: center;" width="10%">No</th>
                           <th width="40%">Nama Lengkap</th>
-                          <th width="30%">Diagnosa Penyakit</th>
+                          <th width="40%">Diagnosa Penyakit</th>
                           <th style="text-align: center;" width="10%">Aksi</th>
                         </tr>
                       </thead>
@@ -84,37 +82,38 @@
 <script type="text/javascript">
   $(document).ready(function(){
     $('#datatable').DataTable({
-      responsive: true,
       processing: true,
       serverSide: true,
+      responsive: true,
+      stateSave: true,
       ajax: {
-      url: "{{ route('riwayat-diagnosa.index') }}",
-      method: "GET",
-      dataType: "JSON"
+        url: "{{ route('riwayat-diagnosa.index') }}",
+        method: "GET",
+        dataType: "JSON"
       },
+      columns : [
+        {
+        data: 'DT_RowIndex',
+        name: 'DT_RowIndex',
+        },
+        {
+        data: 'User',
+        name: 'User.nama',
+        },
+        {
+        data: 'Penyakit',
+        name: 'Penyakit.nama',
+        },
+        {
+        data: 'Aksi',
+        name: 'Aksi',
+        }
+      ],
       'columnDefs': [{
         "targets": 0, // your case first column
         "className": "text-center",
         "width": "4%"
       }],
-      columns : [
-        {
-        data: 'DT_RowIndex',
-        name: 'DT_RowIndex'
-        },
-        {
-        data: 'user',
-        name: 'user.nama'
-        },
-        {
-        data: 'penyakit',
-        name: 'penyakit.nama'
-        },
-        {
-        data: 'Aksi',
-        name: 'Aksi'
-        }
-      ]
     })
   })
 

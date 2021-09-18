@@ -29,7 +29,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/laporan-konsultasi') }}" class="nav-link {{ Request::url() == url('/laporan-konsultasi') ? 'active' : ' ' }}">
-              <i class="nav-icon fas fa-th"></i>
+              <i class="nav-icon fas fa-clipboard"></i>
               <p>Laporan Konsultasi</p>
             </a>
           </li>
@@ -40,7 +40,7 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="{{ url('/keluar') }}" class="nav-link">
+            <a href="{{ route('keluar') }}" class="nav-link">
               <i class="nav-icon fas fa-sign-out-alt"></i>
               <p> Keluar</p>
             </a>
@@ -78,7 +78,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/keluar') }}" class="nav-link">
+              <a href="{{ route('keluar') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>
               </a>
@@ -110,7 +110,7 @@
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ url('/keluar') }}" class="nav-link">
+              <a href="{{ route('keluar') }}" class="nav-link">
                 <i class="nav-icon fas fa-sign-out-alt"></i>
                 <p> Keluar</p>
               </a>

@@ -104,9 +104,9 @@
             processing: true,
             serverSide: true,
             ajax: {
-            url: "{{ url('/gejala') }}",
-            method: "GET",
-            dataType: "JSON"
+                url: "{{ url('/gejala') }}",
+                method: "GET",
+                dataType: "JSON"
             },
             columns : [
                 {

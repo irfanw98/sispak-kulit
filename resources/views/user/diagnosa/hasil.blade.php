@@ -74,7 +74,7 @@
                         </div>
                       </div>
                       <a href="{{ route('konsultasi.index') }}" type="button" class="btn btn-outline-primary"><i class="fas fa-angle-double-left"></i> Konsultasi Lagi</a>
-                      <a href="" type="button" class="btn btn-outline-success"><i class="fas fa-angle-double-right"></i> Lihat Riwayat</a>
+                      <a href="{{ route('riwayat-diagnosa.index') }}" type="button" class="btn btn-outline-success"> Lihat Riwayat <i class="fas fa-angle-double-right"></i></a>
                     </div>
                 </div>
             </div>

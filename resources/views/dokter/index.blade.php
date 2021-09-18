@@ -117,9 +117,9 @@
             processing: true,
             serverSide: true,
             ajax: {
-                    url: "{{ url('/akun-dokter') }}",
-                    type: "GET",
-                    dataType: "JSON"
+                url: "{{ url('/akun-dokter') }}",
+                type: "GET",
+                dataType: "JSON"
             },
             columns: [
                 {

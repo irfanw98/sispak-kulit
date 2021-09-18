@@ -5,21 +5,25 @@ namespace App\Http\Controllers\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
-use DataTables;
+use Yajra\DataTables\DataTables;
 use PDF;
+use Illuminate\Support\Facades\Auth;
 
 class RiwayatDiagnosaController extends Controller
 {
     public function index(Request $request)
     {
-        $diagnosa = Konsultasi::with(['user', 'penyakit'])->latest()->get();
+        $diagnosa = Konsultasi::with(['user', 'penyakit'])
+                                ->where('user_id', Auth::user()->id)
+                                ->latest()
+                                ->get();
 
         if($request->ajax()){
             return DataTables::of($diagnosa)
-                ->addColumn('user', function($data){
+                ->addColumn('User', function($data){
                     return $data->user->nama;
                 }) 
-                ->addColumn('penyakit', function($data){
+                ->addColumn('Penyakit', function($data){
                     return $data->penyakit->nama;
                 })
                 -> addColumn('Aksi', function($data) {
@@ -27,7 +31,7 @@ class RiwayatDiagnosaController extends Controller
                         <a href="" class="btn btn-success diagnosaDetail" role="button" detail-diagnosa="' . $data->id . '"><i class="fas fa-eye"></i> DETAIL</a>
                     ';
                 })
-                ->rawColumns(['Aksi', 'user', 'penyakit'])
+                ->rawColumns(['Aksi', 'User', 'Penyakit'])
                 ->addIndexColumn()
                 ->removeColumn('id')
                 ->make(true);

@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Dokter;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Gejala;
-use DataTables;
+use Yajra\DataTables\DataTables;
 use App\Http\Requests\Dokter\Gejala\{
     StoreRequest,
     UpdateRequest,

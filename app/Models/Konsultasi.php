@@ -14,6 +14,7 @@ class Konsultasi extends Model
     use HasFactory;
 
     protected $table = 'tb_konsultasi';
+    protected $primaryKey = 'id';
     protected $fillable = ['user_id', 'aturan_id'];
 
     public function user() {
