@@ -53,6 +53,10 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
           Route::delete('/hapus/{id?}', [UserController::class,'hapus'])->name('hapus-user');
      });
      Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
+     Route::group(['prefix' => '/laporan-konsultasi/sampah'], function() {
+          Route::get('/', [LaporanController::class, 'sampah'])->name('sampah-laporan');
+          Route::delete('/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
+     });
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });
 

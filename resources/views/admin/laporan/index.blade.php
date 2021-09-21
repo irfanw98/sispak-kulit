@@ -39,6 +39,7 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
+                        <a href="{{ route('sampah-laporan') }}" class="btn btn-warning sampahLaporan mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -124,8 +125,6 @@
                             'id': idKonsultasi,
                         },
                         success: function(response){
-                            $('#datatable').DataTable().ajax.reload();
-
                             swal({
                                 title: "Sukses!",
                                 text: `Data laporan konsutasi ${userKonsultasi} berhasil dihapus!`,
@@ -133,11 +132,14 @@
                                 timer: 2000,
                                 buttons: false,
                             })
+
+                            $('#datatable').DataTable().ajax.reload();
                         }
                     })
                 }
             })
         })
+
     })
 </script>
 @endsection

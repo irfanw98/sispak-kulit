@@ -1,6 +1,6 @@
 @extends('template.master')
 
-@section('tittle', 'dokter')
+@section('tittle', 'Laporan Konsultasi')
 
 @section('header')
     <style>
@@ -18,22 +18,22 @@
 @endsection
 
 @section('content')
-    <section class="content-header">
+ <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-             <a href="{{ url('/akun-dokter') }}" class="btn btn-default p-2"><i class="fas fa-arrow-circle-left"></i> KEMBALI</a>
+              <a href="{{ route('laporan-konsultasi.index') }}" class="btn btn-default p-2"><i class="fas fa-arrow-circle-left"></i> KEMBALI</a>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="{{ route('dashboard-dokter') }}">Dashboard</a></li>
-              <li class="breadcrumb-item active">Akun-Dokter</li>
+              <li class="breadcrumb-item"><a href="{{ route('dashboard-admin') }}">Dashboard</a></li>
+              <li class="breadcrumb-item active">Sampah Laporan</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>
-    <section class="content">
+ </section>
+ <section class="content">
         <div class="row">
             <div class="col-md-12 table-responsive">
                 <div class="card">
@@ -41,61 +41,82 @@
                     </div>
                     <div class="card-body">
                         <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="{{ route('pulihkan-dokter') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">No</th>
-                                    <th width="20%">Nama</th>
-                                    <th width="30%">Email</th>
-                                    <th style="text-align: center;" width="40%">Aksi</th>
+                                    <th style="text-align: center;" width="10%">No</th>
+                                    <th style="text-align: center;" width="20%">Tanggal</th>
+                                    <th width="40%">Nama User</th>
+                                    <th width="40%">Nama Penyakit</th>
+                                    <th style="text-align: center;" width="10%">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            @if ($users->count() > 0)
-                                @foreach($users as $user)
-                                <tr>
-                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
-                                    <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td style="text-align: center;">
-                                        <a href="{{ route('pulihkan-dokter', [$user->id]) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
-                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
-                                    </td>
-                                    @endforeach
-                            @else
-                                    <tr>
-                                        <td colspan="4" class="text-center">Tidak Ada Data</td>
-                                    </tr>
-                            @endif
-                            </tbody>
                         </table>   
                     </div>
                 </div>
             </div>
         </div>
-    </section>
+</section>
 @endsection
 
 @section('footer')
 <script type="text/javascript">
-    //DELETE ALL
+    $(document).ready(function(){
+        $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('sampah-laporan') }}",
+                type: "GET",
+                dataType: "JSON"
+            },
+            columns: [
+                {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+                },
+                {
+                data: 'created_at',
+                name: 'created_at'
+                },
+                {
+                data: 'User',
+                name: 'User.nama'
+                },
+                {
+                data: 'Penyakit',
+                name: 'Penyakit.nama'
+                },
+                {
+                data: 'Aksi',
+                name: 'Aksi'
+                }
+            ],
+            'columnDefs': [{
+                "targets": [0,1], // your case first column
+                "className": "text-center",
+                "width": "5%"
+            }],
+        })
+    })
+
     $(document).on('click', '.hapus', function(e) {
-        e.preventDefault();
+        e.preventDefault()
         swal({
             title: "Yakin?",
-            text: `Data semua dokter dihapus permanen?`,
+            text: `Data semua laporan konsultasi akan dihapus permanen?`,
             icon: "warning",
             buttons: true,
             dangerMode: true,
         })
         .then((result) => {
-            if(result) {
+            if(result){
                 $.ajax({
                     headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: "{{ route('hapus-dokter') }}",
+                    url: '{{ route("hapus-laporan") }}',
                     type:"POST",
                     data: {
                         '_method': 'DELETE',
@@ -103,52 +124,53 @@
                     success: function(response) {
                         swal({
                             title: "Sukses!",
-                            text: `Data semua dokter berhasil dihapus permanen!`,
+                            text: `Data semua laporan konsultasi berhasil dihapus permanen!`,
                             icon: "success",
                             timer: 2000,
                             buttons: false,
                         })
-                        location.reload();
+
+                        $('#datatable').DataTable().ajax.reload();
                     }
                 })
             }
         })
     })
 
-    //DELETE BY ID
-    $(document).on('click', '.deleteSampah', function(e) {
-        e.preventDefault();
-        const hapusId = $(this).attr('deleteId');
-        const hapusNama = $(this).attr('deleteName');
+    $(document).on('click', '.konsultasiDelete', function(e) {
+        e.preventDefault()
+        const idKonsultasi = $(this).attr('delete-konsultasi');
+        const userKonsultasi = $(this).attr('user-konsultasi');
         
         swal({
             title: "Yakin?",
-            text: `Data dokter ${hapusNama} akan dihapus permanen?`,
+            text: `Data laporan konsultasi ${userKonsultasi} akan dihapus permanen?`,
             icon: "warning",
             buttons: true,
             dangerMode: true,
         })
         .then((result) => {
-            if(result) {
+            if(result){
                 $.ajax({
                     headers: {
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     },
-                    url: '{{ route("hapus-dokter") }}/'+hapusId,
+                    url: '{{ route("hapus-laporan") }}/'+idKonsultasi,
                     type:"POST",
                     data: {
                         '_method': 'DELETE',
-                        'id': hapusId,
+                        'id': idKonsultasi,
                     },
                     success: function(response) {
                         swal({
                             title: "Sukses!",
-                            text: `Data dokter ${hapusNama} berhasil dihapus permanen!`,
+                            text: `Data laporan konsultasi ${userKonsultasi} berhasil dihapus permanen!`,
                             icon: "success",
                             timer: 2000,
                             buttons: false,
                         })
-                        location.reload();
+
+                        $('#datatable').DataTable().ajax.reload();
                     }
                 })
             }

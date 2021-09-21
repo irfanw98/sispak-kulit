@@ -171,7 +171,8 @@ class DokterController extends Controller
     {
         if($id != null) {
             $users = User::where('id', $id)
-                                ->onlyTrashed()->first();
+                        ->onlyTrashed()
+                        ->first();
             $users->removeRole('dokter');
             $users->forceDelete();
         } else {
