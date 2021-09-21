@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddIdToTbAturanTable extends Migration
+class AddDeleteAtToTbKonsultasiTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class AddIdToTbAturanTable extends Migration
      */
     public function up()
     {
-        Schema::table('tb_aturan', function (Blueprint $table) {
-            $table->dropSoftDeletes();
+        Schema::table('tb_konsultasi', function (Blueprint $table) {
+            $table->softDeletes();
         });
     }
 
@@ -25,8 +25,8 @@ class AddIdToTbAturanTable extends Migration
      */
     public function down()
     {
-        Schema::table('tb_aturan', function (Blueprint $table) {
-            //
+        Schema::table('tb_konsultasi', function (Blueprint $table) {
+            $table->dropSoftDeletes();
         });
     }
 }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use App\Models\{
     User,
     Aturan
@@ -11,7 +12,7 @@ use App\Models\{
 
 class Konsultasi extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
     protected $table = 'tb_konsultasi';
     protected $primaryKey = 'id';

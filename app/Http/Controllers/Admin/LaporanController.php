@@ -23,7 +23,7 @@ class LaporanController extends Controller
                 })
                 -> addColumn('Aksi', function($data) {
                     return '
-                        <a href="" class="btn btn-danger diagnosaDelete" role="button" delete-user="' . $data->id . '" nama-user="'. $data->user->nama .'"><i class="fas fa-trash"></i> HAPUS</a>
+                        <a href="" class="btn btn-danger diagnosaDelete" role="button" delete-konsultasi="' . $data->id . '" user-konsultasi="'. $data->user->nama .'"><i class="fas fa-trash"></i> HAPUS</a>
                     ';
                 })
                 ->rawColumns(['Aksi', 'User', 'Penyakit'])
@@ -35,15 +35,12 @@ class LaporanController extends Controller
 
         return view('admin.laporan.index');
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy($id)
     {
-        //
+        $laporan = Konsultasi::findOrFail($id);
+        $laporan->delete();
+
+        return redirect('laporan-konsultasi');
     }
 }

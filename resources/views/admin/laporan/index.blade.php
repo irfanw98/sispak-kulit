@@ -43,7 +43,7 @@
                             <thead>
                                 <tr>
                                     <th style="text-align: center;" width="10%">No</th>
-                                    <th style="text-align: center;" width="20%">Tanngal</th>
+                                    <th style="text-align: center;" width="20%">Tanggal</th>
                                     <th width="40%">Nama User</th>
                                     <th width="40%">Nama Penyakit</th>
                                     <th style="text-align: center;" width="10%">Aksi</th>
@@ -96,6 +96,47 @@
                 "className": "text-center",
                 "width": "5%"
             }],
+        })
+
+        $(document).on('click', '.diagnosaDelete', function(e) {
+            e.preventDefault();
+            const idKonsultasi = $(this).attr('delete-konsultasi');
+            const userKonsultasi = $(this).attr('user-konsultasi');
+            
+            swal({
+                title: "Yakin?",
+                text: `Data Laporan konsultasi ${userKonsultasi} akan dihapus?`,
+                icon: "warning",
+                buttons: true,
+                dangerMode: true,
+            })
+            .then((result) => {
+                if(result){
+                    $.ajax({
+                        headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        url: `{{ url('/laporan-konsultasi/${idKonsultasi}') }}`,
+                        type:"POST",
+                        data: {
+                            multi: null,
+                            '_method': 'DELETE',
+                            'id': idKonsultasi,
+                        },
+                        success: function(response){
+                            $('#datatable').DataTable().ajax.reload();
+
+                            swal({
+                                title: "Sukses!",
+                                text: `Data laporan konsutasi ${userKonsultasi} berhasil dihapus!`,
+                                icon: "success",
+                                timer: 2000,
+                                buttons: false,
+                            })
+                        }
+                    })
+                }
+            })
         })
     })
 </script>
