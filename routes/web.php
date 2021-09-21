@@ -58,6 +58,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
           Route::get('/pulihkan/{id?}', [LaporanController::class, 'pulihkan'])->name('pulihkan-laporan');
           Route::delete('/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
      });
+     Route::get('/laporan-konsultasi/cetak', [LaporanController::class, 'cetak'])->name('cetak-laporan');
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });
 

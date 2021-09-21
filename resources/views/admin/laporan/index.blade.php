@@ -40,7 +40,8 @@
                     </div>
                     <div class="card-body">
                         <a href="{{ route('sampah-laporan') }}" class="btn btn-warning sampahLaporan mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
-                        <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
+                        <a href="{{ route('cetak-laporan') }}" target="_blank" class="btn btn-info mb-3 p-2"><i class="fas fa-print"></i> CETAK</a>
+                        <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th style="text-align: center;" width="10%">No</th>

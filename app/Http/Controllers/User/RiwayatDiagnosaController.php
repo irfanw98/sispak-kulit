@@ -49,7 +49,7 @@ class RiwayatDiagnosaController extends Controller
 
     public function exportPdf()
     {
-        $diagnosas = Konsultasi::with(['user','penyakit'])->get();
+        $diagnosas = Konsultasi::with(['user','penyakit'])->latest()->get();
         $pdf = PDF::loadView('user.diagnosa.riwayatpdf', compact('diagnosas'));
         return $pdf->download('riwayat.pdf');
     }

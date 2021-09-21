@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\User\KonsultasiController;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
 use Yajra\DataTables\DataTables;
@@ -91,11 +92,18 @@ class LaporanController extends Controller
     public function pulihkan($id = null)
     {
         if($id != null){
-            $laporan = Konsultasi::where('id', $id)
-                                ->onlyTrashed()
-                                ->restore();
+            Konsultasi::where('id', $id)
+                        ->onlyTrashed()
+                        ->restore();
         } else{
             Konsultasi::onlyTrashed()->restore();
         }
+    }
+
+    public function cetak()
+    {
+        $laporans = Konsultasi::with(['user', 'penyakit'])->latest()->get();
+
+        return view('admin.laporan.cetak', compact('laporans'));
     }
 }
