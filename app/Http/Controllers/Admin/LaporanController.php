@@ -58,6 +58,8 @@ class LaporanController extends Controller
             })
             -> addColumn('Aksi', function($data) {
                 return '
+                    <a href="" class="btn btn-success konsultasiPulihkan" role="buttton" pulihkan-id="'. $data->id .'" user-konsultasi="'. $data->user->nama .'"><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+
                     <a href="" class="btn btn-danger konsultasiDelete" role="button" delete-konsultasi="' . $data->id . '" user-konsultasi="'. $data->user->nama .'"><i class="fas fa-trash"></i> HAPUS</a>
                 ';
             })
@@ -74,8 +76,8 @@ class LaporanController extends Controller
     {
         if($id != null) {
             $laporan = Konsultasi::where('id', $id)
-                        ->onlyTrashed()
-                        ->first();
+                                ->onlyTrashed()
+                                ->first();
             $laporan->forceDelete();
         } else {
             $laporans = Konsultasi::onlyTrashed()->get();
@@ -83,6 +85,17 @@ class LaporanController extends Controller
             foreach ($laporans as $laporan) {
                 $laporan->forceDelete();
             }
+        }
+    }
+
+    public function pulihkan($id = null)
+    {
+        if($id != null){
+            $laporan = Konsultasi::where('id', $id)
+                                ->onlyTrashed()
+                                ->restore();
+        } else{
+            Konsultasi::onlyTrashed()->restore();
         }
     }
 }

@@ -41,6 +41,7 @@
                     </div>
                     <div class="card-body">
                         <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
+                        <a href="" class="btn btn-success mb-3 p-2 pulihkan" style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -101,6 +102,61 @@
         })
     })
 
+    $(document).on('click', '.pulihkan', function(e) {
+        e.preventDefault()
+        
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '{{ route("pulihkan-laporan") }}',
+            type:"POST",
+            data: {
+                '_method': 'GET',
+            },
+            success: function(response) {
+                swal({
+                    title: "Sukses!",
+                    text: `Data semua laporan konsultasi berhasil dipulihkan!`,
+                    icon: "success",
+                    timer: 2000,
+                    buttons: false,
+                })
+
+                $('#datatable').DataTable().ajax.reload()
+            }
+        })
+    })
+
+    $(document).on('click', '.konsultasiPulihkan', function(e) {
+        e.preventDefault()
+        const idPulihkan = $(this).attr('pulihkan-id')
+        const userKonsultasi = $(this).attr('user-konsultasi')
+        
+        $.ajax({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            },
+            url: '{{ route("pulihkan-laporan") }}/' +idPulihkan,
+            type:"POST",
+            data: {
+                '_method': 'GET',
+                'id': idPulihkan
+            },
+            success: function(response) {
+                swal({
+                    title: "Sukses!",
+                    text: `Data laporan konsultasi ${userKonsultasi} berhasil dipulihkan!`,
+                    icon: "success",
+                    timer: 2000,
+                    buttons: false,
+                })
+
+                $('#datatable').DataTable().ajax.reload()
+            }
+        })
+    })
+
     $(document).on('click', '.hapus', function(e) {
         e.preventDefault()
         swal({
@@ -130,7 +186,7 @@
                             buttons: false,
                         })
 
-                        $('#datatable').DataTable().ajax.reload();
+                        $('#datatable').DataTable().ajax.reload()
                     }
                 })
             }
@@ -170,7 +226,7 @@
                             buttons: false,
                         })
 
-                        $('#datatable').DataTable().ajax.reload();
+                        $('#datatable').DataTable().ajax.reload()
                     }
                 })
             }

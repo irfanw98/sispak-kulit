@@ -55,6 +55,7 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
      Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
      Route::group(['prefix' => '/laporan-konsultasi/sampah'], function() {
           Route::get('/', [LaporanController::class, 'sampah'])->name('sampah-laporan');
+          Route::get('/pulihkan/{id?}', [LaporanController::class, 'pulihkan'])->name('pulihkan-laporan');
           Route::delete('/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
      });
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
