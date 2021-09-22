@@ -14,6 +14,12 @@
             height: 4px;
             border-radius: 20px;
         }
+        .dropdown-menu {
+            border: 1px solid #5bc0de;
+        }
+        .dropdown-menu .datepicker-days {
+            padding: 5px;
+        }
     </style>
 @endsection
 
@@ -39,8 +45,32 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
-                        <a href="{{ route('sampah-laporan') }}" class="btn btn-warning sampahLaporan mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
-                        <a href="{{ route('cetak-laporan') }}" target="_blank" class="btn btn-info mb-3 p-2"><i class="fas fa-print"></i> CETAK</a>
+                    <div class="row">
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="tglawal">Dari Tanggal :</label>
+                                <input type="text" name="tglawal" id="tglawal" class="form-control datepicker">
+                            </div>
+                        </div>
+                        <div class="col-md-5">
+                            <div class="form-group">
+                                <label for="tglakhir">Sampai Tanggal :</label>
+                                <input type="text" name="tglakhir" id="tglakhir" class="form-control datepicker">
+                            </div>
+                        </div>
+                        <div class="col-md-2">
+                            <div class="form-group">
+                                <a href="" onclick="this.href='{{ url('/laporan-konsultasi/cetak') }}'+ '/' +document.getElementById('tglawal').value + '/' + document.getElementById('tglakhir').value" target="_blank" style="margin-top: 28px;" class="btn btn-outline-info p-2"><i class="fas fa-print"></i> CETAK</a>
+                            </div>
+                        </div>
+                    </div><hr>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <a href="{{ route('sampah-laporan') }}" class="btn btn-warning sampahLaporan mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
+                            <a href="" target="_blank" class="btn btn-outline-success mb-3 p-2 float-lg-right"><i class="fas fa-file-excel"></i> EXCEL</a>
+                            <a href="" target="_blank" class="btn btn-outline-danger mb-3 mr-2 p-2 float-lg-right"><i class="fas fa-file-pdf"></i> PDF</a>
+                        </div>
+                    </div>
                         <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
@@ -99,6 +129,12 @@
                 "width": "5%"
             }],
         })
+
+        $(".datepicker").datepicker({
+            format: 'dd-mm-yyyy',
+            autoclose: true,
+            todayHighlight: true,
+        });
 
         $(document).on('click', '.diagnosaDelete', function(e) {
             e.preventDefault();

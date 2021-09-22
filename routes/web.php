@@ -53,12 +53,13 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
           Route::delete('/hapus/{id?}', [UserController::class,'hapus'])->name('hapus-user');
      });
      Route::resource('/akun-user', UserController::class)->only(['index', 'destroy']);
-     Route::group(['prefix' => '/laporan-konsultasi/sampah'], function() {
-          Route::get('/', [LaporanController::class, 'sampah'])->name('sampah-laporan');
-          Route::get('/pulihkan/{id?}', [LaporanController::class, 'pulihkan'])->name('pulihkan-laporan');
-          Route::delete('/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
+     Route::group(['prefix' => '/laporan-konsultasi'], function() {
+          Route::get('/sampah', [LaporanController::class, 'sampah'])->name('sampah-laporan');
+          Route::get('/sampah/pulihkan/{id?}', [LaporanController::class, 'pulihkan'])->name('pulihkan-laporan');
+          Route::delete('/sampah/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
+          Route::get('/cetak', [LaporanController::class, 'cetak']);
+          Route::get('/cetak/{tglawal}/{tglakhir}', [LaporanController::class, 'cetakTanggal']);
      });
-     Route::get('/laporan-konsultasi/cetak', [LaporanController::class, 'cetak'])->name('cetak-laporan');
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });
 

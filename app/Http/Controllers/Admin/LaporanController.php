@@ -34,7 +34,7 @@ class LaporanController extends Controller
         }
 
 
-        return view('admin.laporan.index');
+        return view('admin.laporan.index', compact('laporan'));
     }
     
     public function destroy($id)
@@ -105,5 +105,10 @@ class LaporanController extends Controller
         $laporans = Konsultasi::with(['user', 'penyakit'])->latest()->get();
 
         return view('admin.laporan.cetak', compact('laporans'));
+    }
+
+    public function cetakTanggal($tglawal, $tglakhir)
+    {
+        dd($tglawal, $tglakhir);
     }
 }

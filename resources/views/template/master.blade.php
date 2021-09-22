@@ -20,6 +20,7 @@
   <link rel="stylesheet" href="https://cdn.datatables.net/fixedheader/3.1.8/css/fixedHeader.bootstrap.min.css">
   <!-- Css -->
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('datepicker/css/datepicker.css') }}">
   <!-- Font Awesome -->
   <link rel="stylesheet" href="{{ asset('admin/assets/plugins/fontawesome-free/css/all.min.css') }}">
   <!-- Ionicons -->
@@ -112,6 +113,7 @@
 <script src="{{ asset('admin/assets/dist/js/demo.js') }}"></script>
 <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<script src="{{ asset('datepicker/js/bootstrap-datepicker.js') }}"></script>
 @yield('footer')
 </body>
 </html>
