@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Http\Controllers\User\KonsultasiController;
+use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
+use Mockery\Undefined;
 use Yajra\DataTables\DataTables;
+
+use function PHPUnit\Framework\isEmpty;
 
 class LaporanController extends Controller
 {
@@ -109,6 +112,24 @@ class LaporanController extends Controller
 
     public function cetakTanggal($tglawal, $tglakhir)
     {
-        dd($tglawal, $tglakhir);
+        $tanggal_awal = Carbon::parse($tglawal)
+                                ->startOfDay()
+                                ->toDateTimeString();
+        $tanggal_akhir = Carbon::parse($tglakhir)
+                                ->endOfDay()
+                                ->toDateTimeString();
+        
+        if($tanggal_awal <= $tanggal_akhir){
+            
+            $laporans = Konsultasi::with(['user', 'penyakit'])
+                                    ->whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
+                                    ->get();
+
+            return view('admin.laporan.cetak-pertanggal', compact('laporans'));
+
+        } else {
+            return "gagal!";
+        }
+
     }
 }

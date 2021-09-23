@@ -17,9 +17,6 @@ class Konsultasi extends Model
     protected $table = 'tb_konsultasi';
     protected $primaryKey = 'id';
     protected $fillable = ['user_id', 'aturan_id'];
-    protected $dates = [
-        'created_at',
-    ];
 
 
     public function user() {
@@ -40,9 +37,5 @@ class Konsultasi extends Model
     {
         return \Carbon\Carbon::parse($this->attributes['updated_at'])
         ->diffForHumans();
-    }
-
-    public function setDateAttribute( $value ) {
-        $this->attributes['date'] = (new \Carbon\Carbon($value))->format('d-m-Y');
     }
 }

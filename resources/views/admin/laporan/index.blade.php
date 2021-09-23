@@ -5,28 +5,22 @@
 @section('header')
     <style>
         .grad {
-            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
+            background-color: #117a8b;
             height: 4px;
             border-radius: 20px;
         }
         .gradModal {
-            background-image: linear-gradient(to bottom, #4e54c8, #8f94fb);
+            background-color: #117a8b;
             height: 4px;
             border-radius: 20px;
-        }
-        .dropdown-menu {
-            border: 1px solid #5bc0de;
-        }
-        .dropdown-menu .datepicker-days {
-            padding: 5px;
         }
     </style>
 @endsection
 
 @section('content')
  <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
+      <div class="container">
+        <div class="row mb-3">
           <div class="col-sm-6">
           </div>
           <div class="col-sm-6">
@@ -35,6 +29,14 @@
               <li class="breadcrumb-item active">Laporan Konsultasi</li>
             </ol>
           </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="callout callout-info">
+                    <h5><i class="fas fa-info"></i> Note:</h5>
+                    Jika ingin mencetak semua laporan konsultasi, tidak perlu input tanggal. Langsung klik tombol "cetak".
+                </div>
+            </div>
         </div>
       </div><!-- /.container-fluid -->
  </section>
@@ -49,13 +51,13 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="tglawal">Dari Tanggal :</label>
-                                <input type="text" name="tglawal" id="tglawal" class="form-control datepicker">
+                                <input type="date" name="tglawal" id="tglawal" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="tglakhir">Sampai Tanggal :</label>
-                                <input type="text" name="tglakhir" id="tglakhir" class="form-control datepicker">
+                                <input type="date" name="tglakhir" id="tglakhir" class="form-control">
                             </div>
                         </div>
                         <div class="col-md-2">
@@ -130,53 +132,48 @@
             }],
         })
 
-        $(".datepicker").datepicker({
-            format: 'dd-mm-yyyy',
-            autoclose: true,
-            todayHighlight: true,
-        });
 
-        $(document).on('click', '.diagnosaDelete', function(e) {
-            e.preventDefault();
-            const idKonsultasi = $(this).attr('delete-konsultasi');
-            const userKonsultasi = $(this).attr('user-konsultasi');
-            
-            swal({
-                title: "Yakin?",
-                text: `Data Laporan konsultasi ${userKonsultasi} akan dihapus?`,
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-            })
-            .then((result) => {
-                if(result){
-                    $.ajax({
-                        headers: {
-                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                        },
-                        url: `{{ url('/laporan-konsultasi/${idKonsultasi}') }}`,
-                        type:"POST",
-                        data: {
-                            multi: null,
-                            '_method': 'DELETE',
-                            'id': idKonsultasi,
-                        },
-                        success: function(response){
-                            swal({
-                                title: "Sukses!",
-                                text: `Data laporan konsutasi ${userKonsultasi} berhasil dihapus!`,
-                                icon: "success",
-                                timer: 2000,
-                                buttons: false,
-                            })
+    })
 
-                            $('#datatable').DataTable().ajax.reload();
-                        }
-                    })
-                }
-            })
+    $(document).on('click', '.diagnosaDelete', function(e) {
+        e.preventDefault();
+        const idKonsultasi = $(this).attr('delete-konsultasi');
+        const userKonsultasi = $(this).attr('user-konsultasi');
+        
+        swal({
+            title: "Yakin?",
+            text: `Data Laporan konsultasi ${userKonsultasi} akan dihapus?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
         })
+        .then((result) => {
+            if(result){
+                $.ajax({
+                    headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: `{{ url('/laporan-konsultasi/${idKonsultasi}') }}`,
+                    type:"POST",
+                    data: {
+                        multi: null,
+                        '_method': 'DELETE',
+                        'id': idKonsultasi,
+                    },
+                    success: function(response){
+                        swal({
+                            title: "Sukses!",
+                            text: `Data laporan konsutasi ${userKonsultasi} berhasil dihapus!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
 
+                        $('#datatable').DataTable().ajax.reload();
+                    }
+                })
+            }
+        })
     })
 </script>
 @endsection
