@@ -1,5 +1,4 @@
     <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.0.5
+      <b><a href="http://adminlte.io">AdminLTE.io</a></b>
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong> All rights
-    reserved.
+    <strong>Created @2021.</strong> Irfan Wahyudi.

@@ -123,6 +123,7 @@ class LaporanController extends Controller
             
             $laporans = Konsultasi::with(['user', 'penyakit'])
                                     ->whereBetween('created_at', [$tanggal_awal, $tanggal_akhir])
+                                    ->latest()
                                     ->get();
 
             return view('admin.laporan.cetak-pertanggal', compact('laporans'));

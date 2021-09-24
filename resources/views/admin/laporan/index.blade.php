@@ -51,13 +51,13 @@
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="tglawal">Dari Tanggal :</label>
-                                <input type="date" name="tglawal" id="tglawal" class="form-control">
+                                <input type="date" name="tglawal" id="tglawal" class="form-control" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-5">
                             <div class="form-group">
                                 <label for="tglakhir">Sampai Tanggal :</label>
-                                <input type="date" name="tglakhir" id="tglakhir" class="form-control">
+                                <input type="date" name="tglakhir" id="tglakhir" class="form-control" autocomplete="off">
                             </div>
                         </div>
                         <div class="col-md-2">
