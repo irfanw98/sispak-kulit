@@ -2,6 +2,7 @@
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+          <li class="nav-header" style="font-weight: bold;">MENU</li>
           @if(auth()->user()->hasRole('admin'))
            <li class="nav-item">
             <a href="{{ route('dashboard-admin') }}" class="nav-link {{ Request::url() == url('/dashboard-admin') ? 'active' : ' ' }}">
@@ -37,12 +38,6 @@
             <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
               <i class="nav-icon fas fa-unlock-alt"></i>
               <p>Ubah Password</p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="{{ route('keluar') }}" class="nav-link">
-              <i class="nav-icon fas fa-sign-out-alt"></i>
-              <p> Keluar</p>
             </a>
           </li>
           @endif

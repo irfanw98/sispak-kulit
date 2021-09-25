@@ -12,7 +12,7 @@
           <div class="col-sm-6">
           </div>
         </div>
-      </div><!-- /.container-fluid -->
+      </div>
     </section>
     <section class="content">
         <div class="row">
@@ -33,7 +33,7 @@
             <!-- /.col -->
             <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-success"><i class="far fa-flag"></i></span>
+                <span class="info-box-icon bg-success"><i class="far fas fa-user-md"></i></span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Dokter</span>
@@ -46,7 +46,7 @@
             <!-- /.col -->
             <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-info"><i class="far fa-copy"></i></span>
+                <span class="info-box-icon bg-info"><i class="far fas fa-users"></i></span>
 
                  <div class="info-box-content">
                     <span class="info-box-text">User</span>
@@ -57,8 +57,34 @@
                 <!-- /.info-box -->
             </div>
         </div>
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header border-bottom-0">
+                        <h3 class="card-title">User Konsultasi</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Jumlah Semua Konsultasi User Perbulan -->
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header border-bottom-0">
+                        <h3 class="card-title">User Konsultasi</h3>
+                    </div>
+                    <div class="card-body">
+                        <!-- Jumlah Semua Konsultasi User -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 @endsection
 
 @section('footer')
+<script type="script/javascript"
+></script>
+
 @endsection
