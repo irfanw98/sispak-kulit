@@ -3,11 +3,11 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
-use Yajra\DataTables\DataTables;
 use PDF;
-use Illuminate\Support\Facades\Auth;
 
 class RiwayatDiagnosaController extends Controller
 {

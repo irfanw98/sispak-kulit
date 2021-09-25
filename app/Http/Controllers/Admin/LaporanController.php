@@ -3,13 +3,13 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\KonsultasiExport;
+use Yajra\DataTables\DataTables;
 use Illuminate\Support\Carbon;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
-use Mockery\Undefined;
-use Yajra\DataTables\DataTables;
-
-use function PHPUnit\Framework\isEmpty;
+use PDF;
 
 class LaporanController extends Controller
 {
@@ -35,7 +35,6 @@ class LaporanController extends Controller
                 ->removeColumn('id')
                 ->make(true);
         }
-
 
         return view('admin.laporan.index', compact('laporan'));
     }
@@ -131,6 +130,19 @@ class LaporanController extends Controller
         } else {
             return "gagal!";
         }
+    }
 
+    public function exportPdf()
+    {
+        $laporans = Konsultasi::with(['user', 'penyakit'])
+                                ->latest()
+                                ->get();
+        $pdf =  PDF::loadView('admin.laporan.export-pdf', compact('laporans')); 
+        return $pdf->download('laporan-konsultasi.pdf');   
+    }
+
+    public function exportExcel()
+    {
+         return Excel::download(new KonsultasiExport, 'laporan-konsultasi.xlsx');
     }
 }

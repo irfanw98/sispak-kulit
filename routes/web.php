@@ -59,6 +59,8 @@ Route::group(['middleware' => ['auth', 'role:admin']], function() {
           Route::delete('/sampah/hapus/{id?}', [LaporanController::class, 'hapus'])->name('hapus-laporan');
           Route::get('/cetak', [LaporanController::class, 'cetak']);
           Route::get('/cetak/{tglawal}/{tglakhir}', [LaporanController::class, 'cetakTanggal']);
+          Route::get('/export-pdf', [LaporanController::class, 'exportPdf'])->name('laporan-pdf');
+          Route::get('/export-excel', [LaporanController::class, 'exportExcel'])->name('laporan-excel');
      });
      Route::resource('/laporan-konsultasi', LaporanController::class)->only(['index', 'destroy']);
 });

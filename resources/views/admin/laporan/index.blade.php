@@ -69,8 +69,8 @@
                     <div class="row">
                         <div class="col-lg-12">
                             <a href="{{ route('sampah-laporan') }}" class="btn btn-warning sampahLaporan mb-3 p-2 " style="color: white;"><i class="fa fa-trash-restore"></i> SAMPAH</a>
-                            <a href="" target="_blank" class="btn btn-outline-success mb-3 p-2 float-lg-right"><i class="fas fa-file-excel"></i> EXCEL</a>
-                            <a href="" target="_blank" class="btn btn-outline-danger mb-3 mr-2 p-2 float-lg-right"><i class="fas fa-file-pdf"></i> PDF</a>
+                            <a href="{{ route('laporan-excel') }}" class="btn btn-outline-success mb-3 p-2 float-lg-right"><i class="fas fa-file-excel"></i> EXCEL</a>
+                            <a href="{{ route('laporan-pdf') }}" class="btn btn-outline-danger mb-3 mr-2 p-2 float-lg-right"><i class="fas fa-file-pdf"></i> PDF</a>
                         </div>
                     </div>
                         <table id="datatable" class="table table-bordered  table-striped nowrap" cellspacing="0" style="width: 100%">
