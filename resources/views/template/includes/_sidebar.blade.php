@@ -36,7 +36,7 @@
           </li>
           <li class="nav-item">
             <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
-              <i class="nav-icon fas fa-unlock-alt"></i>
+              <i class="nav-icon fas fa-cog"></i>
               <p>Ubah Password</p>
             </a>
           </li>
@@ -68,7 +68,7 @@
             </li>
             <li class="nav-item">
               <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
-                <i class="nav-icon fas fa-unlock-alt"></i>
+                <i class="nav-icon fas fa-cog"></i>
                 <p>Ubah Password</p>
               </a>
             </li>
@@ -100,7 +100,7 @@
             </li>
             <li class="nav-item">
               <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
-                <i class="nav-icon fas fa-unlock-alt"></i>
+                <i class="nav-icon fas fa-cog"></i>
                 <p>Ubah Password</p>
               </a>
             </li>

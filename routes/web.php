@@ -80,4 +80,3 @@ Route::group(['middleware' => ['auth', 'role:user']], function() {
      Route::get('/riwayat-diagnosa/pdf', [RiwayatDiagnosaController::class,'exportPdf'])->name('export-pdf');
      Route::resource('/riwayat-diagnosa', RiwayatDiagnosaController::class)->only(['index', 'show']);
 });
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

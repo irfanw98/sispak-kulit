@@ -61,21 +61,19 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header border-bottom-0">
-                        <h3 class="card-title">User Konsultasi</h3>
-                    </div>
                     <div class="card-body">
                         <!-- Jumlah Semua Konsultasi User Perbulan -->
+                        <div id="chartCountMouth">
+                        </div>
                     </div>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header border-bottom-0">
-                        <h3 class="card-title">User Konsultasi</h3>
-                    </div>
                     <div class="card-body">
                         <!-- Jumlah Semua Konsultasi User -->
+                        <div id="chartCount">
+                        </div>
                     </div>
                 </div>
             </div>
@@ -84,7 +82,90 @@
 @endsection
 
 @section('footer')
-<script type="script/javascript"
-></script>
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+    Highcharts.chart('chartCountMouth', {
+        chart: {
+            type: 'line'
+        },
+        title: {
+            text: 'Jumlah Konsultasi Perbulan'
+        },
+        xAxis: {
+            categories:{!! $bulan !!},
+        },
+        yAxis: {
+            title: {
+                text: 'Jumlah User Konsultasi'
+            }
+        },
+        plotOptions: {
+            line: {
+                dataLabels: {
+                    enabled: true
+                },
+                enableMouseTracking: false
+            }
+        },
+        series: [{
+            name: 'Bulan',
+            data: {!! $jumlah_konsultasi !!}
+        }]
+    });
 
+    Highcharts.chart('chartCount', {
+        chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+        },
+        title: {
+            text: 'Browser market shares in January, 2018'
+        },
+        tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+        },
+        accessibility: {
+            point: {
+                valueSuffix: '%'
+            }
+        },
+        plotOptions: {
+            pie: {
+                allowPointSelect: true,
+                cursor: 'pointer',
+                dataLabels: {
+                    enabled: false
+                },
+                showInLegend: true
+            }
+        },
+        series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+                name: 'Chrome',
+                y: 61.41,
+                sliced: true,
+                selected: true
+            }, {
+                name: 'Internet Explorer',
+                y: 11.84
+            }, {
+                name: 'Firefox',
+                y: 10.85
+            }, {
+                name: 'Edge',
+                y: 4.67
+            }, {
+                name: 'Safari',
+                y: 4.18
+            }, {
+                name: 'Other',
+                y: 7.05
+            }]
+        }]
+    });
+</script>
 @endsection
