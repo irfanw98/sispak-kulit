@@ -2,6 +2,15 @@
 
 @section('tittle', 'Dashboard Admin')
 
+@section('header')
+    <style>
+        #chartCount{
+            font-size: 32px;
+        }
+    </style>
+@endsection
+
+
 @section('content')
     <section class="content-header">
       <div class="container-fluid">
@@ -59,7 +68,21 @@
         </div>
 
         <div class="row">
-            <div class="col-md-6">
+            <div class="col-lg-12">
+                <div class="card callout callout-info">
+                    <div class="card-body">
+                        <!-- Jumlah Semua Konsultasi User -->
+                        <div id="chartCount" class="text-center">
+                            <h4>Total Konsultasi</h4>
+                            <p>{{ $jml_konsultasi }}</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-lg-12">
                 <div class="card">
                     <div class="card-body">
                         <!-- Jumlah Semua Konsultasi User Perbulan -->
@@ -68,16 +91,8 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-6">
-                <div class="card">
-                    <div class="card-body">
-                        <!-- Jumlah Semua Konsultasi User -->
-                        <div id="chartCount">
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
+
     </section>
 @endsection
 
@@ -89,14 +104,14 @@
             type: 'line'
         },
         title: {
-            text: 'Jumlah Konsultasi Perbulan'
+            text: 'Konsultasi Perbulan'
         },
         xAxis: {
             categories:{!! $bulan !!},
         },
         yAxis: {
             title: {
-                text: 'Jumlah User Konsultasi'
+                text: 'Jumlah Konsultasi'
             }
         },
         plotOptions: {
@@ -108,63 +123,8 @@
             }
         },
         series: [{
-            name: 'Bulan',
+            name: 'Jumlah Konsultasi',
             data: {!! $jumlah_konsultasi !!}
-        }]
-    });
-
-    Highcharts.chart('chartCount', {
-        chart: {
-            plotBackgroundColor: null,
-            plotBorderWidth: null,
-            plotShadow: false,
-            type: 'pie'
-        },
-        title: {
-            text: 'Browser market shares in January, 2018'
-        },
-        tooltip: {
-            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-        },
-        accessibility: {
-            point: {
-                valueSuffix: '%'
-            }
-        },
-        plotOptions: {
-            pie: {
-                allowPointSelect: true,
-                cursor: 'pointer',
-                dataLabels: {
-                    enabled: false
-                },
-                showInLegend: true
-            }
-        },
-        series: [{
-            name: 'Brands',
-            colorByPoint: true,
-            data: [{
-                name: 'Chrome',
-                y: 61.41,
-                sliced: true,
-                selected: true
-            }, {
-                name: 'Internet Explorer',
-                y: 11.84
-            }, {
-                name: 'Firefox',
-                y: 10.85
-            }, {
-                name: 'Edge',
-                y: 4.67
-            }, {
-                name: 'Safari',
-                y: 4.18
-            }, {
-                name: 'Other',
-                y: 7.05
-            }]
         }]
     });
 </script>

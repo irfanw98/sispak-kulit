@@ -55,7 +55,7 @@
     <?php
       $dokter = \DB::table('tb_dokter')->where('user_id',  \Auth::user()->id)->first();
     ?>
-    <a href="{{ route('dashboard-dokter') }}" class="brand-link">
+    <a href="{{ route('dashboard-dokter') }}" class="brand-link" style="background-color: #2a3f54; color:#fff;">
       @if($dokter->foto == '')
       <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
            alt="AdminLTE Logo"
