@@ -45,8 +45,10 @@
     @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('dashboard-admin') }}" class="brand-link" style="background-color: #2a3f54; color:#fff;">
       <img src="{{ asset('admin/logo-kemkes.png') }}"
-           alt="AdminLTE Logo"
-           class="brand-image"
+          alt="AdminLTE Logo"
+          class="image img-circle"
+          width="50px"
+          height="45px"
            >
       <span class="brand-text font-weight-light">{{ auth()->user()->nama }}</span>
     </a>
@@ -59,12 +61,16 @@
       @if($dokter->foto == '')
       <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
            alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
+           class="image img-circle"
+           width="50px"
+           height="45px"
            style="opacity: .8;">
       @else
       <img src="{{ asset('storage/dokter') }}/{{ $dokter->foto }}"
            alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
+           class="image img-circle"
+           width="50px"
+           height="45px"
            style="opacity: .8">
       @endif
       <span class="brand-text font-weight-light">{{ auth()->user()->nama }}</span>

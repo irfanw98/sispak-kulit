@@ -72,12 +72,6 @@
                 <p>Ubah Password</p>
               </a>
             </li>
-            <li class="nav-item">
-              <a href="{{ route('keluar') }}" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p> Keluar</p>
-              </a>
-            </li>
           @endif
           @if(auth()->user()->hasRole('user'))
             <li class="nav-item">

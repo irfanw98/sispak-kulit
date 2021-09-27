@@ -5,12 +5,12 @@
 @section('header')
     <style>
         .grad {
-            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
+            background-color: #227c9d;
             height: 4px;
             border-radius: 20px;
         }
         .gradModal {
-            background-image: linear-gradient(to bottom, #4e54c8, #8f94fb);
+            background-color: #227c9d;
             height: 4px;
             border-radius: 20px;
         }

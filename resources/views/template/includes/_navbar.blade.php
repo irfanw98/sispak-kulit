@@ -1,4 +1,4 @@
-  <nav class="main-header navbar navbar-expand navbar-dark border-bottom-0" style="background-color: #2a3f54; color: white; font-family: 'Roboto', sans-serif;">
+<nav class="main-header navbar navbar-expand navbar-dark border-bottom-0" style="background-color: #2a3f54; color: white; font-family: 'Roboto', sans-serif;">
     <!-- Left navbar links -->
   <ul class="navbar-nav">
     <li class="nav-item">
@@ -39,6 +39,4 @@
       @endif
     </ul>
   </div>
-
-
-  </nav>
+</nav>
