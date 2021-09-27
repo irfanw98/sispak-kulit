@@ -7,7 +7,6 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\DB;
 use App\Models\Gejala;
-use App\Models\Aturan;
 
 class Penyakit extends Model
 {
@@ -19,11 +18,12 @@ class Penyakit extends Model
     protected $keyType = 'string';
     protected $fillable = [
         'kode_penyakit', 
-        'nama', 'deskripsi', 
+        'nama', 
+        'deskripsi', 
         'solusi'
     ];
 
-     public static function kode()
+    public static function kode()
     {
         $kode = DB::table('tb_penyakit')->max('kode_penyakit');
         $addNol = ' ';

@@ -33,7 +33,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Admin</span>
-                    <span class="info-box-number">{{ $admin }}</span>
+                    <span class="info-box-number">{{ jumlahAdmin() }}</span>
                 </div>
                 <!-- /.info-box-content -->
                 </div>
@@ -46,7 +46,7 @@
 
                 <div class="info-box-content">
                     <span class="info-box-text">Dokter</span>
-                    <span class="info-box-number">{{ $dokter }}</span>
+                    <span class="info-box-number">{{ jumlahDokter() }}</span>
                 </div>
                 <!-- /.info-box-content -->
                 </div>
@@ -59,7 +59,7 @@
 
                  <div class="info-box-content">
                     <span class="info-box-text">User</span>
-                    <span class="info-box-number">{{ $user }}</span>
+                    <span class="info-box-number">{{ jumlahUser() }}</span>
                 </div>
                 <!-- /.info-box-content -->
                 </div>
@@ -74,7 +74,7 @@
                         <!-- Jumlah Semua Konsultasi User -->
                         <div id="chartCount" class="text-center">
                             <h4>Total Konsultasi</h4>
-                            <p>{{ $jml_konsultasi }}</p>
+                            <p>{{ jumlahKonsultasi() }}</p>
                         </div>
                     </div>
                 </div>

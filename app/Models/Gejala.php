@@ -13,12 +13,11 @@ class Gejala extends Model
     use HasFactory, HasRoles;
 
     protected $table = 'tb_gejala';
-    protected $guard = 'dokter';
     protected $primaryKey = 'kode_gejala';
     protected $keyType = 'string';
     protected $fillable = ['kode_gejala', 'nama',];
 
-     public static function kode()
+    public static function kode()
     {
         $kode = DB::table('tb_gejala')->max('kode_gejala');
         $addNol = ' ';
@@ -37,7 +36,7 @@ class Gejala extends Model
     	return $kodeBaru;
     }
 
-     public function getCreatedAtAttribute()
+    public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])
         ->format('d, M Y H:i');

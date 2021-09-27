@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Dokter;
 
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Gejala;
-use Yajra\DataTables\DataTables;
 use App\Http\Requests\Dokter\Gejala\{
     StoreRequest,
     UpdateRequest,

@@ -4,8 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use App\Models\Gejala;
-use App\Models\Penyakit;
+use App\Model\{
+    Gejala,
+    Penyakit
+};
 
 class Aturan extends Model
 {

@@ -51,8 +51,8 @@ class PenyakitController extends Controller
         $penyakit = new Penyakit;
         $penyakit->kode_penyakit = $request->kode;
         $penyakit->nama = $request->nama;
-        $penyakit->deskripsi = strip_tags($request->deskripsi);
-        $penyakit->solusi = strip_tags($request->solusi);
+        $penyakit->deskripsi = $request->deskripsi;
+        $penyakit->solusi = $request->solusi;
         $penyakit->save();
 
         return redirect('penyakit');
