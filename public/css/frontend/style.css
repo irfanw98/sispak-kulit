@@ -1,0 +1,486 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: sans-serif;
+    overflow-x: hidden;
+}
+
+nav {
+    display: flex;
+    background-color: #ffffff;
+    justify-content: space-around;
+    height: 70px;
+    align-items: center;
+    font-family: "Roboto", sans-serif;
+}
+
+nav .logo {
+    font-size: 24px;
+    padding-right: 30%;
+    color: #2a3f54;
+    padding-top: 10px;
+}
+
+nav ul {
+    display: flex;
+    list-style: none;
+    width: 30%;
+    justify-content: space-between;
+    padding-top: 20px;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #2a3f54;
+    font-size: 1em;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: #16a75c !important;
+    border-bottom: 2px solid #16a75c;
+    content: "";
+    display: block;
+    width: 100%;
+    padding-bottom: 5px;
+    margin-bottom: -7px;
+}
+
+/* Hamburger Menu */
+.menu-toggle {
+    display: none;
+    flex-direction: column;
+    height: 20px;
+    justify-content: space-between;
+    position: relative;
+}
+
+.menu-toggle input {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    opacity: 0;
+    top: -4px;
+    cursor: pointer;
+    z-index: 999;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background-color: #000000;
+    border-radius: 3px;
+    transition: all 0.5s;
+}
+
+/* Hamburger Menu Animasi */
+.menu-toggle span:nth-child(2) {
+    background-color: #000000;
+    transform-origin: 0 0;
+}
+
+.menu-toggle span:nth-child(4) {
+    background-color: #000000;
+    transform-origin: 0 100%;
+}
+
+.menu-toggle input:checked ~ span:nth-child(2) {
+    background-color: #000000;
+    transform: rotate(45deg) translate(-1px, -1px);
+}
+
+.menu-toggle input:checked ~ span:nth-child(3) {
+    opacity: 0;
+    transform: scale(0);
+}
+
+.menu-toggle input:checked ~ span:nth-child(4) {
+    background-color: #000000;
+    transform: rotate(-45deg) translate(-1px, 0);
+}
+
+/* ============HERO============================= */
+.hero {
+    height: 600px;
+    background-color: #b7e4c7;
+    font-family: "Poppins", sans-serif;
+}
+
+.hero .intro-hero {
+    margin-top: 120px;
+    margin-left: -20px;
+    color: #2a3f54;
+}
+
+.hero h1 {
+    font-weight: bold;
+}
+
+.hero p {
+    margin-top: -5px;
+}
+
+.hero .btn-hero {
+    background-color: #2a3f54;
+    color: #ffffff;
+    padding: 0.8rem;
+    border-radius: 0.5rem;
+    font-weight: 500;
+}
+
+.hero .btn-hero:hover {
+    background-color: #2a3f54;
+    color: #ffffff;
+}
+
+.hero img {
+    width: 100%;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+
+/* =========Konsultasi=========== */
+.konsultasi:before {
+    width: 100%;
+    height: 37px;
+    border-radius: 50px 50px 0 0;
+    position: absolute;
+    top: -37px;
+    left: 0;
+    content: "";
+    background-color: #fff;
+}
+
+.konsultasi {
+    background-color: #fff;
+    color: #2a3f54;
+    position: relative;
+    z-index: 2;
+    padding: 65px 0 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.konsultasi h2 {
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.konsultasi span {
+    color: #16a75c;
+    font-size: 36px;
+    font-weight: 600;
+}
+
+.konsultasi .img-langkah img {
+    width: 100%;
+    height: 300px;
+}
+
+.konsultasi h4 {
+    margin-top: 30px;
+    font-weight: bold;
+}
+/* ===========ABOUT======== */
+
+.about {
+    color: #2a3f54;
+    background-color: #f8f9fa;
+    padding: 60px 0 20px;
+    font-family: "Poppins", sans-serif;
+}
+
+.about h1 {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.about h1 span {
+    color: #16a75c;
+}
+
+.about blockquote p {
+    color: #2a3f54;
+    text-align: start;
+    font-size: 24px;
+    font-family: "Poppins", sans-serif;
+    margin-top: 10px;
+}
+
+.about blockquote p span {
+    color: #2a3f54;
+    font-style: italic;
+}
+/* ======FOOTER====== */
+.footer {
+    background-color: #2a3f54;
+    color: #ffffff;
+    position: relative;
+    z-index: 2;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+}
+
+.footer .sosmed {
+    padding-left: 340px;
+}
+
+.footer a {
+    text-decoration: none;
+}
+
+.footer a img {
+    margin-right: 15px;
+}
+
+.footer h4 {
+    padding-right: 100px;
+    font-size: 18px;
+}
+
+/* Responsive ukuran tablet */
+@media screen and (max-width: 768px) {
+    nav ul {
+        width: 60%;
+        padding-top: 20px;
+    }
+
+    nav .logo {
+        padding-right: 0;
+    }
+
+    .hero {
+        height: 750px;
+    }
+
+    .hero .intro-hero {
+        margin-top: 30px;
+        color: #2a3f54;
+    }
+
+    .hero h1 {
+        font-weight: bold;
+        text-align: center;
+        margin-left: 30px;
+    }
+
+    .hero p {
+        margin-top: -3px;
+        text-align: center;
+        margin-left: 30px;
+    }
+
+    .hero .btn-hero {
+        margin-left: 200px;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+    }
+    .hero img {
+        width: 100%;
+        margin-top: 40px;
+        margin-left: 0px;
+    }
+
+    .konsultasi {
+        padding: 20px 0 10px;
+    }
+
+    .konsultasi h2 {
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .konsultasi span {
+        color: #16a75c;
+        font-size: 32px;
+        font-weight: 600;
+    }
+
+    .konsultasi .img-langkah img {
+        width: 200px;
+        margin-top: -20px;
+    }
+
+    .konsultasi h4 {
+        margin-top: 0px;
+        font-weight: bold;
+        text-align: start;
+    }
+
+    .konsultasi p {
+        text-align: start;
+    }
+
+    .about h1 {
+        text-align: start;
+    }
+
+    .about blockquote p {
+        font-size: 24;
+        text-align: start;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .footer .sosmed {
+        padding-left: 50px;
+    }
+
+    .footer a img {
+        margin-right: 15px;
+        padding-top: 10px;
+    }
+
+    .footer h4 {
+        text-align: center;
+        padding-right: 40px;
+        font-size: 16px;
+    }
+}
+
+/* Responsive ukuran mobile */
+@media screen and (max-width: 576px) {
+    .menu-toggle {
+        display: flex;
+    }
+
+    .menu-toggle span {
+        z-index: 99;
+    }
+
+    nav.color {
+        background-color: #2a3f54;
+        color: #ffffff;
+    }
+
+    nav .logo.logoSlide {
+        z-index: 99;
+        color: #ffffff;
+    }
+
+    nav ul {
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 100%;
+        flex-direction: column;
+        height: 100vh;
+        align-items: center;
+        justify-content: space-evenly;
+        z-index: 9;
+        transform: translateX(100%);
+        transition: all 1s;
+        opacity: 0;
+    }
+
+    nav ul.slide {
+        opacity: 0.8;
+        transform: translateX(0);
+        background-color: #2a3f54;
+    }
+
+    nav ul li a {
+        color: #ffffff;
+    }
+    nav ul li a:hover {
+        color: #ffffff !important;
+        border-bottom: 2px solid #b7e4c7;
+    }
+
+    /* ==============HERO============== */
+    .hero .intro-hero {
+        margin-top: 10px;
+        margin-left: 0px;
+        text-align: center;
+    }
+    .hero h1 {
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+
+    .hero p {
+        margin-left: 10px;
+    }
+
+    .hero .btn-hero {
+        margin-left: 10px;
+        padding: 0.8rem;
+        border-radius: 0.5rem;
+        font-weight: 500;
+    }
+
+    .hero img {
+        width: 100%;
+        margin-top: 50px;
+        margin-left: 0px;
+    }
+
+    .konsultasi:before {
+        height: 40px;
+    }
+
+    .konsultasi {
+        padding: 20px 0 10px;
+    }
+
+    .konsultasi h2 {
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .konsultasi span {
+        color: #16a75c;
+        font-size: 24px;
+        font-weight: 600;
+    }
+
+    .konsultasi .img-langkah img {
+        width: 100%;
+        height: 300px;
+        margin-top: 10px;
+        margin-bottom: 20px;
+    }
+
+    .konsultasi h4 {
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .konsultasi p {
+        text-align: left;
+    }
+
+    .about h1 {
+        text-align: center;
+        font-size: 24px;
+        margin-top: -20px;
+    }
+
+    .about blockquote p {
+        font-size: 18px;
+        text-align: center;
+        font-family: "Poppins", sans-serif;
+    }
+
+    .footer .sosmed {
+        padding-left: 100px;
+    }
+
+    .footer h4 {
+        text-align: center;
+        padding-right: 0px;
+        font-size: 16px;
+    }
+
+    .footer a img {
+        padding-bottom: 40px;
+        margin-top: -20px;
+    }
+}
