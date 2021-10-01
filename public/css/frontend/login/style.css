@@ -1,0 +1,40 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.login {
+    background-color: #ffffff;
+    height: 667px;
+    font-family: "Poppins", sans-serif;
+}
+.login .container {
+    padding: 60px 0px 20px;
+    color: #2a3f54;
+}
+
+.login a {
+    text-decoration: none;
+    color: #2a3f54;
+}
+
+.login img {
+    width: 100%;
+    margin-top: 50px;
+}
+
+.login p {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 18px;
+}
+
+.login p span a {
+    color: #16a75c;
+}
+
+@media screen and (max-width: 768px) {
+}
+
+@media screen and (max-width: 576px) {
+}
