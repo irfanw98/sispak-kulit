@@ -4,37 +4,157 @@
 }
 
 .login {
-    background-color: #ffffff;
+    background-color: #b7e4c7;
     height: 667px;
     font-family: "Poppins", sans-serif;
 }
-.login .container {
-    padding: 60px 0px 20px;
-    color: #2a3f54;
+
+.login .gambar-login {
+    width: 650px;
 }
 
-.login a {
+.login .arrow {
     text-decoration: none;
     color: #2a3f54;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 40px;
 }
 
 .login img {
     width: 100%;
-    margin-top: 50px;
+    margin-top: 60px;
 }
 
 .login p {
     text-align: center;
     padding-top: 40px;
-    font-size: 18px;
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .login p span a {
+    text-decoration: none;
     color: #16a75c;
 }
 
-@media screen and (max-width: 768px) {
+.login .form-login {
+    width: 620px;
+    background-color: #ffffff;
+    height: 667px;
+    padding: 60px;
+    padding-top: 120px;
 }
 
+.login h1 {
+    font-weight: bold;
+    color: #2a3f54;
+}
+
+.login .password {
+    padding-top: 10px;
+}
+
+.login .remember-forgot {
+    padding-top: 10px;
+}
+
+.login .remember-forgot .lupa-password {
+    text-decoration: none;
+    color: #2a3f54;
+    padding-left: 50%;
+}
+
+.login .remember-forgot .lupa-password:hover {
+    color: #007bff;
+}
+
+.login .button {
+    padding-top: 15px;
+}
+
+.login .button .costum-btn {
+    background-color: #2a3f54;
+    color: #ffffff;
+    width: 110px !important;
+    padding: 10px;
+}
+
+.login .button .costum-btn:hover {
+    background-color: #007bff;
+}
+
+@media screen and (max-width: 768px) {
+    .login {
+        width: 500px;
+        height: 540px;
+    }
+    .login img {
+        width: 100%;
+        margin-top: 30px;
+        padding-left: 60px;
+    }
+
+    .login p {
+        padding-top: 20px;
+        padding-left: 50px;
+    }
+
+    .login .form-login {
+        width: 820px;
+        background-color: #ffffff;
+        height: 400px;
+        padding-top: 20px;
+        padding-right: 100px;
+    }
+
+    .login .remember-forgot .lupa-password {
+        padding-left: 60%;
+    }
+}
+
+/* Responsive ukuran mobile */
 @media screen and (max-width: 576px) {
+    .login {
+        background-color: #b7e4c7;
+        height: 400px;
+    }
+
+    .login .arrow {
+        margin-left: 20px;
+    }
+
+    .login img {
+        width: 100%;
+        margin-top: 30px;
+        padding-right: 40px;
+    }
+
+    .login p {
+        text-align: center;
+        padding-top: 20px;
+        padding-right: 10px;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    .login .form-login {
+        background-color: #ffffff;
+        height: 440px;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .login .remember-forgot {
+        padding-top: 10px;
+    }
+
+    .login .remember-forgot .lupa-password {
+        padding-left: 20%;
+    }
+
+    .login .button {
+        padding-top: 20px;
+    }
 }
