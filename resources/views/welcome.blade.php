@@ -22,10 +22,13 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous" />
     </head>
     <body>
-        <div class="scrollTop" onclick="scrollToTop();"></div>
+        <div class="scrollTop" onclick="scrollToTop()"></div>
         <nav>
             <div class="logo">
-                <h1>Sispaku.</h1>
+                <h1>
+                    <img src="{{ asset('image/logo-kemkes.png') }}" width="50px" alt="logo-kemkes">
+                    Sispaku.
+                </h1>
             </div>
 
             <ul>
@@ -160,5 +163,19 @@
         </section>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <script src="{{ asset('js/frontend/script.js') }}"></script>
+    <script type="text/javascript">
+        const scrolls = document.querySelector(".scrollTop");
+        
+        window.addEventListener("scroll", function () {
+            scrolls.classList.toggle("aktif", window.scrollY > 500);
+        });
+
+        function scrollToTop() {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        }
+    </script>
     </body>
 </html>

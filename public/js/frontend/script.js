@@ -8,16 +8,3 @@ menuToggle.addEventListener("click", function () {
     navUl.classList.toggle("slide");
     navLogo.classList.toggle("logoSlide");
 });
-
-//Scroll icon
-// window.addEventListener("scroll", function () {
-//     const scroll = document.querySelector(".scrollTop");
-//     scroll.classList.toggle("aktif", window.scrollY > 1300);
-// });
-
-// function scrollToTop() {
-//     window.scrollTo({
-//         top: 0,
-//         behavior: "smooth",
-//     });
-// }

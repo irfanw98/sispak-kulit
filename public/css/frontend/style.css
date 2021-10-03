@@ -1,10 +1,35 @@
 * {
     margin: 0;
     padding: 0;
+    scroll-behavior: smooth;
 }
 
-html {
-    scroll-behavior: smooth;
+.scrollTop {
+    position: fixed;
+    background-image: url("../../image/scrollTop.svg");
+    bottom: 91%;
+    right: 2%;
+    width: 100px;
+    height: 50px;
+    background-size: 50px;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-sizing: border-box;
+    cursor: pointer;
+    z-index: 9999;
+    visibility: hidden;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.scrollTop:hover {
+    background-image: url("../../image/scrollTopHover.svg");
+}
+
+.scrollTop.aktif {
+    bottom: 8%;
+    visibility: visible;
+    opacity: 1;
 }
 
 body {
@@ -28,6 +53,10 @@ nav .logo {
     padding-top: 10px;
 }
 
+nav .logo h1 {
+    font-weight: bold;
+}
+
 nav ul {
     display: flex;
     list-style: none;
@@ -44,8 +73,8 @@ nav ul li a {
 }
 
 nav ul li a:hover {
-    color: #16a75c !important;
-    border-bottom: 2px solid #16a75c;
+    color: #00aaa9 !important;
+    border-bottom: 2px solid #00aaa9;
     content: "";
     display: block;
     width: 100%;
@@ -132,12 +161,12 @@ nav ul li a:hover {
     background-color: #2a3f54;
     color: #ffffff;
     padding: 0.8rem;
-    border-radius: 0.5rem;
+    border-radius: 0.3rem;
     font-weight: 500;
 }
 
 .hero .btn-hero:hover {
-    background-color: #2a3f54;
+    background-color: #00aaa9;
     color: #ffffff;
 }
 
@@ -390,8 +419,8 @@ nav ul li a:hover {
         color: #ffffff;
     }
     nav ul li a:hover {
-        color: #ffffff !important;
-        border-bottom: 2px solid #b7e4c7;
+        color: #00aaa9 !important;
+        border-bottom: 2px solid #00aaa9;
     }
 
     /* ==============HERO============== */
