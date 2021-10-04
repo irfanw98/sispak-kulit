@@ -46,6 +46,11 @@
     padding-top: 120px;
 }
 
+.login .form-login .logo-login {
+    font-size: 24px;
+    color: #2a3f54;
+}
+
 .login h1 {
     font-weight: bold;
     color: #2a3f54;
@@ -127,13 +132,11 @@
     .login img {
         width: 100%;
         margin-top: 30px;
-        padding-right: 40px;
     }
 
     .login p {
         text-align: center;
         padding-top: 20px;
-        padding-right: 10px;
         font-size: 18px;
         font-weight: bold;
     }

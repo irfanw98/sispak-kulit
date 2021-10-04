@@ -130,9 +130,7 @@
                     </div>
                     <div class="col-sm-12 col-md-12 col-lg-12">
                         <blockquote>
-                            <p>
-                                "Sistem Pakar <span>(Expert System)</span> merupakan sistem berbasis komputer yang menggunakan pengetahuan seorang pakar dalam memecahkan masalah dalam bidang tersebut, sehingga dapat digunakan untuk berkonsultasi."
-                            </p>
+                            Sistem Pakar <span>(Expert System)</span> merupakan sistem berbasis komputer yang menggunakan pengetahuan seorang pakar dalam memecahkan masalah dalam bidang tersebut, sehingga dapat digunakan untuk berkonsultasi.
                         </blockquote>
                     </div>
                 </div>
@@ -143,20 +141,20 @@
             <div class="container">
                 <div class="row">
                      <div class="col-sm-6 col-md-6 col-lg-6 mt-4">
-                        <h4>&copy;Copyright @2021 Sistem Pakar | Irfan Wahyudi </h4>
+                        <h4>&copy;2021 Sistem Pakar | Irfan Wahyudi </h4>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 mt-3 sosmed">
                         <a href="mailto:irfanwahyudi2016@gmail.com" target="_blank">
-                            <img src="{{ asset('image/email.svg') }}" alt="email" width="30px">
+                            <img src="{{ asset('image/email.svg') }}" class="email" alt="email" width="30px">
                         </a>
                         <a href="https://wa.me/+6289655591519" target="_blank">
-                            <img src="{{ asset('image/whatsapp.svg') }}" alt="whastsapp" width="40px">
+                            <img src="{{ asset('image/whatsapp.svg') }}" class="whatsapp" alt="whastsapp" width="40px">
                         </a>
                         <a href="https://t.me/irfanw98" target="_blank">
-                            <img src="{{ asset('image/telegram.svg') }}" alt="telegram" width="30px">
+                            <img src="{{ asset('image/telegram.svg') }}" class="telegram" alt="telegram" width="30px">
                         </a>
                         <a href="https://github.com/irfanw98" target="_blank">
-                            <img src="{{ asset('image/github.svg') }}" alt="github" width="30px">
+                            <img src="{{ asset('image/github.svg') }}" class="github" alt="github" width="30px">
                         </a>
                     </div>
                 </div>

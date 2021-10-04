@@ -22,8 +22,8 @@
         <div class="row d-flex">
             <div class="col-sm-6 col-md-6 col-lg-6 mt-3 gambar-login">
                 <a href="{{ url('/') }}" class="arrow"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
-                <img src="{{ asset('image/page-login.svg') }}" alt="ilustrasi-login">
-                <p>Belum memiliki akun ? Yuk,
+                <img src="{{ asset('image/page-login.svg') }}" class="px-3" alt="ilustrasi-login">
+                <p class="px-3">Belum memiliki akun ? Yuk,
                     <span><a href="{{ route('register') }}" type="button" class="register">Daftar</a></span>
                 </p>
             </div>

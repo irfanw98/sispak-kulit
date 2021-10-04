@@ -67,3 +67,52 @@
     text-decoration: none;
     color: #16a75c;
 }
+
+@media screen and (max-width: 768px) {
+    .register {
+        height: 700px;
+    }
+
+    .register .gambar-register {
+        width: 100%;
+        margin-bottom: 20%;
+    }
+
+    .register .gambar-register img {
+        width: 90%;
+    }
+
+    .register .form-register {
+        width: 100%;
+        margin-top: -60px;
+        padding: 40px;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .register {
+        height: 400px;
+    }
+
+    .register .gambar-register .arrow {
+        margin-left: 20px;
+    }
+    .register .gambar-register img {
+        width: 90%;
+        padding-bottom: 20px;
+    }
+
+    .register .form-register {
+        background-color: #ffffff;
+        height: 440px;
+        padding-top: 30px;
+        padding-left: 30px;
+        padding-right: 30px;
+    }
+
+    .register .form-register p {
+        padding-top: 20px;
+        font-size: 18px;
+        padding-bottom: 20px;
+    }
+}

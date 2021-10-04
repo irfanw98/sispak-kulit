@@ -222,7 +222,7 @@ nav ul li a:hover {
 .about {
     color: #2a3f54;
     background-color: #f8f9fa;
-    padding: 60px 0 20px;
+    padding: 40px 0 20px;
     font-family: "Poppins", sans-serif;
 }
 
@@ -235,16 +235,21 @@ nav ul li a:hover {
     color: #16a75c;
 }
 
-.about blockquote p {
-    color: #2a3f54;
+.about blockquote::before {
+    content: "\201c";
+}
+
+.about blockquote {
     text-align: start;
     font-size: 24px;
-    font-family: "Poppins", sans-serif;
     margin-top: 10px;
 }
 
-.about blockquote p span {
-    color: #2a3f54;
+.about blockquote::after {
+    content: "\201d";
+}
+
+.about blockquote span {
     font-style: italic;
 }
 /* ======FOOTER====== */
@@ -254,11 +259,28 @@ nav ul li a:hover {
     position: relative;
     z-index: 2;
     padding: 10px;
+    transition: 1s;
     font-family: "Poppins", sans-serif;
 }
 
 .footer .sosmed {
     padding-left: 340px;
+}
+
+.footer .sosmed .email:hover {
+    transform: scale(1.5);
+}
+
+.footer .sosmed .whatsapp:hover {
+    transform: scale(1.5);
+}
+
+.footer .sosmed .telegram:hover {
+    transform: scale(1.5);
+}
+
+.footer .sosmed .github:hover {
+    transform: scale(1.5);
 }
 
 .footer a {
@@ -376,6 +398,10 @@ nav ul li a:hover {
 
 /* Responsive ukuran mobile */
 @media screen and (max-width: 576px) {
+    .scrollTop.aktif {
+        bottom: 16%;
+    }
+
     .menu-toggle {
         display: flex;
     }
@@ -492,14 +518,29 @@ nav ul li a:hover {
         margin-top: -20px;
     }
 
-    .about blockquote p {
+    .about blockquote {
         font-size: 18px;
         text-align: center;
-        font-family: "Poppins", sans-serif;
     }
 
     .footer .sosmed {
         padding-left: 100px;
+    }
+
+    .footer .sosmed .email:hover {
+        transform: none;
+    }
+
+    .footer .sosmed .whatsapp:hover {
+        transform: none;
+    }
+
+    .footer .sosmed .telegram:hover {
+        transform: none;
+    }
+
+    .footer .sosmed .github:hover {
+        transform: none;
     }
 
     .footer h4 {
