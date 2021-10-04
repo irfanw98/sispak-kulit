@@ -45,9 +45,9 @@
                             <li><a href="{{ route('dashboard-user') }}">Dashboard</a></li>
                         @endif
                     @else
-                        <li><a href="{{ route('login') }}">Login</a></li>
+                        <li><a href="{{ route('login') }}">Masuk</a></li>
                         @if (Route::has('register'))
-                            <li><a href="{{ route('register') }}">Register</a></li>
+                            <li><a href="{{ route('register') }}">Daftar</a></li>
                         @endif
                     @endauth
                 @endif
@@ -91,22 +91,22 @@
                         <div class="img-langkah">
                             <img src="{{ asset('image/register.svg') }}" alt="langkah-resgistrasi">
                         </div>
-                        <h4>Registrasi</h4>
-                        <p>Langkah pertama registrasi agar mempunyai akun untuk berkonsultasi di sistem pakar ini.</p>
+                        <h4>Daftar</h4>
+                        <p>Langkah pertama daftarkan diri anda agar mempunyai akun untuk berkonsultasi di sistem pakar ini.</p>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 px-5 py-4 mt-lg-5">
                         <div class="img-langkah">
                             <img src="{{ asset('image/caraLogin.svg') }}" alt="langkah-login">
                         </div>
-                        <h4>Login</h4>
-                        <p>Langkah Kedua login menggunakan akun yang telah di registrasikan sebelumnya.</p>
+                        <h4>Masuk</h4>
+                        <p>Langkah Kedua Masuk menggunakan akun yang telah di daftarkan sebelumnya.</p>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 px-5 py-4">
                         <div class="img-langkah">
                             <img src="{{ asset('image/konsultasi.svg') }}" alt="langkah-konsultasi">
                         </div>
                         <h4>Konsultasi</h4>
-                        <p>Langkah ketiga pilih menu konsultasi dan masukkan gejala penyakit kulit yang anda rasakan.</p>
+                        <p>Langkah ketiga pilih menu konsultasi dan masukkan gejala penyakit kulit yang anda alami.</p>
                     </div>
                     <div class="col-sm-6 col-md-6 col-lg-6 px-5 py-4 mt-lg-5">
                         <div class="img-langkah">

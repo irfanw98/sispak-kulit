@@ -21,18 +21,18 @@
     <div class="container-fluid login">
         <div class="row d-flex">
             <div class="col-sm-6 col-md-6 col-lg-6 mt-3 gambar-login">
-                <a href="{{ url('/') }}" class="arrow"><i class="fas fa-arrow-circle-left"></i> HOME</a>
+                <a href="{{ url('/') }}" class="arrow"><i class="fas fa-arrow-circle-left"></i> Kembali</a>
                 <img src="{{ asset('image/page-login.svg') }}" alt="ilustrasi-login">
                 <p>Belum memiliki akun ? Yuk,
-                    <span><a href="{{ route('register') }}" type="button" class="register">Register</a></span>
+                    <span><a href="{{ route('register') }}" type="button" class="register">Daftar</a></span>
                 </p>
             </div>
             <div class="col-sm-6 col-md-6 col-lg-6 form-login">
-                <h1>Login</h1><hr>
+                <h1>Masuk</h1><hr>
                 <form action="{{ route('login') }}" method="POST">
                     @csrf
                     <div class="form-group">
-                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat Email') }}</label>
                         <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus placeholder="alamat@gmail.com">
 
                         @error('email')
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="form-group button">
-                        <button type="submit" class="btn costum-btn">{{ __('Login') }} <i class="fas fa-sign-in-alt"></i></button>
+                        <button type="submit" class="btn costum-btn">{{ __('Masuk') }} <i class="fas fa-sign-in-alt"></i></button>
                     </div>
                 </form>
             </div>

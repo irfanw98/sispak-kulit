@@ -1,0 +1,69 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.register {
+    background-color: #b7e4c7;
+    height: 667px;
+    font-family: "Poppins", sans-serif;
+}
+
+.register .gambar-register {
+    width: 650px;
+}
+
+.register .gambar-register .arrow {
+    text-decoration: none;
+    color: #2a3f54;
+    font-size: 18px;
+    font-weight: bold;
+    margin-left: 40px;
+}
+
+.register .gambar-register img {
+    width: 90%;
+    margin-top: 10%;
+    margin-left: 5%;
+}
+
+.register .form-register {
+    width: 620px;
+    background-color: #ffffff;
+    height: 667px;
+    padding: 60px;
+    padding-top: 60px;
+}
+
+.register .form-register h1 {
+    font-weight: bold;
+    color: #2a3f54;
+    margin-bottom: -5px;
+}
+
+.register .form-register .button {
+    padding-top: 15px;
+}
+
+.register .form-register .button .btn-register {
+    background-color: #2a3f54;
+    color: #ffffff;
+    width: 100% !important;
+    padding: 10px;
+}
+
+.register .form-register .button .btn-register:hover {
+    background-color: #00aaa9;
+}
+
+.register .form-register p {
+    text-align: center;
+    padding-top: 40px;
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.register .form-register p span a {
+    text-decoration: none;
+    color: #16a75c;
+}

@@ -66,7 +66,7 @@
 }
 
 .login .remember-forgot .lupa-password:hover {
-    color: #007bff;
+    color: #00aaa9;
 }
 
 .login .button {
@@ -81,7 +81,7 @@
 }
 
 .login .button .costum-btn:hover {
-    background-color: #007bff;
+    background-color: #00aaa9;
 }
 
 @media screen and (max-width: 768px) {
