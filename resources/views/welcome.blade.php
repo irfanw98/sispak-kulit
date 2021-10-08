@@ -32,9 +32,9 @@
             </div>
 
             <ul>
-                <li><a href="">Beranda</a></li>
-                <li><a href="">Langkah</a></li>
-                <li><a href="">Tentang</a></li>
+                <li><a href="{{ url('/') }}">Beranda</a></li>
+                <li><a href="#konsultasi">Langkah</a></li>
+                <li><a href="#tentang">Tentang</a></li>
                 @if (Route::has('login'))
                     @auth
                         @if(auth()->user()->hasRole("admin"))
@@ -76,7 +76,7 @@
             </div>
         </section>
 
-        <section class="konsultasi">
+        <section id="konsultasi" class="konsultasi">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12 text-center">
@@ -119,7 +119,7 @@
             </div>
         </section>
 
-        <section class="about">
+        <section id="tentang" class="about">
             <div class="container">
                 <div class="row">
                     <div class="col-sm-12 col-md-12 col-lg-12">

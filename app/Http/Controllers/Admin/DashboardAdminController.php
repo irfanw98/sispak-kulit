@@ -9,13 +9,12 @@ class DashboardAdminController extends Controller
 {
     public function index() 
     {
-
-        // $konsultasis = Konsultasi::groupBy(\DB::raw('MONTH(created_at)'))->get();
         $konsultasis = Konsultasi::select(
                         \DB::raw('count(id) as count'),
                         \DB::raw('DATE_FORMAT(created_at, "%M") as months')
                         )
                         ->groupBy('months')
+                        ->orderBy('created_at', 'asc')
                         ->get();
 
         $result_bulan = [];

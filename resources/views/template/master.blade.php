@@ -77,11 +77,12 @@
     </a>
     @endif
     @if(auth()->user()->hasRole('user'))
-    <a href="{{ route('dashboard-user') }}" class="brand-link">
-      <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
-           alt="AdminLTE Logo"
-           class="brand-image img-circle elevation-3"
-           style="opacity: .8">
+    <a href="{{ route('dashboard-user') }}" class="brand-link p-2" style="background-color: #2a3f54; color:#fff;">
+      <img src="{{ getUserFoto() }}"
+           alt="User Image"
+           class="img-circle elevation-2 mr-2"
+           width="65px"
+           height="65px">
       <span class="brand-text font-weight-light">{{ auth()->user()->nama }}</span>
     </a>
     @endif

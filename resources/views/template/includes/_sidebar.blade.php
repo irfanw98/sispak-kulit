@@ -81,6 +81,12 @@
               </a>
             </li>
             <li class="nav-item">
+              <a href="{{ route('tentang') }}" class="nav-link  {{ Request::url() == url('/tentang') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-scroll"></i>
+                <p>Tentang</p>
+              </a>
+            </li>
+            <li class="nav-item">
               <a href="{{ url('/konsultasi') }}" class="nav-link {{ Request::url() == url('/konsultasi') ? 'active' : ' ' }}">
                 <i class="nav-icon fas fa-check-circle"></i>
                 <p>Konsultasi</p>
@@ -92,16 +98,17 @@
                 <p>Riwayat Diagnosa</p>
               </a>
             </li>
+            <li class="nav-header" style="font-weight: bold; margin-top: -20px; margin-left: -10px;">SETTING</li>
             <li class="nav-item">
-              <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
-                <i class="nav-icon fas fa-cog"></i>
-                <p>Ubah Password</p>
+              <a href="{{ url('/profile') }}/{{ Auth::user()->id }}/edit" class="nav-link {{ Request::url() == url('/profile') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-address-card"></i>
+                <p>Ubah Profile</p>
               </a>
             </li>
             <li class="nav-item">
-              <a href="{{ route('keluar') }}" class="nav-link">
-                <i class="nav-icon fas fa-sign-out-alt"></i>
-                <p> Keluar</p>
+              <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-cog"></i>
+                <p>Ganti Password</p>
               </a>
             </li>
           @endif

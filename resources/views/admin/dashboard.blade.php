@@ -27,9 +27,9 @@
         <div class="row">
             <div class="col-md-4 col-sm-6 col-12">
                 <div class="info-box">
-                <span class="info-box-icon bg-primary">
-                    <i class="nav-icon fas fa-user-shield"></i>
-                </span>
+                    <span class="info-box-icon bg-primary">
+                        <i class="nav-icon fas fa-user-shield"></i>
+                    </span>
 
                 <div class="info-box-content">
                     <span class="info-box-text">Admin</span>

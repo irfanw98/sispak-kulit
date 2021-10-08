@@ -21,8 +21,10 @@ use App\Http\Controllers\Dokter\{
 };
 use App\Http\Controllers\User\{
      DashboardUserController,
+     TentangController,
      KonsultasiController,
-     RiwayatDiagnosaController
+     RiwayatDiagnosaController,
+     ProfileController
 };
 
 Auth::routes();
@@ -76,7 +78,9 @@ Route::group(['middleware' => ['auth', 'role:dokter']], function() {
 
 Route::group(['middleware' => ['auth', 'role:user']], function() {
      Route::get('/dashboard-user', [DashboardUserController::class, 'index'])->name('dashboard-user');
+     Route::get('/tentang', [TentangController::class, 'index'])->name('tentang');
      Route::resource('/konsultasi', KonsultasiController::class);
      Route::get('/riwayat-diagnosa/pdf', [RiwayatDiagnosaController::class,'exportPdf'])->name('export-pdf');
      Route::resource('/riwayat-diagnosa', RiwayatDiagnosaController::class)->only(['index', 'show']);
+     route::resource('/profile', ProfileController::class)->only(['edit', 'update']);
 });

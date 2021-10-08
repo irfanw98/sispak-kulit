@@ -1,4 +1,5 @@
 <?php
+use Illuminate\Support\Facades\Auth;
 use App\Models\{
     Admin,
     Dokter,
@@ -41,3 +42,18 @@ function jumlahKonsultasi()
     return Konsultasi::count();
 }
 
+function jumlahKonsultasiId()
+{
+    return Konsultasi::where('user_id', Auth::user()->id)->count();
+}
+
+function getUserFoto()
+{
+    $user = User::where('id', Auth::user()->id)->first();
+    
+    if(!$user->foto){
+        return asset('image/profile-user.png');
+    } else {
+        return asset('storage/user/' . $user->foto);
+    }
+}

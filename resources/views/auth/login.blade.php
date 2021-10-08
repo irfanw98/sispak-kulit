@@ -33,7 +33,7 @@
                     @csrf
                     <div class="form-group">
                         <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('Alamat Email') }}</label>
-                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="off" autofocus placeholder="alamat@gmail.com">
+                        <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus placeholder="alamat@gmail.com">
 
                         @error('email')
                             <span class="invalid-feedback" role="alert">
