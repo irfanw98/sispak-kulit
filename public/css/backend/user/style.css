@@ -1,0 +1,81 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+.wrapper {
+    width: 100%;
+}
+
+.wrapper .tittle h4 {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 40px;
+}
+
+.wrapper .container .option_item {
+    position: relative;
+    display: block;
+    width: 200px;
+    height: 200px;
+    margin: 10px;
+}
+
+.wrapper .container .option_item .option_inner {
+    width: 100%;
+    height: 100%;
+    background: #2a3f54;
+    border-radius: 5px;
+    padding: 80px 20px;
+    text-align: center;
+    cursor: pointer;
+    color: #ffffff;
+    display: block;
+    border: 3px solid transparent;
+    position: relative;
+}
+
+.wrapper .container .option_item .option_inner:hover {
+    transform: scale(1.1);
+}
+
+.wrapper .container .option_item .checkbox {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 1;
+    opacity: 1;
+}
+
+.wrapper .container .option_item .checkbox:checked ~ .option_inner {
+    border-color: #007bff;
+    background: #ffffff;
+    color: #2a3f54;
+}
+
+.wrapper .container .option_item .option_inner .tickmark {
+    position: absolute;
+    top: -1px;
+    left: -1px;
+    display: none;
+    border: 20px solid;
+    border-color: #007bff transparent transparent #007bff;
+}
+
+.wrapper .container .option_item .checkbox:checked ~ .option_inner .tickmark {
+    display: block;
+}
+
+.wrapper .container .option_item .option_inner .tickmark::before {
+    content: "";
+    position: absolute;
+    top: -15px;
+    left: -15px;
+    width: 15px;
+    height: 7px;
+    border: 1px solid red;
+    border-color: transparent transparent #ffffff #ffffff;
+    transform: rotate(-45deg);
+}

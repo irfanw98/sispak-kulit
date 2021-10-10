@@ -3,25 +3,7 @@
 @section('tittle', 'konsultasi')
 
 @section('header')
-    <style>
-        .grad {
-            background-image: linear-gradient(to right, #4e54c8, #8f94fb);
-            height: 4px;
-            border-radius: 20px;
-        }
-        .gradModal {
-            background-image: linear-gradient(to bottom, #4e54c8, #8f94fb);
-            height: 4px;
-            border-radius: 20px;
-        }
-        .checks {
-          margin: 10px;
-        }
-        .proses{
-          margin-top: 5px;
-          margin-left: 10px;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/backend/user/style.css') }}">
 @endsection
 
 @section('content')
@@ -39,8 +21,93 @@
         </div>
       </div><!-- /.container-fluid -->
  </section>
- <section class="content">
+ <section class="content mt-2">
+  <div class="wrapper">
+    <div class="tittle text-center">
+        <h4>Pilih Gejala Penyakit Yang Anda Rasakan</h4>
+    </div>
+
+    <div class="container">
+      <div class="card-body">
         <div class="row">
+        <!-- Foreach disini -->
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <label class="option_item">
+              <input type="checkbox" class="checkbox" name="gejala[]" value="">
+              <div class="option_inner gejala">
+                <div class="tickmark"></div>
+                <div class="name">Gatal - gatal</div>
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <label class="option_item">
+              <input type="checkbox" class="checkbox" name="gejala[]" value="">
+              <div class="option_inner gejala">
+                <div class="tickmark"></div>
+                <div class="name">Kulit Kering</div>
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <label class="option_item">
+              <input type="checkbox" class="checkbox" name="gejala[]" value="">
+              <div class="option_inner gejala">
+                <div class="tickmark"></div>
+                <div class="name">Kulit Ruam</div>
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <label class="option_item">
+              <input type="checkbox" class="checkbox" name="gejala[]" value="">
+              <div class="option_inner gejala">
+                <div class="tickmark"></div>
+                <div class="name">Kulit Luka</div>
+              </div>
+            </label>
+          </div>
+          <div class="col-sm-12 col-md-3 col-lg-3">
+            <label class="option_item">
+              <input type="checkbox" class="checkbox" name="gejala[]" value="">
+              <div class="option_inner gejala">
+                <div class="tickmark"></div>
+                <div class="name">Kulit Berminyak</div>
+              </div>
+            </label>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-outline-info proses ml-2 mt-2">Proses <i class="fas fa-angle-double-right"></i></button>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <!-- <div class="row">
             <div class="col-md-12 table-responsive">
                 <div class="card">
                     <div class="grad">
@@ -61,7 +128,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
 </section>
 @endsection
 
