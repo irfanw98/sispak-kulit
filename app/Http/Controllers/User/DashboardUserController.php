@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Konsultasi;
 
 class DashboardUserController extends Controller
@@ -14,6 +15,7 @@ class DashboardUserController extends Controller
                         \DB::raw('DATE_FORMAT(created_at, "%M") as months')
                         )
                         ->groupBy('months')
+                        ->where('user_id', Auth::user()->id)
                         ->orderBy('created_at', 'asc')
                         ->get();
 

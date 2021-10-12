@@ -36,6 +36,14 @@ class Gejala extends Model
     	return $kodeBaru;
     }
 
+    public function scopeFilter($query, array $filters)
+    {
+        $query->when($filters['pencarian'] ?? false, function($query, $pencarian) {
+            return $query->where('nama', 'like', '%' . $pencarian . '%')
+                         ->orWhere('kode_gejala', 'like', '%' . $pencarian . '%');
+        });
+    }
+
     public function getCreatedAtAttribute()
     {
         return \Carbon\Carbon::parse($this->attributes['created_at'])

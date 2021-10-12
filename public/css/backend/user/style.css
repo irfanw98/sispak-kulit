@@ -46,7 +46,7 @@
     top: 10px;
     right: 10px;
     z-index: 1;
-    opacity: 1;
+    opacity: 0;
 }
 
 .wrapper .container .option_item .checkbox:checked ~ .option_inner {
@@ -78,4 +78,15 @@
     border: 1px solid red;
     border-color: transparent transparent #ffffff #ffffff;
     transform: rotate(-45deg);
+}
+
+.wrapper .container .proses {
+    background-color: #00aaa9;
+    color: #ffffff;
+    width: 200px !important;
+    padding: 10px;
+}
+
+.wrapper .container .proses:hover {
+    background-color: #007bff;
 }

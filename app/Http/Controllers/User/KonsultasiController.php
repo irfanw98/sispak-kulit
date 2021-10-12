@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\{
     Konsultasi,
@@ -11,13 +12,12 @@ use App\Models\{
     Gejala,
     Penyakit
 };
-use Auth;
 
 class KonsultasiController extends Controller
 {
     public function index()
     {
-        $gejalas = Gejala::orderBy('nama', 'asc')->get();
+        $gejalas = Gejala::orderBy('kode_gejala', 'asc')->filter(request(['pencarian']))->get();
 
         return view('user.konsultasi.index', compact('gejalas'));
     }
@@ -28,15 +28,21 @@ class KonsultasiController extends Controller
 
             $diagnosa = $this->basispengetahuan($request->input('gejala'));
             $penyakit = Penyakit::where('kode_penyakit', $diagnosa)->first();
-            $gejalas = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
-            $user = User::where('id', Auth::user()->id)->first();
 
-            $konsultasi = new Konsultasi;
-            $konsultasi->user_id = $user->id;
-            $konsultasi->kode_penyakit = $penyakit->kode_penyakit;
-            $konsultasi->save();
+            if($penyakit != null) {
+                $gejalas = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
+                $user = User::where('id', Auth::user()->id)->first();
+    
+                $konsultasi = new Konsultasi;
+                $konsultasi->user_id = $user->id;
+                $konsultasi->kode_penyakit = $penyakit->kode_penyakit;
+                $konsultasi->save();
+    
+                return view('user.diagnosa.hasil', compact('penyakit', 'gejalas', 'user'));
+            } else {
+                return redirect('konsultasi');
+            }
 
-            return view('user.diagnosa.hasil', compact('penyakit', 'gejalas', 'user'));
         } else {
             return redirect('konsultasi');
         }  
@@ -45,22 +51,36 @@ class KonsultasiController extends Controller
 
     private function basispengetahuan($gejala)
     {   
+        $role['P000'] = 0;
         $role['P001'] = 0;
         $role['P002'] = 0;
-    
-        for ($i=0; $i < count($gejala); $i++) {
-           if(
-                $gejala[$i] == "G001" || $gejala[$i] == "G003"
-                || $gejala[$i] == "G005"
-           ) {
-               $role['P001'] = $role['P001'] + 1 ;
-           }
+        $role['P003'] = 0;
+        $role['P004'] = 0;
+        $role['P005'] = 0;
 
-           if(
-               $gejala[$i] == "G002" || $gejala[$i] == "G003" || $gejala[$i] == "G004" || $gejala[$i] == "G005"
-           ) {
-               $role['P002'] = $role['P002'] + 1 ;
-           }
+        if(
+            $gejala == ["G004","G005","G006","G007"]
+        ) {
+            $role['P001'] = $role['P001'] + 1;
+        } elseif(
+            $gejala == ["G001","G002","G005"]
+        ) {
+            $role['P002'] = $role['P002'] + 1;
+        } elseif(
+            $gejala == ["G008","G009","G010"]
+        ) {
+            $role['P003'] = $role['P003'] + 1;
+        } elseif(
+            $gejala == ["G002","G003","G005","G012"]
+        ) {
+            $role['P004'] = $role['P004'] + 1;
+        } elseif(
+            $gejala == ["G012"]
+        ) {
+            $role['P005'] = $role['P005'] + 1;
+        } else {
+            $role['P000'] =  $role['P000'] + 1;
+        }
 
         $data = $role;
         asort($data);
@@ -69,7 +89,5 @@ class KonsultasiController extends Controller
         }
 
         return $hasil;
-        }
-        
     }
 }
