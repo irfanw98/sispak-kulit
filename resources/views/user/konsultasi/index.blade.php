@@ -3,7 +3,7 @@
 @section('tittle', 'konsultasi')
 
 @section('header')
-<link rel="stylesheet" href="{{ asset('css/backend/user/style.css') }}">
+<link rel="stylesheet" href="{{ asset('css/backend/user/konsultasi/style.css') }}">
 @endsection
 
 @section('content')
@@ -43,8 +43,9 @@
         <form action="{{ route('konsultasi.store') }}" method="POST">
         @csrf
           <div class="row">
+          @if($gejalas->count() > 0)
             @foreach($gejalas as $gejala)
-            <div class="col-sm-12 col-md-3 col-lg-3">
+            <div class="col-sm-12 col-md-3 col-lg-3 d-flex justify-content-center">
               <label class="option_item">
                 <input type="checkbox" class="checkbox" name="gejala[]" value="{{ $gejala->kode_gejala }}">
                 <div class="option_inner gejala">
@@ -55,6 +56,15 @@
               </label>
             </div>
             @endforeach
+          @else
+            <div class="col-sm-12 col-md-12 col-lg-12 text-center search">
+              <img src="{{ asset('image/pencarian.svg') }}" alt="pencarian">
+              <h4>Pencarian tidak ditemukan</h4>
+            </div>
+          @endif
+            <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end mt-3 pr-3">
+             {{ $gejalas->links() }}   
+            </div>
           </div>
           <div class="row justify-content-center">
             <button type="submit" class="btn proses mt-5 mb-2">Proses <i class="fas fa-angle-double-right"></i></button>

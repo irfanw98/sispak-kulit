@@ -10,8 +10,9 @@
 }
 
 .wrapper .tittle h4 {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 32px;
+    font-weight: 700;
+    margin-top: 20px;
     margin-bottom: 40px;
 }
 
@@ -81,7 +82,7 @@
 }
 
 .wrapper .container .proses {
-    background-color: #00aaa9;
+    background-color: #138496;
     color: #ffffff;
     width: 200px !important;
     padding: 10px;
@@ -89,4 +90,13 @@
 
 .wrapper .container .proses:hover {
     background-color: #007bff;
+}
+
+.wrapper .container .search img {
+    width: 30%;
+}
+
+.wrapper .container .search h4 {
+    font-weight: bold;
+    font-size: 24px;
 }

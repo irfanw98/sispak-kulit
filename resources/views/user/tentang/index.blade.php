@@ -3,26 +3,7 @@
 @section('tittle', 'Tentang Penyakit Kulit')
 
 @section('header')
-    <style>
-        .judul-artikel{
-            font-weight: bold;
-        }
-        .img-artikel{
-            width: 400px;
-            margin-top: 10px;
-        }
-        .sumber-gambar{
-            font-size: 12px;
-        }
-        .isi-artikel{
-            text-indent: 30px;
-            text-align:justify;
-        }
-        .sumber-artikel{
-            font-size: 14px;
-            font-style: italic;
-        }    
-    </style>
+<link rel="stylesheet" type="text/css" href="{{ asset('css/backend/user/tentang/style.css') }}">
 @endsection
 
 
@@ -34,8 +15,8 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard-user') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">Tentang Penyakit Kulit</li>
+                <li class="breadcrumb-item" style="font-weight: bold;"><a href="{{ route('dashboard-user') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="font-weight: bold;">Tentang Penyakit Kulit</li>
             </ol>
             </div>
         </div>

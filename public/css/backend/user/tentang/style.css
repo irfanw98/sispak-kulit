@@ -1,0 +1,25 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Poppins", sans-serif;
+}
+.content .judul-artikel h4 {
+    font-weight: bold;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.content .img-artikel{
+    width: 400px;
+}
+.content .sumber-gambar{
+    font-size: 12px;
+    font-style: italic;
+}
+.isi-artikel{
+    text-indent: 30px;
+    text-align:justify;
+}
+.sumber-artikel{
+    font-size: 14px;
+    font-style: italic;
+}  

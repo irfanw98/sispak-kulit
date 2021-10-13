@@ -17,7 +17,10 @@ class KonsultasiController extends Controller
 {
     public function index()
     {
-        $gejalas = Gejala::orderBy('kode_gejala', 'asc')->filter(request(['pencarian']))->get();
+        $gejalas = Gejala::orderBy('kode_gejala', 'asc')
+                            ->filter(request(['pencarian']))
+                            ->paginate(8)
+                            ->withQueryString();
 
         return view('user.konsultasi.index', compact('gejalas'));
     }

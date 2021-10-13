@@ -2,6 +2,10 @@
 
 @section('tittle', 'Dashboard User')
 
+@section('header')
+<link rel="stylesheet" type="text/css" href="{{ asset('css/backend/user/dashboard/style.css') }}">
+@endsection
+
 @section('content')
  <section class="content-header">
       <div class="container-fluid">
