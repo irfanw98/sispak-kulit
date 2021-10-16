@@ -40,7 +40,7 @@
     </div>
     <div class="container">
       <div class="card-body">
-        <form action="{{ route('konsultasi.store') }}" method="POST">
+        <form action="{{ route('konsultasi.store') }}" method="POST" enctype="multipart/form-data">
         @csrf
           <div class="row">
           @if($gejalas->count() > 0)

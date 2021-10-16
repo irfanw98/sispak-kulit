@@ -1,13 +1,5 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: "Poppins", sans-serif;
-}
-
-.content-header h3 {
-	font-weight: bold;
-}
-
-.content #konsultasi h4 {
-	font-weight: bold;
+    font-family: sans-serif;
 }

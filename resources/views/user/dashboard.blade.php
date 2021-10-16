@@ -11,7 +11,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h3>Dashboard</h3>
+            <h3 style="font-weight: bold;">Dashboard</h3>
           </div>
           <div class="col-sm-6">
           </div>

@@ -43,7 +43,7 @@ class RiwayatDiagnosaController extends Controller
     public function show($id)
     {
         $diagnosa = Konsultasi::findOrFail($id);
-        
+    
         return view('user.diagnosa.detail', compact('diagnosa'));
     }
 
@@ -54,4 +54,18 @@ class RiwayatDiagnosaController extends Controller
         return $pdf->download('riwayat.pdf');
     }
 
+    public function cetakById($id)
+    {
+        $diagnosas = Konsultasi::with(['user', 'penyakit'])->where('id', $id)->get();
+
+        return view('user.diagnosa.riwayatcetak', compact('diagnosas'));
+    }
+
+    public function pdfById($id)
+    {
+        $diagnosas = Konsultasi::with(['user', 'penyakit'])->where('id', $id)->get();
+        $pdf = PDF::loadView('user.diagnosa.unduhpdf', compact('diagnosas'));
+
+        return $pdf->download('riwayat-diagnosa.pdf');
+    }
 }
