@@ -66,6 +66,13 @@
                 <p>Aturan</p>
               </a>
             </li>
+            <li class="nav-header" style="font-weight: bold; margin-top: -20px; margin-left: -10px;">SETTING</li>
+            <li class="nav-item">
+              <a href="{{ url('/profile-dokter') }}/{{ Auth::user()->id }}/edit" class="nav-link {{ Request::url() == url('/profile-dokter') ? 'active' : ' ' }}">
+                <i class="nav-icon fas fa-address-card"></i>
+                <p>Ubah Profile</p>
+              </a>
+            </li>
             <li class="nav-item">
               <a href="{{ url('/ubah-password') }}" class="nav-link {{ Request::url() == url('/ubah-password') ? 'active' : ' ' }}">
                 <i class="nav-icon fas fa-cog"></i>

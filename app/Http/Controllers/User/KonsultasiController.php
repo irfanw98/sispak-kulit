@@ -16,11 +16,14 @@ use App\Models\{
 class KonsultasiController extends Controller
 {
     public function index()
-    {
+    {   
+        // $gejalas = Gejala::orderBy('kode_gejala', 'asc')
+        //                     ->filter(request(['pencarian']))
+        //                     ->paginate(8)
+        //                     ->withQueryString();
         $gejalas = Gejala::orderBy('kode_gejala', 'asc')
                             ->filter(request(['pencarian']))
-                            ->paginate(8)
-                            ->withQueryString();
+                            ->get();
 
         return view('user.konsultasi.index', compact('gejalas'));
     }
@@ -29,8 +32,8 @@ class KonsultasiController extends Controller
     {
         if($request->input('gejala') != null) {
 
-            $diagnosa = $this->basispengetahuan($request->input('gejala'));
-            $penyakit = Penyakit::where('kode_penyakit', $diagnosa)->first();
+            $input_gejala = $this->basispengetahuan($request->input('gejala'));
+            $penyakit = Penyakit::where('kode_penyakit', $input_gejala)->first();
 
             if($penyakit != null) {
                 $gejalas = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
@@ -40,7 +43,7 @@ class KonsultasiController extends Controller
                 $konsultasi->user_id = $user->id;
                 $konsultasi->kode_penyakit = $penyakit->kode_penyakit;
                 $konsultasi->save();
-    
+                
                 return view('user.diagnosa.hasil', compact('penyakit', 'gejalas', 'user'));
             } else {
                 return redirect('konsultasi');

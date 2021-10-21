@@ -62,12 +62,12 @@
               <h4>Pencarian tidak ditemukan</h4>
             </div>
           @endif
-            <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end mt-3 pr-3">
-             {{ $gejalas->links() }}   
-            </div>
+            <!-- <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end mt-3 pr-3">
+             $gejalas->links()
+            </div> -->
           </div>
           <div class="row justify-content-center">
-            <button type="submit" class="btn proses mt-5 mb-2">Proses <i class="fas fa-angle-double-right"></i></button>
+            <button type="submit" class="btn proses mt-5 mb-2 proses">Proses <i class="fas fa-angle-double-right"></i></button>
           </div>
         </form>
       </div>

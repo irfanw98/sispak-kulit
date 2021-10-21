@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Spatie\Permission\Traits\HasRoles;
 use Illuminate\Support\Facades\DB;
 use App\Models\Penyakit;
+use App\Models\Konsultasi;
 
 class Gejala extends Model
 {

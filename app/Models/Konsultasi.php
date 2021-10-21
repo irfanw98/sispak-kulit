@@ -13,7 +13,7 @@ class Konsultasi extends Model
 
     protected $table = 'tb_konsultasi';
     protected $primaryKey = 'id';
-    protected $fillable = ['user_id', 'aturan_id'];
+    protected $fillable = ['user_id', 'kode_penyakit', 'kode_gejala'];
 
 
     public function user() {

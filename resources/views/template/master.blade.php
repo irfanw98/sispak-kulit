@@ -54,25 +54,13 @@
     </a>
     @endif
     @if(auth()->user()->hasRole('dokter'))
-    <?php
-      $dokter = \DB::table('tb_dokter')->where('user_id',  \Auth::user()->id)->first();
-    ?>
     <a href="{{ route('dashboard-dokter') }}" class="brand-link" style="background-color: #2a3f54; color:#fff;">
-      @if($dokter->foto == '')
-      <img src="{{ asset('admin/assets/dist/img/AdminLTELogo.png') }}"
-          alt="AdminLTE Logo"
+      <img src="{{ getDokterFoto() }}"
+          alt="Dokter Image"
           class="image img-circle"
           width="50px"
           height="45px"
           >
-      @else
-      <img src="{{ asset('storage/dokter') }}/{{ $dokter->foto }}"
-          alt="AdminLTE Logo"
-          class="image img-circle"
-          width="50px"
-          height="45px"
-          >
-      @endif
       <span class="brand-text font-weight-light">{{ auth()->user()->nama }}</span>
     </a>
     @endif

@@ -57,3 +57,14 @@ function getUserFoto()
         return asset('storage/user/' . $user->foto);
     }
 }
+
+function getDokterFoto()
+{
+    $dokter = Dokter::with('user')->where('user_id', Auth::user()->id)->first();
+    
+    if(!$dokter->foto){
+        return asset('image/profile-user.png');
+    } else {
+        return asset('storage/dokter/' . $dokter->foto);
+    }
+}

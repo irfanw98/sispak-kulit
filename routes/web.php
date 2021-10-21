@@ -17,7 +17,8 @@ use App\Http\Controllers\Dokter\{
      DashboardDokterController,
      GejalaController,
      PenyakitController,
-     AturanController
+     AturanController,
+     ProfileDokterController
 };
 use App\Http\Controllers\User\{
      DashboardUserController,
@@ -33,6 +34,10 @@ Route::view('/', 'welcome');
 Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {
      Route::resource('/ubah-password', PasswordController::class)->only(['index','store']);
      Route::get('/logout', [LogoutController::class,'logout'])->name('keluar');
+});
+
+Route::group(['middleware' => ['auth', 'role:dokter|user']], function() {
+     Route::resource('/profile', ProfileController::class)->only(['edit', 'update']);
 });
 
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
@@ -74,6 +79,7 @@ Route::group(['middleware' => ['auth', 'role:dokter']], function() {
      Route::delete('/penyakit/hapus',  [PenyakitController::class, 'hapus']);
      Route::resource('/penyakit', PenyakitController::class);
      Route::resource('/aturan',  AturanController::class);
+     Route::resource('/profile-dokter', ProfileDokterController::class)->only(['edit', 'update']);
 });
 
 Route::group(['middleware' => ['auth', 'role:user']], function() {
@@ -86,5 +92,4 @@ Route::group(['middleware' => ['auth', 'role:user']], function() {
           Route::get('/cetak/{id}', [RiwayatDiagnosaController::class, 'cetakById'])->name('cetak-riwayat');
      });
      Route::resource('/riwayat-diagnosa', RiwayatDiagnosaController::class)->only(['index', 'show']);
-     route::resource('/profile', ProfileController::class)->only(['edit', 'update']);
 });
