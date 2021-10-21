@@ -40,35 +40,17 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
-                        <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="{{ route('pulihkan-admin') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
+                        <!-- <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
+                        <a href="{{ route('pulihkan-admin') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a> -->
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
                                     <th width="10%">No</th>
-                                    <th width="20%">Nama</th>
-                                    <th width="30%">Username</th>
-                                    <th style="text-align: center;" width="40%">Aksi</th>
+                                    <th width="30%">Nama</th>
+                                    <th width="30%">Email</th>
+                                    <th style="text-align: center;" width="30%">Aksi</th>
                                 </tr>
                             </thead>
-                            <tbody>
-                            @if ($users->count() > 0)
-                                @foreach($users as $user)
-                                <tr>
-                                    <td style="text-align: center;">{{ $loop->iteration }}</td>
-                                    <td>{{ $user->nama }}</td>
-                                    <td>{{ $user->email }}</td>
-                                    <td style="text-align: center;">
-                                        <a href="{{ route('pulihkan-admin', [$user->id]) }}" class="btn  btn-info"><i class="fa fa-edit"></i> PULIHKAN</a>
-                                        <a href="" class="btn  btn-danger deleteSampah" deleteId = "{{ $user->id }}" deleteName ="{{ $user->nama }}"><i class="fa fa-edit"></i> HAPUS</a>
-                                    </td>
-                                    @endforeach
-                            @else
-                                    <tr>
-                                        <td colspan="4" class="text-center">Tidak Ada Data</td>
-                                    </tr>
-                            @endif
-                            </tbody>
                         </table>   
                     </div>
                 </div>
@@ -79,6 +61,40 @@
 
 @section('footer')
 <script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').DataTable({
+            responsive: true,
+            processing: true,
+            serverSide: true,
+            ajax: {
+                url: "{{ route('sampah-admin') }}",
+                type: "GET",
+                dataType: "JSON"
+            },
+            columns: [
+                {
+                data: 'DT_RowIndex',
+                name: 'DT_RowIndex'
+                },
+                {
+                data: 'nama',
+                name: 'nama'
+                },
+                {
+                data: 'email',
+                name: 'email'
+                },
+                {
+                data: 'Aksi',
+                name: 'Aksi'
+                }
+            ],
+            'columnDefs': [{
+                "targets": [3], // your case first column
+                "className": "text-center",
+            }],
+        })
+    })
     //DELETE ALL 
     $(document).on('click', '.hapus', function(e){
         e.preventDefault();

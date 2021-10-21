@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use DataTables;
 use App\Models\{
     Admin,
     User
@@ -63,15 +63,33 @@ class AdminController extends Controller
         return redirect('akun-admin');
     }
 
-    public function sampah()
+    public function sampah(Request $request)
     {
-        $users = User::whereHas("roles", function($q){
+        $admins = User::whereHas("roles", function($q){
             $q->where("name", "admin"); 
         })
         ->onlyTrashed()
         ->get();
 
-        return view('admin.sampah', compact('users'));
+        if($request->ajax()) {
+            return DataTables::of($admins) 
+               -> addColumn('Aksi', function($data) {
+                return '
+                    <a href="" class="btn btn-info konsultasiPulihkan" role="buttton" pulihkan-id="'. $data->id .'"><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+
+                    <a href="" class="btn  btn-danger deleteSampah" deleteId = "'. $data->id .'" deleteName ="'. $data->nama .'"><i class="fa fa-edit"></i> HAPUS</a>
+
+                ';
+                })
+                ->rawColumns(['Aksi'])
+                ->addIndexColumn()
+                ->removeColumn('id')
+                ->make(true);
+        }
+
+
+
+        return view('admin.sampah', compact('admins'));
     }
 
     public function pulihkan($id = null) 
