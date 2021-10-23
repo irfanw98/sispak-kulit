@@ -26,7 +26,7 @@ class StoreAdminRequest extends FormRequest
         return [
             'nama' => 'required|min:3',
             'username' => 'required|min:6',
-            'email' => 'required|unique:tb_admin'
+            'email' => 'required|email|unique:tb_admin'
         ];
     }
 
@@ -35,9 +35,10 @@ class StoreAdminRequest extends FormRequest
         return [
             'nama.required' => 'Nama wajib diisi!',
             'nama.min' => 'Nama minimal diisi 3 karakter!',
-            'username.required' =>   'Username wajib diisi!',
+            'username.required' =>  'Username wajib diisi!',
             'username.min' => 'Username minimal diisi 6 karakter!',
             'email.required' => 'Email wajib diisi!',
+            'email.email' => 'Yang anda inputkan bukan email!',
             'email.unique' => 'Email sudah digunakan!'
         ];
     }

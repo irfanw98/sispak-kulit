@@ -75,10 +75,9 @@ class AdminController extends Controller
             return DataTables::of($admins) 
                -> addColumn('Aksi', function($data) {
                 return '
-                    <a href="" class="btn btn-info konsultasiPulihkan" role="buttton" pulihkan-id="'. $data->id .'"><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+                    <a href="" class="btn btn-info adminPulihkan" role="buttton" pulihkan-id="'. $data->id .'" pulihkanName ="'. $data->nama .'" ><i class="fa fa-undo-alt"></i> PULIHKAN</a>
 
-                    <a href="" class="btn  btn-danger deleteSampah" deleteId = "'. $data->id .'" deleteName ="'. $data->nama .'"><i class="fa fa-edit"></i> HAPUS</a>
-
+                    <a href="" class="btn  btn-danger deleteSampah" deleteId = "'. $data->id .'" deleteName ="'. $data->nama .'"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
                 })
                 ->rawColumns(['Aksi'])
@@ -86,8 +85,6 @@ class AdminController extends Controller
                 ->removeColumn('id')
                 ->make(true);
         }
-
-
 
         return view('admin.sampah', compact('admins'));
     }

@@ -40,15 +40,15 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
-                        <!-- <a href="" class="btn btn-danger mb-3 p-2 hapus" style="color: white;"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
-                        <a href="{{ route('pulihkan-admin') }}" class="btn btn-success mb-3 p-2 " style="color: white;"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a> -->
+                        <a href="" class="btn btn-outline-danger mb-3 p-2 hapus"><i class="fa fa-trash"></i> HAPUS SEMUA</a>
+                        <a href="" class="btn btn-outline-info mb-3 p-2 pulihkan"><i class="fas fa-undo-alt"></i> PULIHKAN SEMUA</a>
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">No</th>
+                                    <th width="5%">No</th>
                                     <th width="30%">Nama</th>
-                                    <th width="30%">Email</th>
-                                    <th style="text-align: center;" width="30%">Aksi</th>
+                                    <th width="40%">Email</th>
+                                    <th style="text-align: center;" width="10%">Aksi</th>
                                 </tr>
                             </thead>
                         </table>   
@@ -90,14 +90,88 @@
                 }
             ],
             'columnDefs': [{
-                "targets": [3], // your case first column
+                "targets": [0,3], // your case first column
                 "className": "text-center",
             }],
         })
     })
-    //DELETE ALL 
+
+    $(document).on('click', '.pulihkan', function(e) {
+        e.preventDefault()
+        swal({
+            title: "Yakin?",
+            text: `Data semua admin akan dipulihkan kembali?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{ route("pulihkan-admin") }}',
+                    type:"POST",
+                    data: {
+                        '_method': 'GET',
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Sukses!",
+                            text: `Data semua admin berhasil dipulihkan!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        $('#datatable').DataTable().ajax.reload()
+                    }
+                })
+            }
+        })
+    })
+
+    $(document).on('click', '.adminPulihkan', function(e) {
+        e.preventDefault()
+        const adminId = $(this).attr('pulihkan-id')
+        const namaAdmin = $(this).attr('pulihkanName')
+
+        swal({
+            title: "Yakin?",
+            text: `Data admin ${namaAdmin} akan dipulihkan kembali?`,
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+        })
+        .then((result) => {
+            if(result) {
+                $.ajax({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url: '{{ route("pulihkan-admin") }}/' + adminId,
+                    type: 'POST',
+                    data: {
+                        '_method': 'GET',
+                        'id': adminId
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Sukses!",
+                            text: `Data admin ${namaAdmin} berhasil dipulihkan!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        $('#datatable').DataTable().ajax.reload()
+                    }
+                })
+            }
+        })
+    })
+
     $(document).on('click', '.hapus', function(e){
-        e.preventDefault();
+        e.preventDefault()
         swal({
             title: "Yakin?",
             text: `Data semua admin dihapus permanen?`,
@@ -108,30 +182,29 @@
         .then((result) => {
             if (result) {
                 $.ajax({
-                headers: {
-                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-                },
-                url:"{{ route('hapus-admin') }}",
-                type:"POST",
-                data: {
-                    '_method': 'DELETE',
-                },
-                success: function(response) {
-                    swal({
-                        title: "Sukses!",
-                        text: `Data semua admin berhasil dihapus permanen!`,
-                        icon: "success",
-                        timer: 2000,
-                        buttons: false,
-                    })
-                    location.reload();
-                }
-            })
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    url:"{{ route('hapus-admin') }}",
+                    type:"POST",
+                    data: {
+                        '_method': 'DELETE',
+                    },
+                    success: function(response) {
+                        swal({
+                            title: "Sukses!",
+                            text: `Data semua admin berhasil dihapus permanen!`,
+                            icon: "success",
+                            timer: 2000,
+                            buttons: false,
+                        })
+                        $("#datatable").DataTable().ajax.reload()
+                    }
+                })
             }
         })
     })
     
-    //DELETE BY ID
     $(document).on('click', '.deleteSampah', function(e) {
         e.preventDefault();
         const hapusId = $(this).attr('deleteId');
@@ -164,7 +237,7 @@
                             timer: 2000,
                             buttons: false,
                         })
-                        location.reload();
+                        $("#datatable").DataTable().ajax.reload()
                     }
                 })
             }

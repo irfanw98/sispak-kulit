@@ -44,9 +44,10 @@
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">No</th>
-                                    <th width="40%">Nama</th>
-                                    <th width="30%">Username</th>
+                                    <th width="5%">No</th>
+                                    <th width="30%">Nama</th>
+                                    <th width="20%">Username</th>
+                                    <th width="30%">Email</th>
                                     <th style="text-align: center;" width="10%">Aksi</th>
                                 </tr>
                             </thead>
@@ -60,7 +61,7 @@
 
 <!-- Modal Tambah -->
 <div class="modal fade" id="addModal"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
                 <div class="gradModal">
                 </div>
@@ -137,28 +138,36 @@
                     name: 'username'
                 },
                 {
+                    data: 'email',
+                    name: 'email'
+                },
+                {
                     data: 'Aksi',
                     name: 'Aksi'
                 }
-            ]
+            ],
+            'columnDefs': [{
+                "targets": [0], // your case first column
+                "className": "text-center",
+            }],
         });
     });
 
     //TAMBAH DATA 
     $('.addAdmin').on('click', function(e) {
-        e.preventDefault();
-        $('#addModal').modal('show');//Menampilkan modal 
+        e.preventDefault()
+        $('#addModal').modal('show')
     })
 
     $('.saveButton').on('click', function(e) {
-        e.preventDefault();
-        let form = $('.formInsert')[0]; //Get form input
-        const formData = new FormData(form);
+        e.preventDefault()
+        let form = $('.formInsert')[0] //Get form input
+        const formData = new FormData(form)
 
         //Validasi form input
-        $('#namaError').addClass('d-none');
-        $('#usernameError').addClass('d-none');
-        $('#emailError').addClass('d-none');
+        $('#namaError').addClass('d-none')
+        $('#usernameError').addClass('d-none')
+        $('#emailError').addClass('d-none')
     
         $.ajax({
              headers: {
@@ -172,9 +181,9 @@
             cache: false,
             dataType: "JSON",
             success: function(result) {
-                $('.formInsert').trigger('reset');//Reset inputan form
-                $('#addModal').modal('hide');//Tutup Modal
-                $("#datatable").DataTable().ajax.reload();//Reload Datatable
+                $('.formInsert').trigger('reset')//Reset inputan form
+                $('#addModal').modal('hide')//Tutup Modal
+                $("#datatable").DataTable().ajax.reload()//Reload Datatable
 
                 swal({
                   title: "Sukses!",
@@ -185,18 +194,18 @@
                 })
             },
             error: function(data) {
-                let errors = data.responseJSON;
+                let errors = data.responseJSON
                 if ($.isEmptyObject(errors) == false) {
                     $.each(errors.errors, function(key,value) {
-                        let errID = '#' + key + 'Error';
-                        $('#nama').removeClass('is-valid');
-                        $('#nama').addClass('is-invalid');
-                        $('#username').removeClass('is-valid');
-                        $('#username').addClass('is-invalid');
-                        $('#email').removeClass('is-valid');
-                        $('#email').addClass('is-invalid');
-                        $(errID).removeClass('d-none');
-                        $(errID).text(value);
+                        let errID = '#' + key + 'Error'
+                        $('#nama').removeClass('is-valid')
+                        $('#nama').addClass('is-invalid')
+                        $('#username').removeClass('is-valid')
+                        $('#username').addClass('is-invalid')
+                        $('#email').removeClass('is-valid')
+                        $('#email').addClass('is-invalid')
+                        $(errID).removeClass('d-none')
+                        $(errID).text(value)
                     })
                 } 
             }
@@ -204,19 +213,20 @@
     })
 
     $('.cancelButton').on('click', function(e) {
-        e.preventDefault();
-        $('.formInsert').trigger('reset'); //reset form input
+        e.preventDefault()
+        $('.formInsert').trigger('reset') //reset form input
 
-        $('#namaError').addClass('d-none');//reset validasi form input
-        $('#usernameError').addClass('d-none');
-        $('#emailError').addClass('d-none');
+        $('#namaError').addClass('d-none')//reset validasi form input
+        $('#usernameError').addClass('d-none')
+        $('#emailError').addClass('d-none')
 
-        $('#nama').removeClass('is-invalid');
-        $('#username').removeClass('is-invalid');
-        $('#email').removeClass('is-invalid');
+        $('#nama').removeClass('is-invalid')
+        $('#username').removeClass('is-invalid')
+        $('#email').removeClass('is-invalid')
 
     })
 
+    //HAPUS DATA
     $(document).on('click', '.adminDelete', function(e) {
         e.preventDefault();
         const adminId = $(this).attr('delete-id');
@@ -242,8 +252,6 @@
                         'id': adminId,
                     },
                     success: function(response) {
-                            $('#datatable').DataTable().ajax.reload();
-
                         swal({
                             title: "Sukses!",
                             text: `Data admin ${adminNama} berhasil dihapus!`,
@@ -251,6 +259,7 @@
                             timer: 2000,
                             buttons: false,
                         })
+                        $('#datatable').DataTable().ajax.reload()
                     }
                 })
             }
