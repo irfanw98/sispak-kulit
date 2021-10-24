@@ -44,10 +44,10 @@
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">No</th>
+                                    <th width="5%">No</th>
                                     <th width="40%">Nama</th>
                                     <th width="30%">Username</th>
-                                    <th style="text-align: center;" width="10%">Aksi</th>
+                                    <th width="15%">Aksi</th>
                                 </tr>
                             </thead>
                         </table>   
@@ -62,6 +62,8 @@
 <div class="modal fade" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="detailModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-md" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="detailModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -77,8 +79,10 @@
 
 <!-- Modal Create  -->
 <div class="modal fade" id="createModal" tabindex="-1" role="dialog" aria-labelledby="createModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-md" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="createModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -96,6 +100,8 @@
 <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
+            <div class="gradModal">
+            </div>
             <div class="modal-header">
                 <h5 class="modal-title" id="editModalLabel"></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -138,7 +144,11 @@
                 data: 'Aksi',
                 name: 'Aksi'
                 }
-            ]
+            ],
+            'columnDefs': [{
+                "targets": [0,3], // your case first column
+                "className": "text-center",
+            }],
         })
     })
 
