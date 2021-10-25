@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use DataTables;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
+use App\Models\User;
 
 class UserController extends Controller
 {
@@ -39,13 +39,28 @@ class UserController extends Controller
         return redirect('akun-user');
     }
 
-    public function sampah()
+    public function sampah(Request $request)
     {
         $users = User::whereHas("roles", function($q){
             $q->where("name", "user"); 
         })
         ->onlyTrashed()
         ->get();
+
+        if($request->ajax()) {
+            return DataTables::of($users)
+            -> addColumn('Aksi', function($data) {
+            return '
+                <a href="" class="btn btn-info userPulihkan" role="buttton" pulihkan-id="'. $data->id .'" pulihkanName ="'. $data->nama .'" ><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+
+                <a href="" class="btn  btn-danger deleteSampah" deleteId = "'. $data->id .'" deleteName ="'. $data->nama .'"><i class="fa fa-trash"></i> HAPUS</a>
+                ';
+            })
+            ->rawColumns(['Aksi'])
+            ->addIndexColumn()
+            ->removeColumn('id')
+            ->make(true); 
+        }
 
         return view('user.sampah', compact('users'));
     }

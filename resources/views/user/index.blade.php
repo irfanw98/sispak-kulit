@@ -43,7 +43,7 @@
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th width="10%">No</th>
+                                    <th width="5%">No</th>
                                     <th width="30%">Nama</th>
                                     <th width="40%">Email</th>
                                     <th style="text-align: center;" width="10%">Aksi</th>
@@ -86,14 +86,18 @@
                 data: 'Aksi',
                 name: 'Aksi'
                 }
-            ]
+            ],
+            'columnDefs': [{
+                "targets": [0,3], // your case first column
+                "className": "text-center",
+            }],
         })
     })
 
     $(document).on('click', '.userDelete',  function(e){
-        e.preventDefault();
-        const idUser = $(this).attr('delete-id');
-        const namaUser = $(this).attr('userNama');
+        e.preventDefault()
+        const idUser = $(this).attr('delete-id')
+        const namaUser = $(this).attr('userNama')
         
         swal({
             title: "Yakin?",
@@ -115,8 +119,6 @@
                         'id': idUser,
                     },
                     success: function(response) {
-                       $('#datatable').DataTable().ajax.reload();
-
                         swal({
                             title: "Sukses!",
                             text: `Data user ${namaUser} berhasil dihapus!`,
@@ -124,6 +126,7 @@
                             timer: 2000,
                             buttons: false,
                         })
+                        $('#datatable').DataTable().ajax.reload()
                     }
                 })
             }
