@@ -1,7 +1,7 @@
     <div class="sidebar">
       <!-- Sidebar Menu -->
       <nav class="mt-2">
-        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false" style="font-size: 18px;">
           <li class="nav-header" style="font-weight: bold;">MENU</li>
           @if(auth()->user()->hasRole('admin'))
            <li class="nav-item">

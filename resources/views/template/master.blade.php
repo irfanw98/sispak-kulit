@@ -40,7 +40,7 @@
   <!-- /.navbar -->
 
   <!-- Main Sidebar Container -->
-  <aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: #fff; font-family: 'Roboto', sans-serif;">
+  <aside class="main-sidebar sidebar-light-primary elevation-4" style="background-color: #fff; font-family: sans-serif;">
     <!-- Brand Logo -->
     @if(auth()->user()->hasRole('admin'))
     <a href="{{ route('dashboard-admin') }}" class="brand-link" style="background-color: #2a3f54; color:#fff;">
@@ -50,7 +50,7 @@
           width="50px"
           height="45px"
           >
-      <span class="brand-text font-weight-light">{{ auth()->user()->nama }}</span>
+      <span class="brand-text font-weight-light" style="font-size: 24px;">{{ auth()->user()->nama }}</span>
     </a>
     @endif
     @if(auth()->user()->hasRole('dokter'))

@@ -61,7 +61,7 @@ class LaporanController extends Controller
             })
             -> addColumn('Aksi', function($data) {
                 return '
-                    <a href="" class="btn btn-success konsultasiPulihkan" role="buttton" pulihkan-id="'. $data->id .'" user-konsultasi="'. $data->user->nama .'"><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+                    <a href="" class="btn btn-info konsultasiPulihkan" role="buttton" pulihkan-id="'. $data->id .'" user-konsultasi="'. $data->user->nama .'"><i class="fa fa-undo-alt"></i> PULIHKAN</a>
 
                     <a href="" class="btn btn-danger konsultasiDelete" role="button" delete-konsultasi="' . $data->id . '" user-konsultasi="'. $data->user->nama .'"><i class="fas fa-trash"></i> HAPUS</a>
                 ';
