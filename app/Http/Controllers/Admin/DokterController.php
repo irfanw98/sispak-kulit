@@ -4,9 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Storage;
+use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
-use DataTables;
 use App\Models\{
     Dokter,
     User
@@ -27,7 +27,9 @@ class DokterController extends Controller
             -> addColumn('Aksi', function($data) {
                 return '
                     <a href="" class="btn btn-success dokterDetail" role="button" detail-kode="' . $data->kode_dokter . '"><i class="fas fa-eye"></i> DETAIL</a>
+
                     <a href="" class="btn btn-info dokterUbah" role="button" ubah-kode="' . $data->kode_dokter . '"><i class="fas fa-edit"></i> UBAH</a>
+                    
                     <a href="" class="btn btn-danger dokterDelete" role="button" delete-kode="' . $data->kode_dokter . '" dokterNama="' . $data->nama . '"><i class="fa fa-trash"></i> HAPUS</a>
                 ';
             })
@@ -133,15 +135,30 @@ class DokterController extends Controller
         return redirect('akun-dokter');
     }
 
-    public function sampah ()
+    public function sampah (Request $request)
     {
-        $users = User::whereHas("roles", function($q){
+        $dokters = User::whereHas("roles", function($q){
             $q->where("name", "dokter"); 
         })
         ->onlyTrashed()
         ->get();
 
-         return view('dokter.sampah', compact('users'));
+        if($request->ajax()) {
+            return DataTables::of($dokters)
+            -> addColumn('Aksi', function($data) {
+            return '
+                <a href="" class="btn btn-info dokterPulihkan" role="buttton" pulihkan-id="'. $data->id .'" pulihkanName ="'. $data->nama .'" ><i class="fa fa-undo-alt"></i> PULIHKAN</a>
+
+                <a href="" class="btn  btn-danger deleteSampah" deleteId = "'. $data->id .'" deleteName ="'. $data->nama .'"><i class="fa fa-trash"></i> HAPUS</a>
+            ';
+            })
+            ->rawColumns(['Aksi'])
+            ->addIndexColumn()
+            ->removeColumn('id')
+            ->make(true);
+        }
+
+         return view('dokter.sampah', compact('dokters'));
     }
 
     public function pulihkan($id = null) 

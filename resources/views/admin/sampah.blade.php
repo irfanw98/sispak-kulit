@@ -73,20 +73,20 @@
             },
             columns: [
                 {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
                 },
                 {
-                data: 'nama',
-                name: 'nama'
+                    data: 'nama',
+                    name: 'nama'
                 },
                 {
-                data: 'email',
-                name: 'email'
+                    data: 'email',
+                    name: 'email'
                 },
                 {
-                data: 'Aksi',
-                name: 'Aksi'
+                    data: 'Aksi',
+                    name: 'Aksi'
                 }
             ],
             'columnDefs': [{
