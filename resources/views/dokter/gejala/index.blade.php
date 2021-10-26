@@ -45,10 +45,10 @@
                             <thead>
                                 <tr>
                                     <th  style="text-align: center;" width="5%"></th>
-                                    <th width="10%">No</th>
-                                    <th width="40%">Kode Gejala</th>
-                                    <th width="30%">Nama Gejala</th>
-                                    <th style="text-align: center;" width="10%">Aksi</th>
+                                    <th width="5%">No</th>
+                                    <th width="20%">Kode Gejala</th>
+                                    <th width="40%">Nama Gejala</th>
+                                    <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
                         </table>   
@@ -110,25 +110,29 @@
             },
             columns : [
                 {
-                data: 'Cek',
-                name: 'Cek'
+                    data: 'Cek',
+                    name: 'Cek'
                 },
                 {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
                 },
                 {
-                data: 'kode_gejala',
-                name: 'kode_gejala'
+                    data: 'kode_gejala',
+                    name: 'kode_gejala'
                 },
                 {
-                data: 'nama',
-                name: 'nama'
+                    data: 'nama',
+                    name: 'nama'
                 },
                 {
-                data: 'Aksi',
-                name: 'Aksi'
-            }]
+                    data: 'Aksi',
+                    name: 'Aksi'
+            }],
+            'columnDefs': [{
+                "targets": [0,1,4], // your case first column
+                "className": "text-center",
+            }],
         })
     })
 

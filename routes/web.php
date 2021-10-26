@@ -36,10 +36,6 @@ Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {
      Route::get('/logout', [LogoutController::class,'logout'])->name('keluar');
 });
 
-Route::group(['middleware' => ['auth', 'role:dokter|user']], function() {
-     Route::resource('/profile', ProfileController::class)->only(['edit', 'update']);
-});
-
 Route::group(['middleware' => ['auth', 'role:admin']], function() {
      Route::get('/dashboard-admin', [DashboardAdminController::class,'index'])->name('dashboard-admin');
      Route::group(['prefix' => '/akun-admin/sampah'], function() {
@@ -92,4 +88,5 @@ Route::group(['middleware' => ['auth', 'role:user']], function() {
           Route::get('/cetak/{id}', [RiwayatDiagnosaController::class, 'cetakById'])->name('cetak-riwayat');
      });
      Route::resource('/riwayat-diagnosa', RiwayatDiagnosaController::class)->only(['index', 'show']);
+     Route::resource('/profile', ProfileController::class)->only(['edit', 'update']);
 });

@@ -44,11 +44,11 @@
                         <table id="datatable" class="table table-bordered  table-striped  nowrap" cellspacing="0" style="width: 100%">
                             <thead>
                                 <tr>
-                                    <th style="text-align: center;" width="5%"></th>
-                                    <th width="10%">No</th>
+                                    <th width="5%"></th>
+                                    <th width="5%">No</th>
                                     <th width="20%">Kode Penyakit</th>
                                     <th width="50%">Nama Penyakit</th>
-                                    <th style="text-align: center;" width="10%">Aksi</th>
+                                    <th width="10%">Aksi</th>
                                 </tr>
                             </thead>
                         </table>   
@@ -127,25 +127,29 @@
             },
             columns : [
                 {
-                data: 'Cek',
-                name: 'Cek'
+                    data: 'Cek',
+                    name: 'Cek'
                 },
                 {
-                data: 'DT_RowIndex',
-                name: 'DT_RowIndex'
+                    data: 'DT_RowIndex',
+                    name: 'DT_RowIndex'
                 },
                 {
-                data: 'kode_penyakit',
-                name: 'kode_penyakit'
+                    data: 'kode_penyakit',
+                    name: 'kode_penyakit'
                 },
                 {
-                data: 'nama',
-                name: 'nama'
+                    data: 'nama',
+                    name: 'nama'
                 },
                 {
-                data: 'Aksi',
-                name: 'Aksi'
-            }]
+                    data: 'Aksi',
+                    name: 'Aksi'
+            }],
+            'columnDefs': [{
+                "targets": [0,1,4], // your case first column
+                "className": "text-center",
+            }],
         })
     })
 
