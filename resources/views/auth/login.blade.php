@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login | Sispak</title>
+    <title>Masuk - Sispak Kulit</title>
 
     <!-- Font Poppins -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -67,7 +67,7 @@
                         </div>
                     </div>
                     <div class="form-group button">
-                        <button type="submit" class="btn costum-btn">{{ __('Masuk') }} <i class="fas fa-sign-in-alt"></i></button>
+                        <button type="submit" class="btn costum-btn">{{ __('Masuk') }}</button>
                     </div>
                 </form>
             </div>

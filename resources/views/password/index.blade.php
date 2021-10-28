@@ -4,6 +4,11 @@
 
 @section('header')
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+        }
         .grad {
             background-color: #117a8b;
             height: 4px;
@@ -25,7 +30,7 @@
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item">
+              <li class="breadcrumb-item" style="font-weight: bold;">
                 @if(auth()->user()->hasRole('admin'))
                 <a href="{{ route('dashboard-admin') }}">Dashboard</a>
                 @endif
@@ -36,7 +41,7 @@
                 <a href="{{ route('dashboard-user') }}">Dashboard</a>
                 @endif
               </li>
-              <li class="breadcrumb-item active">Ubah Password</li>
+              <li class="breadcrumb-item active" style="font-weight: bold;">Ubah Password</li>
             </ol>
           </div>
         </div>

@@ -3,15 +3,8 @@
 @section('tittle', 'Profile')
 
 @section('header')
-    <style>
-        .grad {
-            background-color: #117a8b;
-            height: 4px;
-            border-radius: 20px;
-        }
-    </style>
+<link rel="stylesheet" href="{{ asset('css/backend/user/profile/style.css') }}">
 @endsection
-
 
 @section('content')
 <section class="content-header">
@@ -21,15 +14,15 @@
             </div>
             <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="{{ route('dashboard-user') }}">Dashboard</a></li>
-                <li class="breadcrumb-item active">My Profile</li>
+                <li class="breadcrumb-item" style="font-weight: bold;"><a href="{{ route('dashboard-user') }}">Dashboard</a></li>
+                <li class="breadcrumb-item active" style="font-weight: bold;">My Profile</li>
             </ol>
             </div>
         </div>
     </div><!-- /.container-fluid -->
 </section>
 <section class="content">
-<form action="{{ url('/profile') }}/{{ $users->id }}" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" class="formEdit" enctype="multipart/form-data">
     @method('put')
     @csrf
     <div class="row">
@@ -39,6 +32,11 @@
                 </div>
                 <div class="card-body">
                 <div class="row">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
+                        <div class="form-group">
+                            <input type="hidden" name="kode" id="kode" value="{{ $users['id'] }}">
+                        </div>
+                    </div>
                     <div class="col-sm-12 col-md-4 col-lg-4 text-center">
                         <div class="col-sm-12 col-md-12 col-lg-12">
                             <div class="form-group">
@@ -69,4 +67,35 @@
 @endsection
 
 @section('footer')
+<script>
+$(document).on('click', '.editButton', function(e) {
+    e.preventDefault()
+    const form_id = $('input[id=kode]').val()
+    let form = $('.formEdit')[0]
+    const formData = new FormData(form)
+    
+    $.ajax({
+        headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
+        url: `{{ url('/profile/${form_id}') }}`,
+        method: 'POST',
+        enctype: 'multipart/form-data',
+        processData: false,
+        contentType: false,
+        cache: false,
+        data: formData,
+        success: function(response) {
+            swal({
+                title: "Sukses!",
+                text: "Profile berhasil diubah!",
+                icon: "success",
+                timer: 2000,
+                buttons: false,
+            })
+            location.reload() 
+        }
+    })
+})
+</script>
 @endsection

@@ -46,30 +46,49 @@
                     <div class="grad">
                     </div>
                     <div class="card-body">
-                      <h4 class="title-konsultasi">Hasil Diagnosa Penyakit Kulit Berdasarkan Gejala</h4>
+                      <h4 class="title-gejala">Gejala Yang Anda Pilih</h4>
                       <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
+                          <table class="table table-bordered table-striped  nowrap" cellspacing="0" style="width: 50%">
+                            <thead>
+                              <tr>
+                                <th style="text-align: center;">Kode Gejala</th>
+                                <th>Nama Gejala</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                            @foreach($gejalas as $gejala)
+                              <tr>
+                                <td style="text-align: center;">{{ $gejala->gejala_kode }}</td>
+                                <td>{{ $gejala->gejala->nama }}</td>
+                              </tr>
+                            @endforeach
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                      <h4 class="title-konsultasi mt-2">Hasil Diagnosa Penyakit Kulit Berdasarkan Gejala</h4>
+                      <div class="row">
+                        <div class="col-sm-12 col-md-12 col-lg-12 mt-2">
                             <table class="table table-bordered table-striped  nowrap" cellspacing="0" style="width: 100%">
-                                <div class="col-md-12 mt-3">
-                                    <tbody>
-                                        <tr>
-                                            <td>Nama</td>
-                                            <td>{{ $user->nama }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Nama Penyakit</td>
-                                            <td>{{ $penyakit->nama }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Deskripsi</td>
-                                            <td>{{ $penyakit->deskripsi }}</td>
-                                        </tr>
-                                        <tr>
-                                            <td>Solusi</td>
-                                            <td>{{ $penyakit->solusi }}</td>
-                                        </tr>
-                                    </tbody>
-                                </div>
+                              <tbody>
+                                <tr>
+                                    <td style="font-weight: bold;">Nama</td>
+                                    <td>{{ $user->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Nama Penyakit</td>
+                                    <td>{{ $penyakit->nama }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Deskripsi</td>
+                                    <td>{{ $penyakit->deskripsi }}</td>
+                                </tr>
+                                <tr>
+                                    <td style="font-weight: bold;">Solusi</td>
+                                    <td>{{ $penyakit->solusi }}</td>
+                                </tr>
+                              </tbody>
                             </table> 
                         </div>
                       </div>

@@ -81,7 +81,7 @@
 .login .button .costum-btn {
     background-color: #2a3f54;
     color: #ffffff;
-    width: 110px !important;
+    width: 100% !important;
     padding: 10px;
 }
 

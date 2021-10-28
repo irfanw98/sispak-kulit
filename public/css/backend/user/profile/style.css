@@ -1,0 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: sans-serif;
+}
+.grad {
+    background-color: #117a8b;
+    height: 4px;
+    border-radius: 20px;
+}

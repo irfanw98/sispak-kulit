@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Sispak | Kulit</title>
+        <title>Sistem Pakar Penyakit Kulit</title>
 
         <!-- Font Roboto -->
         <link rel="preconnect" href="https://fonts.googleapis.com">

@@ -39,7 +39,7 @@
                 </div>
                 <div class="card-body">
                 <div class="row">
-                     <div class="col-sm-12 col-md-12 col-lg-12">
+                    <div class="col-sm-12 col-md-12 col-lg-12">
                         <div class="form-group">
                             <input type="hidden" name="kode" id="kode" value="{{ $dokter->kode_dokter }}">
                         </div>
@@ -63,7 +63,7 @@
                             <label for="email">E-mail </label>
                             <input type="email" name="email" class="form-control" id="email" value="{{ $dokter['email'] }}">
                         </div>
-                            <button type="submit" class="btn btn-primary editButton">SIMPAN</button>
+                            <button type="submit" class="btn btn-primary editButton">Simpan</button>
                     </div>
                 </div>
             </div>

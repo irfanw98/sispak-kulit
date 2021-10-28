@@ -41,7 +41,5 @@ class ProfileController extends Controller
         $users->email = $request->email;
         $users->foto = $filename;
         $users->save();
-
-        return redirect()->back();
     }
 }
