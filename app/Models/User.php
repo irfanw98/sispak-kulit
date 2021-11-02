@@ -14,9 +14,9 @@ use App\Models\{
     Konsultasi
 };
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
-    use HasFactory, Notifiable, HasRoles, SoftDeletes;
+    use HasFactory,Notifiable, HasRoles, SoftDeletes;
 
     protected $fillable = [
         'nama',

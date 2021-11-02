@@ -31,19 +31,19 @@ class KonsultasiController extends Controller
     public function store(Request $request)
     {
         if($request->input('gejala') != null) {
-
+            
             $input_gejala = $this->basispengetahuan($request->input('gejala'));
             $penyakit = Penyakit::where('kode_penyakit', $input_gejala)->first();
-
+            
             if($penyakit != null) {
                 $gejalas = Aturan::with('gejala')->where('penyakit_kode', $penyakit->kode_penyakit)->get();
                 $user = User::where('id', Auth::user()->id)->first();
-    
+            
                 $konsultasi = new Konsultasi;
                 $konsultasi->user_id = $user->id;
                 $konsultasi->kode_penyakit = $penyakit->kode_penyakit;
                 $konsultasi->save();
-                
+
                 return view('user.diagnosa.hasil', compact('penyakit', 'gejalas', 'user'));
             } else {
                 return redirect('konsultasi');
@@ -56,7 +56,7 @@ class KonsultasiController extends Controller
     }
 
     private function basispengetahuan($gejala)
-    {   
+    {  
         $role['P000'] = 0;
         $role['P001'] = 0;
         $role['P002'] = 0;

@@ -24,6 +24,14 @@
                             <td>{{ $diagnosa->user->nama }}</td>
                         </tr>
                         <tr>
+                            <td>Gejala</td>
+                            <td>
+                                @foreach($gejalas as $data)
+                                    <p>{{ $data->gejala_kode }} - {{ $data->gejala->nama }}</p>
+                                @endforeach
+                            </td>
+                        </tr>
+                        <tr>
                             <td>Diagnosa Penyakit</td>
                             <td>{{ $diagnosa->penyakit->nama }}</td>
                         </tr>

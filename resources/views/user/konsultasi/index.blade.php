@@ -63,7 +63,7 @@
             </div>
           @endif
             <!-- <div class="col-sm-12 col-md-12 col-lg-12 d-flex justify-content-end mt-3 pr-3">
-             $gejalas->links()
+              !! $gejalas->onEachSide(1)->render() !!
             </div> -->
           </div>
           <div class="row justify-content-center">

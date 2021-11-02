@@ -28,7 +28,7 @@ use App\Http\Controllers\User\{
      ProfileController
 };
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 Route::view('/', 'welcome');
 
 Route::group(['middleware' => ['auth', 'role:admin|dokter|user']], function() {

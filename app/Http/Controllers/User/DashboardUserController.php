@@ -8,6 +8,11 @@ use App\Models\Konsultasi;
 
 class DashboardUserController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware(['auth', 'verified']);
+    }
+
     public function index() 
     {
         $konsultasis = Konsultasi::select(

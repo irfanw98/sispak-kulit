@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\DataTables;
 use Illuminate\Http\Request;
 use App\Models\Konsultasi;
+use App\Models\Aturan;
 use PDF;
 
 class RiwayatDiagnosaController extends Controller
@@ -42,9 +43,12 @@ class RiwayatDiagnosaController extends Controller
 
     public function show($id)
     {
-        $diagnosa = Konsultasi::findOrFail($id);
-    
-        return view('user.diagnosa.detail', compact('diagnosa'));
+        $diagnosa = Konsultasi::with('penyakit')->findOrFail($id);
+        $gejalas = Aturan::with('gejala')
+                        ->where('penyakit_kode', $diagnosa->kode_penyakit)
+                        ->get();
+
+        return view('user.diagnosa.detail', compact('diagnosa', 'gejalas'));
     }
 
     public function exportPdf()
